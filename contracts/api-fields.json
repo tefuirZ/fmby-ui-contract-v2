@@ -707,7 +707,7 @@
     {
       "method": "POST",
       "path": "/api/manage/source-availability/{id}/recover",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "ManageSourceAvailabilityRecoverResponse",
       "responseFields": [
         "library_source_id",
@@ -720,7 +720,7 @@
     {
       "method": "GET",
       "path": "/api/manage/users",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -729,7 +729,7 @@
     {
       "method": "POST",
       "path": "/api/manage/users",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -738,7 +738,7 @@
     {
       "method": "GET",
       "path": "/api/manage/users/{id}",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -747,7 +747,7 @@
     {
       "method": "PATCH",
       "path": "/api/manage/users/{id}",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -756,7 +756,7 @@
     {
       "method": "DELETE",
       "path": "/api/manage/users/{id}",
-      "status": "implemented",
+      "status": "stub",
       "responseType": null,
       "responseFields": null,
       "requestType": "ConfirmQuery",
@@ -767,7 +767,7 @@
     {
       "method": "PATCH",
       "path": "/api/manage/users/{id}/status",
-      "status": "implemented",
+      "status": "stub",
       "responseType": null,
       "responseFields": null,
       "requestType": null,
@@ -776,7 +776,7 @@
     {
       "method": "GET",
       "path": "/api/manage/role-templates",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -785,7 +785,7 @@
     {
       "method": "POST",
       "path": "/api/manage/role-templates",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -794,7 +794,7 @@
     {
       "method": "GET",
       "path": "/api/manage/role-templates/{id}",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -803,7 +803,7 @@
     {
       "method": "GET",
       "path": "/api/manage/registration-codes",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -812,7 +812,7 @@
     {
       "method": "POST",
       "path": "/api/manage/registration-codes",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -1578,7 +1578,7 @@
     {
       "method": "GET",
       "path": "/api/manage/media-items",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1587,7 +1587,7 @@
     {
       "method": "GET",
       "path": "/api/manage/media-items/{id}",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1596,7 +1596,7 @@
     {
       "method": "GET",
       "path": "/api/manage/media-items/{id}/pipeline",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1688,7 +1688,7 @@
     {
       "method": "GET",
       "path": "/api/manage/probe-tasks",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1697,7 +1697,7 @@
     {
       "method": "POST",
       "path": "/api/manage/probe-tasks",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -1706,7 +1706,7 @@
     {
       "method": "GET",
       "path": "/api/manage/naming-scrape",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1715,7 +1715,7 @@
     {
       "method": "PUT",
       "path": "/api/manage/naming-scrape",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -1724,7 +1724,7 @@
     {
       "method": "GET",
       "path": "/api/manage/naming-cleanup",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1733,7 +1733,7 @@
     {
       "method": "PUT",
       "path": "/api/manage/naming-cleanup",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -1742,7 +1742,7 @@
     {
       "method": "POST",
       "path": "/api/manage/naming-cleanup/preview",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -1751,7 +1751,7 @@
     {
       "method": "POST",
       "path": "/api/manage/naming-cleanup/replay-identify",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -1760,7 +1760,7 @@
     {
       "method": "POST",
       "path": "/api/manage/naming-scrape/batch-repair",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -1769,7 +1769,7 @@
     {
       "method": "GET",
       "path": "/api/manage/task-center/overview",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1778,7 +1778,7 @@
     {
       "method": "GET",
       "path": "/api/manage/task-center/items",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1787,7 +1787,7 @@
     {
       "method": "GET",
       "path": "/api/manage/task-center/items/{category}/{id}",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1796,7 +1796,7 @@
     {
       "method": "POST",
       "path": "/api/manage/task-center/items/{category}/{id}/actions",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": "Value",
@@ -1805,7 +1805,7 @@
     {
       "method": "GET",
       "path": "/api/manage/sessions",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1814,7 +1814,7 @@
     {
       "method": "DELETE",
       "path": "/api/manage/sessions/{id}",
-      "status": "implemented",
+      "status": "stub",
       "responseType": null,
       "responseFields": null,
       "requestType": null,
@@ -1823,7 +1823,7 @@
     {
       "method": "GET",
       "path": "/api/manage/audit-logs",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -1832,7 +1832,7 @@
     {
       "method": "GET",
       "path": "/api/manage/runtime-logs",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
