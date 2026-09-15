@@ -538,6 +538,34 @@
       ]
     },
     {
+      "method": "GET",
+      "path": "/api/items/people/{id}",
+      "status": "implemented",
+      "responseType": "PersonDetailDto",
+      "responseFields": [
+        "id",
+        "name",
+        "poster_key",
+        "item_count"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/items/people/{id}/items",
+      "status": "implemented",
+      "responseType": "ItemDescendantsResponse",
+      "responseFields": [
+        "items",
+        "total",
+        "next_cursor",
+        "has_more"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "POST",
       "path": "/api/playback/resolve",
       "status": "implemented",
