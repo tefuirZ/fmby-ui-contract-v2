@@ -1,0 +1,1984 @@
+{
+  "contract_version": "0.1.0",
+  "generated_by": "scripts/check-contract-sync.mjs --write",
+  "note": "端点 → 请求/响应 wire 字段的机器可读契约清单（后端 DTO 为字段权威口径，见契约仓 api/README.md）。planned = 前端已调用、后端未实现（契约仓 features/implementation-status.md 登记的 G 项）；exempt = 已知登记豁免；known_drift = 字段级/路由级已核实漂移基线（门禁在此基线内不阻断，基线外新漂移 FAIL）。生成后请人工维护 planned/exempt/known_drift 三张表，勿手改 endpoints。",
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/qr-login",
+      "status": "implemented",
+      "responseType": "CredentialQrLoginDto",
+      "responseFields": [
+        "session_id",
+        "uid",
+        "qr_url",
+        "qr_image"
+      ],
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/qr-status",
+      "status": "implemented",
+      "responseType": "CredentialQrStatusDto",
+      "responseFields": [
+        "status"
+      ],
+      "requestType": "String, String",
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/activate",
+      "status": "implemented",
+      "responseType": "CredentialActivateResponse",
+      "responseFields": [
+        "ok",
+        "mount_id"
+      ],
+      "requestType": "CredentialActivateRequest",
+      "requestFields": [
+        "session_id",
+        "mount_id",
+        "cookie_app",
+        "cookie_header"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/accounts/{mount_id}",
+      "status": "implemented",
+      "responseType": "CredentialAccountDto",
+      "responseFields": [
+        "mount_id",
+        "uid",
+        "status",
+        "has_cookie",
+        "has_open_token",
+        "last_active_at",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/accounts/{mount_id}/refresh",
+      "status": "implemented",
+      "responseType": "CredentialOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/accounts/{mount_id}/health",
+      "status": "implemented",
+      "responseType": "CredentialHealthDto",
+      "responseFields": [
+        "ok",
+        "reason"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/accounts/{mount_id}/browse",
+      "status": "implemented",
+      "responseType": "CredentialBrowseDto",
+      "responseFields": [
+        "mount_id",
+        "current_path",
+        "entries",
+        "total_count",
+        "next_offset"
+      ],
+      "requestType": "CredentialBrowseRequest",
+      "requestFields": [
+        "path",
+        "offset",
+        "limit"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/pan115/accounts/{mount_id}",
+      "status": "implemented",
+      "responseType": "CredentialOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "LoginRequest",
+      "requestFields": [
+        "username",
+        "password"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": "implemented",
+      "responseType": "MeResponse",
+      "responseFields": [
+        "user_id",
+        "capabilities"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/entry/status",
+      "status": "implemented",
+      "responseType": "SetupStatusResponse",
+      "responseFields": [
+        "needs_setup",
+        "registration_enabled",
+        "registration_requires_code"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/identity",
+      "status": "implemented",
+      "responseType": "IdentityListResponse",
+      "responseFields": [
+        "user_id",
+        "providers"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/identity/bind",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "BindRequest",
+      "requestFields": [
+        "provider"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/identity/unbind",
+      "status": "implemented",
+      "responseType": "UnbindResponse",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "UnbindRequest",
+      "requestFields": [
+        "provider"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/identity/{provider}",
+      "status": "implemented",
+      "responseType": "IdentityDetailResponse",
+      "responseFields": [
+        "provider",
+        "bound"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/install/status",
+      "status": "implemented",
+      "responseType": "InstallStatusDto",
+      "responseFields": [
+        "state",
+        "database_configured",
+        "can_probe"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/install/probe/database",
+      "status": "implemented",
+      "responseType": "InstallDatabaseProbeDto",
+      "responseFields": [
+        "kind",
+        "reachable"
+      ],
+      "requestType": "InstallDatabaseProbeRequest",
+      "requestFields": [
+        "kind",
+        "path",
+        "url"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/browse/roots",
+      "status": "implemented",
+      "responseType": "RootItemDto",
+      "responseFields": [
+        "id",
+        "title",
+        "kind",
+        "year",
+        "library_id"
+      ],
+      "requestType": "BrowseRootsQuery",
+      "requestFields": [
+        "library_id",
+        "kind"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/browse/home/bootstrap",
+      "status": "implemented",
+      "responseType": "HomeBootstrapResponse",
+      "responseFields": [
+        "hero_summary",
+        "sections"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/browse/libraries",
+      "status": "implemented",
+      "responseType": "LibraryListResponse",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/browse/libraries/{id}",
+      "status": "implemented",
+      "responseType": "LibraryDetailResponse",
+      "responseFields": [
+        "library",
+        "hero_summary",
+        "items",
+        "total",
+        "page",
+        "page_size",
+        "next_cursor",
+        "has_more"
+      ],
+      "requestType": "LibraryDetailQuery",
+      "requestFields": [
+        "page",
+        "page_size",
+        "cursor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/browse/history",
+      "status": "implemented",
+      "responseType": "BrowseHistoryResponse",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "HistoryQuery",
+      "requestFields": [
+        "page",
+        "page_size"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/browse/items/{id}",
+      "status": "implemented",
+      "responseType": "ItemDetailDto",
+      "responseFields": [
+        "id",
+        "title",
+        "kind",
+        "year",
+        "library_id",
+        "parent_id",
+        "children",
+        "variants"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/search",
+      "status": "implemented",
+      "responseType": "RootItemDto",
+      "responseFields": [
+        "id",
+        "title",
+        "kind",
+        "year",
+        "library_id"
+      ],
+      "requestType": "SearchQuery",
+      "requestFields": [
+        "q",
+        "library_ids",
+        "media_types",
+        "root_only",
+        "has_effective_source",
+        "has_poster",
+        "has_subtitle",
+        "has_local_override",
+        "source_status",
+        "mount_status",
+        "metadata_status",
+        "offset",
+        "limit",
+        "sort"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/recommendations/for-you",
+      "status": "implemented",
+      "responseType": "RecommendationItemDto",
+      "responseFields": [
+        "id",
+        "title",
+        "kind",
+        "year",
+        "library_id",
+        "reason"
+      ],
+      "requestType": "RecommendationsForYouQuery",
+      "requestFields": [
+        "limit"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/assets/{blob_id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/items/{id}",
+      "status": "implemented",
+      "responseType": "ItemDetailWebDto",
+      "responseFields": [
+        "item",
+        "children",
+        "related_items",
+        "versions",
+        "can_play",
+        "technical",
+        "metadata_extras"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/items/{id}/descendants",
+      "status": "implemented",
+      "responseType": "ItemDescendantsResponse",
+      "responseFields": [
+        "items",
+        "total",
+        "next_cursor",
+        "has_more"
+      ],
+      "requestType": "ItemDescendantsQuery",
+      "requestFields": [
+        "page",
+        "page_size",
+        "cursor"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/playback/resolve",
+      "status": "implemented",
+      "responseType": "PlaybackTargetDto",
+      "responseFields": [
+        "url_ref",
+        "kind",
+        "quality",
+        "container"
+      ],
+      "requestType": "PlaybackResolveRequest",
+      "requestFields": [
+        "variant_id"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/playback/report",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "PlaybackReportRequest",
+      "requestFields": [
+        "session_id",
+        "progress"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/playback/sessions",
+      "status": "implemented",
+      "responseType": "PlaybackSessionCreateDto",
+      "responseFields": [
+        "session_id",
+        "item_id",
+        "title",
+        "stream_url",
+        "mime_type",
+        "can_direct_play_in_browser",
+        "can_use_external_player",
+        "duration_seconds",
+        "active_source",
+        "audio_tracks",
+        "subtitle_tracks"
+      ],
+      "requestType": "PlaybackSessionCreateRequest",
+      "requestFields": [
+        "item_id"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/playback/sessions/{id}/progress",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "PlaybackSessionProgressRequest",
+      "requestFields": [
+        "position_ticks",
+        "duration_ticks",
+        "is_completed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/playback/sessions/{id}/heartbeat",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "PlaybackHeartbeatRequest",
+      "requestFields": [
+        "position_ticks",
+        "paused"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/playback/sessions/{id}/stop",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "PlaybackSessionProgressRequest",
+      "requestFields": [
+        "position_ticks",
+        "duration_ticks",
+        "is_completed"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/playback/stream/{variant_id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "PlaybackStreamQuery",
+      "requestFields": [
+        "session"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/playback/stream/{variant_id}/{session}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/overview",
+      "status": "implemented",
+      "responseType": "OverviewDto",
+      "responseFields": [
+        "total_items",
+        "total_libraries",
+        "total_mounts",
+        "active_admin_count",
+        "uptime_secs"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/overview",
+      "status": "implemented",
+      "responseType": "OverviewDto",
+      "responseFields": [
+        "total_items",
+        "total_libraries",
+        "total_mounts",
+        "active_admin_count",
+        "uptime_secs"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/source-availability/{id}/recover",
+      "status": "implemented",
+      "responseType": "ManageSourceAvailabilityRecoverResponse",
+      "responseFields": [
+        "library_source_id",
+        "recovered",
+        "recovered_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/users",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/users/{id}",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/users/{id}",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/users/{id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/users/{id}/status",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/role-templates",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/role-templates",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/role-templates/{id}",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/registration-codes",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/registration-codes",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts",
+      "status": "implemented",
+      "responseType": "ManagedMountSummaryDto",
+      "responseFields": [
+        "id",
+        "name",
+        "provider_type",
+        "type_label",
+        "status",
+        "path",
+        "path_label",
+        "description",
+        "capabilities",
+        "linked_libraries",
+        "last_checked_at"
+      ],
+      "requestType": "ManageMountsQuery",
+      "requestFields": [
+        "page",
+        "page_size",
+        "search",
+        "health_status",
+        "provider_type",
+        "library_id"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": "ManagedMountCreateRequest",
+      "requestFields": [
+        "name",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "status",
+        "capabilities",
+        "path_policies"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/browse-directories",
+      "status": "implemented",
+      "responseType": "MountBrowseResponse",
+      "responseFields": [
+        "current_path",
+        "parent_path",
+        "directories"
+      ],
+      "requestType": "MountBrowseRequest",
+      "requestFields": [
+        "provider_type",
+        "config_json",
+        "mount_id",
+        "preview_id",
+        "root_path",
+        "path"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts/{id}",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/mounts/{id}",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": "ManagedMountUpdateRequest",
+      "requestFields": [
+        "name",
+        "root_path",
+        "config_json",
+        "status",
+        "capabilities",
+        "path_policies"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/mounts/{id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/verify",
+      "status": "implemented",
+      "responseType": "ManagedMountDto",
+      "responseFields": [
+        "id",
+        "name",
+        "mount_type",
+        "config_hash",
+        "verified_at",
+        "status"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts/{id}/libraries",
+      "status": "implemented",
+      "responseType": "GovernanceLibrarySetDto",
+      "responseFields": [
+        "mount_id",
+        "library_ids"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/libraries",
+      "status": "implemented",
+      "responseType": "GovernanceOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "GovernanceBindRequest",
+      "requestFields": [
+        "library_id"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/mounts/{id}/libraries/{library_id}",
+      "status": "implemented",
+      "responseType": "GovernanceOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/libraries",
+      "status": "implemented",
+      "responseType": "ManagedLibraryDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/libraries",
+      "status": "implemented",
+      "responseType": "ManagedLibraryDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "requestType": "ManagedLibraryWrite",
+      "requestFields": [
+        "name",
+        "kind"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/libraries/{id}",
+      "status": "implemented",
+      "responseType": "ManagedLibraryDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/libraries/{id}",
+      "status": "implemented",
+      "responseType": "ManagedLibraryDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind"
+      ],
+      "requestType": "ManagedLibraryWrite",
+      "requestFields": [
+        "name",
+        "kind"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/libraries/{id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/collections",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDto",
+      "responseFields": [
+        "id",
+        "title",
+        "overview",
+        "poster_url",
+        "source_kind",
+        "visibility",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/collections",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ManagedCollectionWrite",
+      "requestFields": [
+        "title",
+        "overview",
+        "poster_url",
+        "visibility"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/collections/{id}",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDetailDto",
+      "responseFields": [
+        "collection",
+        "members"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/collections/{id}",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDto",
+      "responseFields": [
+        "id",
+        "title",
+        "overview",
+        "poster_url",
+        "source_kind",
+        "visibility",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "ManagedCollectionWrite",
+      "requestFields": [
+        "title",
+        "overview",
+        "poster_url",
+        "visibility"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/collections/{id}",
+      "status": "implemented",
+      "responseType": "CollectionsOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/collections/{id}/members/{member_id}",
+      "status": "implemented",
+      "responseType": "CollectionsOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/rewards/accounts/{user_id}",
+      "status": "implemented",
+      "responseType": "RewardsAccountSummaryDto",
+      "responseFields": [
+        "user_id",
+        "account",
+        "total_checkin_days"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/rewards/accounts/{user_id}/ledger",
+      "status": "implemented",
+      "responseType": "RewardsLedgerEntryDto",
+      "responseFields": [
+        "id",
+        "user_id",
+        "delta",
+        "balance_after",
+        "transaction_type",
+        "source_type",
+        "source_id",
+        "rule_version",
+        "detail_json",
+        "created_at"
+      ],
+      "requestType": "LedgerQuery",
+      "requestFields": [
+        "limit"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/telegram-bot/status",
+      "status": "implemented",
+      "responseType": "TelegramBotStatusDto",
+      "responseFields": [
+        "health",
+        "enabled",
+        "configured",
+        "mode",
+        "allowed_chat_count",
+        "custom_api_base",
+        "generated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/integrations/telegram/bot/webhook",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/telegram-bot/config",
+      "status": "implemented",
+      "responseType": "TelegramBotConfigDto",
+      "responseFields": [
+        "enabled",
+        "api_base",
+        "allowed_chat_ids"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/telegram-bot/config",
+      "status": "implemented",
+      "responseType": "TelegramBotConfigDto",
+      "responseFields": [
+        "enabled",
+        "api_base",
+        "allowed_chat_ids"
+      ],
+      "requestType": "TelegramBotConfigDto",
+      "requestFields": [
+        "enabled",
+        "api_base",
+        "allowed_chat_ids"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/rewards/config",
+      "status": "implemented",
+      "responseType": "RewardsEventConfigDto",
+      "responseFields": [
+        "checkin_enabled",
+        "daily_checkin_points",
+        "streak_bonus_points",
+        "max_streak_days"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/rewards/config",
+      "status": "implemented",
+      "responseType": "RewardsEventConfigDto",
+      "responseFields": [
+        "checkin_enabled",
+        "daily_checkin_points",
+        "streak_bonus_points",
+        "max_streak_days"
+      ],
+      "requestType": "RewardsEventConfigDto",
+      "requestFields": [
+        "checkin_enabled",
+        "daily_checkin_points",
+        "streak_bonus_points",
+        "max_streak_days"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/secrets/status",
+      "status": "implemented",
+      "responseType": "SecretsStatusDto",
+      "responseFields": [
+        "entries",
+        "overrides_file",
+        "microsoft_editions"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/secrets/overrides",
+      "status": "implemented",
+      "responseType": "SecretsOverrideResponseDto",
+      "responseFields": [
+        "ok",
+        "applied",
+        "restart_required"
+      ],
+      "requestType": "SecretsOverrideRequest",
+      "requestFields": [
+        "overrides"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/license/status",
+      "status": "implemented",
+      "responseType": "LicenseStatusDto",
+      "responseFields": [
+        "runtime_state",
+        "business_access_allowed",
+        "server_base_url",
+        "realtime_enabled",
+        "realtime_status",
+        "protocol_version",
+        "instance_id",
+        "instance_public_key",
+        "activation_id",
+        "license_id",
+        "lease_id",
+        "product_code",
+        "issued_at",
+        "not_before",
+        "expires_at",
+        "grace_expires_at",
+        "next_heartbeat_at",
+        "last_heartbeat_at",
+        "last_error_at",
+        "last_realtime_connected_at",
+        "last_realtime_event_at",
+        "last_realtime_error_at",
+        "realtime_blocked_at",
+        "last_error_code",
+        "last_error_message",
+        "last_realtime_event_id",
+        "last_realtime_event_kind",
+        "last_realtime_error",
+        "realtime_blocked_reason",
+        "device_flow",
+        "summary",
+        "entitlements",
+        "usage"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/license/device-flow",
+      "status": "implemented",
+      "responseType": "LicenseActionResponseDto",
+      "responseFields": [
+        "status"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/license/device-flow/poll",
+      "status": "implemented",
+      "responseType": "LicensePollResponseDto",
+      "responseFields": [
+        "status",
+        "poll_status"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/license/activation-token",
+      "status": "implemented",
+      "responseType": "LicenseActionResponseDto",
+      "responseFields": [
+        "status"
+      ],
+      "requestType": "LicenseActivationTokenRequest",
+      "requestFields": [
+        "activation_token"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/license/heartbeat",
+      "status": "implemented",
+      "responseType": "LicenseActionResponseDto",
+      "responseFields": [
+        "status"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/media-items",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/media-items/{id}",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/media-items/{id}/pipeline",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/probe-tasks",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/probe-tasks",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/naming-scrape",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/naming-scrape",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/naming-cleanup",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/naming-cleanup",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/naming-cleanup/preview",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/naming-cleanup/replay-identify",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/naming-scrape/batch-repair",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/task-center/overview",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/task-center/items",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/task-center/items/{category}/{id}",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/task-center/items/{category}/{id}/actions",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/sessions",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/sessions/{id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/audit-logs",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/runtime-logs",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/user/profile",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/user/profile",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/user/playback",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/user/playback",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/user/appearance",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/user/appearance",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/site/themes",
+      "status": "implemented",
+      "responseType": "ThemesResponse",
+      "responseFields": null,
+      "requestType": "ThemesQuery",
+      "requestFields": [
+        "refresh"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/site/themes/install",
+      "status": "implemented",
+      "responseType": "ThemeEntry",
+      "responseFields": null,
+      "requestType": "ThemeInstallRequest",
+      "requestFields": [
+        "id",
+        "version",
+        "url"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/site/themes/{id}/enable",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ThemeEnableRequest",
+      "requestFields": [
+        "enabled"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/server/general",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/server/general",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/server/security",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/server/security",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/server/session-policy",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/server/session-policy",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/site-settings",
+      "status": "implemented",
+      "responseType": "SiteSettingsDto",
+      "responseFields": [
+        "theme_mode",
+        "timezone_display"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/site-settings",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "SiteSettingsDto",
+      "requestFields": [
+        "theme_mode",
+        "timezone_display"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/tasks",
+      "status": "implemented",
+      "responseType": "TaskItemDto",
+      "responseFields": [
+        "id",
+        "kind",
+        "state"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/admin/media/{id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/audit",
+      "status": "implemented",
+      "responseType": "AuditItemDto",
+      "responseFields": [
+        "id",
+        "action",
+        "actor",
+        "target",
+        "created_at_ms"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/api-tokens",
+      "status": "implemented",
+      "responseType": "CreateApiTokenResponse",
+      "responseFields": [
+        "id",
+        "name",
+        "token",
+        "scopes"
+      ],
+      "requestType": "CreateApiTokenRequest",
+      "requestFields": [
+        "name",
+        "scopes",
+        "expires_at_ms"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/api-tokens",
+      "status": "implemented",
+      "responseType": "ApiTokenItemDto",
+      "responseFields": [
+        "id",
+        "name",
+        "scopes",
+        "created_at_ms"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/admin/api-tokens/{id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    }
+  ],
+  "planned": [],
+  "exempt": [],
+  "known_drift": [
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "GET",
+      "path": "/api/browse/search",
+      "reason": "契约仓 G-15 前端路径笔误（应为 /api/search）。已在前端仓分支 w/zcode/writer1-contract-sync 修复（shared/src/contracts/browse/search/api.ts）；前端该分支合并后本条自动转为 stale 警告，届时从 known_drift 删除。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/auth/register",
+      "reason": "契约仓 G-02：注册/初始化端点未实现（前端已就绪，后端缺失）。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/auth/setup",
+      "reason": "契约仓 G-02：注册/初始化端点未实现（前端已就绪，后端缺失）。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "DELETE",
+      "path": "/api/auth/logout",
+      "reason": "前端 logout 的 DELETE 兜底分支（POST 已存在，DELETE 永不触发）→ 死代码，非真缺陷。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_EXTRA",
+      "method": "GET",
+      "path": "/api/manage/overview",
+      "reason": "形状漂移（真）：后端 OverviewDto{total_items,total_libraries,total_mounts,active_admin_count,uptime_secs} 5 平字段（bridges/manage.rs 无端口 → fail-closed）；前端 RawManageOverviewResponse 期待 18 嵌套字段（kpis/alerts/...）。前端 mapper 对缺字段有回落（不崩但 KPI 恒 0/不可用）。根因=后端 overview 端口未接。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_MISSING",
+      "method": "GET",
+      "path": "/api/manage/overview",
+      "reason": "形状漂移（真）：后端 OverviewDto{total_items,total_libraries,total_mounts,active_admin_count,uptime_secs} 5 平字段（bridges/manage.rs 无端口 → fail-closed）；前端 RawManageOverviewResponse 期待 18 嵌套字段（kpis/alerts/...）。前端 mapper 对缺字段有回落（不崩但 KPI 恒 0/不可用）。根因=后端 overview 端口未接。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/users/batch/update",
+      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/users/batch/disable",
+      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/users/batch/delete",
+      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/users/{*}/approve-registration",
+      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/users/{*}/reject-registration",
+      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/users/{*}/reset-password",
+      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/login-risk/ip/reset",
+      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/users/{*}/login-risk/reset",
+      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/{*}",
+      "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/batches/{*}",
+      "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "DELETE",
+      "path": "/api/manage/registration-codes/{*}",
+      "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/registration-codes/batch/delete",
+      "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "DELETE",
+      "path": "/api/manage/role-templates/{*}",
+      "reason": "role-templates 删除端点未实现（前端 deleteRoleTemplate 已接）。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "GET",
+      "path": "/api/manage/advanced",
+      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_EXTRA",
+      "method": "GET",
+      "path": "/api/manage/libraries/{*}",
+      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_MISSING",
+      "method": "GET",
+      "path": "/api/manage/libraries/{*}",
+      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_EXTRA",
+      "method": "POST",
+      "path": "/api/manage/libraries",
+      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_MISSING",
+      "method": "POST",
+      "path": "/api/manage/libraries",
+      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_EXTRA",
+      "method": "PATCH",
+      "path": "/api/manage/libraries/{*}",
+      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_MISSING",
+      "method": "PATCH",
+      "path": "/api/manage/libraries/{*}",
+      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/libraries/{*}/scan",
+      "reason": "契约仓 G-08：触发扫描端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/mounts/{*}/validate",
+      "reason": "契约仓 G-09：挂载校验/刷新访问端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/mounts/{*}/refresh-access",
+      "reason": "契约仓 G-09：挂载校验/刷新访问端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "GET",
+      "path": "/api/manage/probe-tasks/{*}",
+      "reason": "契约仓 G-10：探测任务操作端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/probe-tasks/{*}/enqueue",
+      "reason": "契约仓 G-10：探测任务操作端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/probe-tasks/{*}/refresh",
+      "reason": "契约仓 G-10：探测任务操作端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "PATCH",
+      "path": "/api/manage/media-items/{*}/metadata",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/media-items/{*}/metadata/reset",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/media-items/{*}/refresh-metadata",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/media-items/{*}/artwork",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "DELETE",
+      "path": "/api/manage/media-items/{*}/artwork/{*}",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/media-items/{*}/subtitles",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "PATCH",
+      "path": "/api/manage/media-items/{*}/subtitles/{*}",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "DELETE",
+      "path": "/api/manage/media-items/{*}/subtitles/{*}",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "DELETE",
+      "path": "/api/manage/media-items/{*}/sources/{*}",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/media-items/{*}/scan",
+      "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/pan115/imghost/qr-login",
+      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/qr-status",
+      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/pan115/imghost/activate",
+      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/credentials",
+      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "DELETE",
+      "path": "/api/manage/pan115/imghost/credentials",
+      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/assets",
+      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
+    }
+  ]
+}
