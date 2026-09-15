@@ -5,6 +5,115 @@
   "endpoints": [
     {
       "method": "POST",
+      "path": "/api/manage/pan115/imghost/qr-login",
+      "status": "implemented",
+      "responseType": "Pan115ImghostQrLoginResponse",
+      "responseFields": [
+        "session_id",
+        "uid",
+        "qr_url",
+        "qr_image"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/qr-status",
+      "status": "implemented",
+      "responseType": "Pan115ImghostQrStatusResponse",
+      "responseFields": [
+        "status"
+      ],
+      "requestType": "String, String",
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/imghost/activate",
+      "status": "implemented",
+      "responseType": "Pan115ImghostOkResponse",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "Pan115ImghostActivateRequest",
+      "requestFields": [
+        "session_id",
+        "cookie_app"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/credentials",
+      "status": "implemented",
+      "responseType": "Pan115ImghostCredentialsResponse",
+      "responseFields": [
+        "id",
+        "status",
+        "has_cookie",
+        "last_active_at",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/pan115/imghost/credentials",
+      "status": "implemented",
+      "responseType": "Pan115ImghostOkResponse",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/imghost/upload",
+      "status": "implemented",
+      "responseType": "Pan115ImghostUploadResponse",
+      "responseFields": [
+        "id",
+        "sha1",
+        "size",
+        "mime",
+        "mirror_status",
+        "local_url",
+        "host_url"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/assets",
+      "status": "implemented",
+      "responseType": "Pan115ImghostAssetListResponse",
+      "responseFields": [
+        "total",
+        "page",
+        "page_size",
+        "items"
+      ],
+      "requestType": "Pan115ImghostAssetsQuery",
+      "requestFields": [
+        "page",
+        "page_size"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/raw/{sha1}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
       "path": "/api/manage/pan115/qr-login",
       "status": "implemented",
       "responseType": "CredentialQrLoginDto",
@@ -1021,6 +1130,183 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/upstreams",
+      "status": "implemented",
+      "responseType": "UpstreamSourceListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "UpstreamSourceListQuery",
+      "requestFields": [
+        "source_type",
+        "status"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "UpstreamSourceWriteDto",
+      "requestFields": [
+        "name",
+        "source_type",
+        "base_url",
+        "auth_method",
+        "username",
+        "password",
+        "api_key",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "retain_secret",
+        "enabled"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}",
+      "status": "implemented",
+      "responseType": "UpstreamSourceDto",
+      "responseFields": [
+        "id",
+        "name",
+        "source_type",
+        "source_type_label",
+        "base_url",
+        "auth_method",
+        "status",
+        "username",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "has_secret",
+        "last_health_check_at",
+        "last_sync_at",
+        "last_error_at",
+        "last_error_message",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/upstreams/{id}",
+      "status": "implemented",
+      "responseType": "UpstreamSourceDto",
+      "responseFields": [
+        "id",
+        "name",
+        "source_type",
+        "source_type_label",
+        "base_url",
+        "auth_method",
+        "status",
+        "username",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "has_secret",
+        "last_health_check_at",
+        "last_sync_at",
+        "last_error_at",
+        "last_error_message",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "UpstreamSourceWriteDto",
+      "requestFields": [
+        "name",
+        "source_type",
+        "base_url",
+        "auth_method",
+        "username",
+        "password",
+        "api_key",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "retain_secret",
+        "enabled"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/upstreams/{id}",
+      "status": "implemented",
+      "responseType": "UpstreamOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/enable",
+      "status": "implemented",
+      "responseType": "UpstreamSourceDto",
+      "responseFields": [
+        "id",
+        "name",
+        "source_type",
+        "source_type_label",
+        "base_url",
+        "auth_method",
+        "status",
+        "username",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "has_secret",
+        "last_health_check_at",
+        "last_sync_at",
+        "last_error_at",
+        "last_error_message",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/disable",
+      "status": "implemented",
+      "responseType": "UpstreamSourceDto",
+      "responseFields": [
+        "id",
+        "name",
+        "source_type",
+        "source_type_label",
+        "base_url",
+        "auth_method",
+        "status",
+        "username",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "has_secret",
+        "last_health_check_at",
+        "last_sync_at",
+        "last_error_at",
+        "last_error_message",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/rewards/accounts/{user_id}",
       "status": "implemented",
       "responseType": "RewardsAccountSummaryDto",
@@ -1287,6 +1573,74 @@
       "responseFields": null,
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/media-reviews",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "MediaReviewListRequest",
+      "requestFields": [
+        "stage",
+        "status",
+        "media_item_id",
+        "page",
+        "page_size"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/media-reviews/provider-search",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "MediaReviewProviderSearchRequest",
+      "requestFields": [
+        "provider",
+        "query",
+        "entity_type",
+        "year"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/media-reviews/{id}",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-reviews/{id}/claim",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-reviews/{id}/release",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-reviews/{id}/resolve",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "MediaReviewResolveRequest",
+      "requestFields": [
+        "action",
+        "payload"
+      ]
     },
     {
       "method": "GET",
@@ -1693,10 +2047,16 @@
   "exempt": [],
   "known_drift": [
     {
+      "rule": "FRONTEND_FIELD_MISSING",
+      "method": "GET",
+      "path": "/api/manage/mounts",
+      "reason": "CONTRACT-DRIFT-01 真漂移：前端 RawManagedMountRecord 读旧名 mount_type/health_status，缺 wire 的 provider_type/status。已在**前端仓分支 w/zcode/writer1-contract-sync 修复**（改读 provider_type/status + 新增 mapMountHealthStatus 四态映射 + 回归测试）。主仓门禁读前端 main，合并后自动转 stale。"
+    },
+    {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "GET",
       "path": "/api/browse/search",
-      "reason": "契约仓 G-15 前端路径笔误（应为 /api/search）。已在前端仓分支 w/zcode/writer1-contract-sync 修复（shared/src/contracts/browse/search/api.ts）；前端该分支合并后本条自动转为 stale 警告，届时从 known_drift 删除。"
+      "reason": "契约仓 G-15 前端路径笔误（应为 /api/search）。已在**前端仓分支 w/zcode/writer1-contract-sync 修复**；主仓门禁读前端 main，前端分支合并后本条自动转 stale 警告，届时从 known_drift 删除。"
     },
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
@@ -1979,6 +2339,36 @@
       "method": "GET",
       "path": "/api/manage/pan115/imghost/assets",
       "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/{*}/status",
+      "reason": "契约仓 G-11：注册码增强端点未实现（后端无此路由）。CONTRACT-DRIFT-01 新扫描器（修复嵌套泛型/无类型参数漏扫）暴露。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "PATCH",
+      "path": "/api/manage/role-templates/{*}",
+      "reason": "role-templates 更新端点未实现（后端只有 GET/POST/GET{id}；前端 updateRoleTemplate 已接）。契约仓未登记 G 项——CONTRACT-DRIFT-01 新暴露，建议补登记。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "GET",
+      "path": "/api/manage/scans",
+      "reason": "契约仓 G-08：扫描列表端点未实现。CONTRACT-DRIFT-01 新扫描器暴露。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_EXTRA",
+      "method": "GET",
+      "path": "/api/manage/mounts",
+      "reason": "前端 RawManagedMountRecord 声明了向后兼容/预留可选字段（mount_type/health_status 为旧名回落读；status_message/reference_counts/unavailable_binding_count 后端无物理来源）。**非漂移**：属故意的兼容层，mapper 已安全缺省；后端补齐统计后收回。CONTRACT-DRIFT-01 已修 provider_type/status 真漂移（FIELD_MISSING 已消）。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_EXTRA",
+      "method": "GET",
+      "path": "/api/manage/libraries",
+      "reason": "前端声明丰富列表字段（description/type_label/item_count/status/...），后端 GET/POST/PATCH 只返回扁平 {id,name,kind}（实证 live server）。**真漂移（后端 feature gap）**：丰富 DTO 未落地；前端 mapper 已安全缺省（不再崩），但 status 恒 attention、itemCount 恒 0。建议立卡补后端 DTO。"
     }
   ]
 }
