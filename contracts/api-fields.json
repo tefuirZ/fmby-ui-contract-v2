@@ -1672,6 +1672,21 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/developer/endpoints",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "DeveloperApiCatalogRequest",
+      "requestFields": [
+        "method",
+        "scope",
+        "q",
+        "page",
+        "page_size"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/probe-tasks",
       "status": "implemented",
       "responseType": "Value",
