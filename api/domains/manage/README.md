@@ -91,3 +91,19 @@
 | `GET/PUT /api/admin/site-settings` | `ManageSettings` | 站点设置 |
 | `POST/GET /api/admin/api-tokens` | `ManageSettings` | API token 签发/列表 |
 | `DELETE /api/admin/api-tokens/{id}` | `ManageSettings` | 吊销 |
+
+---
+
+## 139 云盘账号（V1F-04a）
+
+| 方法 路径 | 说明 |
+|---|---|
+| `GET/POST /api/manage/yun139/credential-profiles` | 凭据档案列表 / 新建 |
+| `DELETE /api/manage/yun139/credential-profiles/{profile_id}` | 删除档案（被池引用 → 409） |
+| `POST /api/manage/yun139/credential-profiles/{profile_id}/reauthorize` | 重新授权 |
+| `GET/POST /api/manage/yun139/account-pools` | 账号池列表 / 新建 |
+| `GET/PUT/DELETE /api/manage/yun139/account-pools/{pool_id}` | 池 读 / 改 / 删 |
+| `GET/POST /api/manage/yun139/account-pools/{pool_id}/members` | 成员列表 / 添加 |
+| `DELETE /api/manage/yun139/account-pools/{pool_id}/members/{profile_id}` | 移除成员 |
+
+详见 [`yun139.md`](./yun139.md)。★ **段 A：池只存管，不参与取流调度（段 B）。**

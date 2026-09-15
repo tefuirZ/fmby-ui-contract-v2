@@ -102,7 +102,8 @@
 | G-09 | `/api/manage/mounts/{id}/validate`、`/{id}/refresh-access` | 挂载校验 / 刷新访问（与 P2-06-R5 同线） |
 | G-11 | `/api/manage/registration-codes/{id}`、`/{id}/status`、`/batches/{id}`、`/batch/delete` | 注册码增强 |
 | G-13 | `/api/assets`、`/api/assets/items/{id}/images/{id}`、`/api/assets/libraries/{id}/images/{id}`、`/api/assets/subtitles` | 资产子路由（当前只有 `/api/assets/{blob_id}`） |
-| G-14 | `/api/manage/advanced`、`/api/manage/pan115/imghost` | 高级维护 / 115 图床 |
+| G-14 | `/api/manage/advanced` | 高级维护（115 图床 `pan115/imghost` 已于 V1F-01 实现并移出本项） |
+| G-17 | `/api/manage/yun139/*` **前端接线** | 后端段 A（11 端点）已实现；**前端页面与交互待用户接手**（契约见 `api/domains/manage/yun139.md`） |
 | G-06 | ⚠️ **危险操作确认口径不一致**：后端 `?confirmed=true` vs 前端 body `confirm_action` | 所有 DELETE 类 |
 | G-07 | ⚠️ 前端**细粒度能力守卫未落**（仅 `manage:access` 粗粒度） | 审计/设置页应各自守卫 |
 | G-15 | ⚠️ 前端路径笔误：`/api/browse/search` 应为 `/api/search` | 前端修正 |
@@ -128,6 +129,7 @@
 | ⚪ P115 命名歧义 | `P115`（外部 runtime）与 `Pan115`（原生 SDK）并存，UI 层禁止合并（已处理） |
 | ⚪ 注册/审批流 | v1 有注册码 + 审批，v2 未完整对齐（见 G-02/G-04） |
 | ⚪ 媒体审核工单 | v1 有 media-reviews，v2 未实现 |
+| 🟡 **139 账号管理** | v1 有 `yun139-accounts` 页；v2 **段 A（存管）已实现** —— 端点 11 个 + 迁移 0037 + SecretBox 凭据；**段 B（池取流调度）未接线** |
 | ⚪ 上游源网关 | v1 有 upstreams（AppleCMS/Emby 导入），v2 未实现 |
 | ⚪ Microsoft Graph 数据面 | v1 有完整 Graph，v2 仍是 P0-07 fail-closed stub |
 
@@ -145,6 +147,8 @@
 | 4 | 真实 Telegram Bot | 真实联调 |
 | 5 | 真 license 服务器 | 设备流 / 续租 / 功能门 |
 | 6 | 真实网络往返 | 各 provider 外部依赖 |
+| 7 | 139 真凭据（authorization/cookie） | 段 A：档案创建/重新授权后**凭据可被 139 侧接受**（本卡只验密封与存管，未验 139 上游接受性） |
+| 8 | 139 池调度（段 B） | 取流按池策略选号 / 租借 / 冷却 / 失败计数生效 |
 
 详见 [`../acceptance/functional.md`](../acceptance/functional.md) §真实环境验收。
 

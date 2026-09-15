@@ -59,6 +59,7 @@
 | 个人设置 | `/api/settings/user/*` | 6 | [`domains/settings.md`](./domains/settings.md) |
 | 服务器设置 | `/api/settings/server/*` | 6 | [`domains/settings.md`](./domains/settings.md) |
 | 挂载管理 | `/api/manage/mounts/*` + pan115 | ~20 | [`domains/manage/mounts.md`](./domains/manage/mounts.md) |
+| 139 账号 | `/api/manage/yun139/*` | 11（**后端已实现，前端未接线**） | [`domains/manage/yun139.md`](./domains/manage/yun139.md) |
 | 媒体库/条目 | `/api/manage/libraries*`、`/media-items*` | ~10 | [`domains/manage/libraries.md`](./domains/manage/libraries.md) |
 | 用户/权限 | `/api/manage/users*`、`/role-templates*`、`/registration-codes*` | ~12 | [`domains/manage/users.md`](./domains/manage/users.md) |
 | 合集/积分 | `/api/manage/collections*`、`/rewards/*` | ~10 | [`domains/manage/collections.md`](./domains/manage/collections.md) |
