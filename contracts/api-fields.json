@@ -720,11 +720,34 @@
     {
       "method": "GET",
       "path": "/api/manage/users",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "ManagedUserDto",
+      "responseFields": [
+        "id",
+        "username",
+        "display_name",
+        "email",
+        "account_kind",
+        "status",
+        "roles",
+        "source_grants",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_until",
+        "must_change_password",
+        "created_at",
+        "updated_at",
+        "last_activity_at",
+        "recent_client_info"
+      ],
+      "requestType": "ManageUsersQuery",
+      "requestFields": [
+        "page",
+        "page_size",
+        "search",
+        "status",
+        "account_kind"
+      ]
     },
     {
       "method": "POST",
@@ -738,9 +761,26 @@
     {
       "method": "GET",
       "path": "/api/manage/users/{id}",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
+      "status": "implemented",
+      "responseType": "ManagedUserDto",
+      "responseFields": [
+        "id",
+        "username",
+        "display_name",
+        "email",
+        "account_kind",
+        "status",
+        "roles",
+        "source_grants",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_until",
+        "must_change_password",
+        "created_at",
+        "updated_at",
+        "last_activity_at",
+        "recent_client_info"
+      ],
       "requestType": null,
       "requestFields": null
     },
@@ -767,11 +807,13 @@
     {
       "method": "PATCH",
       "path": "/api/manage/users/{id}/status",
-      "status": "stub",
+      "status": "implemented",
       "responseType": null,
       "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "requestType": "UpdateUserStatusRequest",
+      "requestFields": [
+        "status"
+      ]
     },
     {
       "method": "GET",
@@ -1329,6 +1371,54 @@
         "created_by",
         "created_at",
         "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/emby/discover-lan",
+      "status": "implemented",
+      "responseType": "UpstreamLanDiscoveryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/health-check",
+      "status": "implemented",
+      "responseType": "CredentialHealthDto",
+      "responseFields": [
+        "ok",
+        "reason"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/apple-cms/discover-categories",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/emby/discover-libraries",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
       ],
       "requestType": null,
       "requestFields": null
