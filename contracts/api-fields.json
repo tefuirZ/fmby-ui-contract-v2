@@ -273,6 +273,15 @@
     },
     {
       "method": "GET",
+      "path": "/api/auth/identity/providers",
+      "status": "implemented",
+      "responseType": "IdentityProvidersPublicView",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/auth/identity",
       "status": "implemented",
       "responseType": "IdentityListResponse",
@@ -1727,6 +1736,33 @@
         "streak_bonus_points",
         "max_streak_days"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/auth-providers",
+      "status": "implemented",
+      "responseType": "AuthProviderConfigsView",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/auth-providers",
+      "status": "implemented",
+      "responseType": "AuthProviderConfigsView",
+      "responseFields": null,
+      "requestType": "UpdateAuthProviderConfigsRequest",
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/auth-providers/{provider}/diagnostics",
+      "status": "implemented",
+      "responseType": "AuthProviderDiagnosticResponse",
+      "responseFields": null,
+      "requestType": "AuthProviderDiagnosticRequest",
+      "requestFields": null
     },
     {
       "method": "GET",
