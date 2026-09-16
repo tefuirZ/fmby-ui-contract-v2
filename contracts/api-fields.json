@@ -825,6 +825,97 @@
       ]
     },
     {
+      "method": "POST",
+      "path": "/api/manage/users/batch/update",
+      "status": "implemented",
+      "responseType": "ManageBatchUsersActionResponse",
+      "responseFields": [
+        "updated_count",
+        "results"
+      ],
+      "requestType": "BatchUpdateUsersRequest",
+      "requestFields": [
+        "user_ids",
+        "status",
+        "roles",
+        "source_grants"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/batch/disable",
+      "status": "implemented",
+      "responseType": "ManageBatchUsersActionResponse",
+      "responseFields": [
+        "updated_count",
+        "results"
+      ],
+      "requestType": "BatchUserIdsRequest",
+      "requestFields": [
+        "user_ids"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/batch/permanent-delete",
+      "status": "implemented",
+      "responseType": "ManageBatchUsersActionResponse",
+      "responseFields": [
+        "updated_count",
+        "results"
+      ],
+      "requestType": "BatchUserIdsRequest",
+      "requestFields": [
+        "user_ids"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/{id}/reset-password",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ResetPasswordRequest",
+      "requestFields": [
+        "new_password",
+        "force_change"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/{id}/login-risk/reset",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/login-risk/ip/reset",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ResetIpLoginRiskRequest",
+      "requestFields": [
+        "ip_address"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/manage/role-templates",
       "status": "stub",
