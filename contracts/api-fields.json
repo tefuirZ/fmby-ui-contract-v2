@@ -2645,17 +2645,209 @@
       "responseFields": null,
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/microsoft/auth/config-status",
+      "status": "implemented",
+      "responseType": "MicrosoftAppConfigStatusResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/microsoft/auth/profiles",
+      "status": "implemented",
+      "responseType": "MicrosoftAuthProfilesResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": "ManageMicrosoftAuthProfilesQuery",
+      "requestFields": [
+        "provider_type",
+        "auth_profile_id",
+        "account_id",
+        "tenant_id",
+        "drive_id",
+        "service_kind"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/start",
+      "status": "implemented",
+      "responseType": "StartMicrosoftAuthResponse",
+      "responseFields": [
+        "authorization_id",
+        "auth_profile_id",
+        "provider_type",
+        "tenant_id",
+        "drive_id",
+        "service_kind",
+        "redirect_uri",
+        "authorize_url"
+      ],
+      "requestType": "StartMicrosoftAuthRequest",
+      "requestFields": [
+        "provider_type",
+        "tenant_id",
+        "drive_id",
+        "service_kind",
+        "oauth_client",
+        "auth_profile_id",
+        "note"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/complete",
+      "status": "implemented",
+      "responseType": "CompleteMicrosoftAuthResponse",
+      "responseFields": [
+        "authorization_id",
+        "auth_profile_id",
+        "provider_type",
+        "tenant_id",
+        "drive_id",
+        "service_kind",
+        "status",
+        "principal_id",
+        "user_principal_name",
+        "display_name"
+      ],
+      "requestType": "CompleteMicrosoftAuthRequest",
+      "requestFields": [
+        "authorization_id",
+        "callback_url"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/token/drives",
+      "status": "implemented",
+      "responseType": "MicrosoftDriveListResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": "MicrosoftTokenDriveListRequest",
+      "requestFields": [
+        "provider_type",
+        "access_token",
+        "refresh_token",
+        "site_id",
+        "oauth_client"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/token/start",
+      "status": "implemented",
+      "responseType": "StartMicrosoftTokenAuthResponse",
+      "responseFields": [
+        "authorization_id",
+        "provider_type",
+        "tenant_id",
+        "service_kind",
+        "redirect_uri",
+        "authorize_url",
+        "oauth_client_kind"
+      ],
+      "requestType": "StartMicrosoftTokenAuthRequest",
+      "requestFields": [
+        "provider_type",
+        "service_kind",
+        "oauth_client"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/token/complete",
+      "status": "implemented",
+      "responseType": "CompleteMicrosoftTokenAuthResponse",
+      "responseFields": [
+        "authorization_id",
+        "provider_type",
+        "tenant_id",
+        "service_kind",
+        "access_token",
+        "refresh_token",
+        "expires_at",
+        "principal_id",
+        "user_principal_name",
+        "display_name",
+        "oauth_client_kind"
+      ],
+      "requestType": "CompleteMicrosoftTokenAuthRequest",
+      "requestFields": [
+        "authorization_id",
+        "callback_url"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/token/sites",
+      "status": "implemented",
+      "responseType": "MicrosoftSiteListResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": "MicrosoftTokenSiteSearchRequest",
+      "requestFields": [
+        "provider_type",
+        "access_token",
+        "refresh_token",
+        "q",
+        "oauth_client"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/token/import",
+      "status": "implemented",
+      "responseType": "MicrosoftAuthAccountDto",
+      "responseFields": [
+        "id",
+        "auth_profile_id",
+        "provider_type",
+        "tenant_id",
+        "drive_id",
+        "service_kind",
+        "oauth_client_kind",
+        "note",
+        "status",
+        "principal_id",
+        "user_principal_name",
+        "display_name",
+        "last_used_at",
+        "last_success_at",
+        "last_error_at",
+        "last_error_message",
+        "throttled_until",
+        "consecutive_throttle_count",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "ImportMicrosoftTokenAccountRequest",
+      "requestFields": [
+        "provider_type",
+        "service_kind",
+        "access_token",
+        "refresh_token",
+        "tenant_id",
+        "drive_id",
+        "auth_profile_id",
+        "site_id",
+        "oauth_client",
+        "note"
+      ]
     }
   ],
   "planned": [],
   "exempt": [],
   "known_drift": [
-    {
-      "rule": "FRONTEND_FIELD_MISSING",
-      "method": "GET",
-      "path": "/api/manage/mounts",
-      "reason": "CONTRACT-DRIFT-01 真漂移：前端 RawManagedMountRecord 读旧名 mount_type/health_status，缺 wire 的 provider_type/status。已在**前端仓分支 w/zcode/writer1-contract-sync 修复**（改读 provider_type/status + 新增 mapMountHealthStatus 四态映射 + 回归测试）。主仓门禁读前端 main，合并后自动转 stale。"
-    },
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "GET",
@@ -2695,18 +2887,6 @@
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "POST",
-      "path": "/api/manage/users/batch/update",
-      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/users/batch/disable",
-      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
       "path": "/api/manage/users/batch/delete",
       "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
     },
@@ -2720,24 +2900,6 @@
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "POST",
       "path": "/api/manage/users/{*}/reject-registration",
-      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/users/{*}/reset-password",
-      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/login-risk/ip/reset",
-      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/users/{*}/login-risk/reset",
       "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
     },
     {
@@ -2907,90 +3069,6 @@
       "method": "POST",
       "path": "/api/manage/media-items/{*}/scan",
       "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/pan115/imghost/qr-login",
-      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "GET",
-      "path": "/api/manage/pan115/imghost/qr-status",
-      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/pan115/imghost/activate",
-      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "GET",
-      "path": "/api/manage/pan115/imghost/credentials",
-      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "DELETE",
-      "path": "/api/manage/pan115/imghost/credentials",
-      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "GET",
-      "path": "/api/manage/pan115/imghost/assets",
-      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "PATCH",
-      "path": "/api/manage/registration-codes/{*}/status",
-      "reason": "契约仓 G-11：注册码增强端点未实现（后端无此路由）。CONTRACT-DRIFT-01 新扫描器（修复嵌套泛型/无类型参数漏扫）暴露。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "PATCH",
-      "path": "/api/manage/role-templates/{*}",
-      "reason": "role-templates 更新端点未实现（后端只有 GET/POST/GET{id}；前端 updateRoleTemplate 已接）。契约仓未登记 G 项——CONTRACT-DRIFT-01 新暴露，建议补登记。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "GET",
-      "path": "/api/manage/scans",
-      "reason": "契约仓 G-08：扫描列表端点未实现。CONTRACT-DRIFT-01 新扫描器暴露。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_EXTRA",
-      "method": "GET",
-      "path": "/api/manage/mounts",
-      "reason": "前端 RawManagedMountRecord 声明了向后兼容/预留可选字段（mount_type/health_status 为旧名回落读；status_message/reference_counts/unavailable_binding_count 后端无物理来源）。**非漂移**：属故意的兼容层，mapper 已安全缺省；后端补齐统计后收回。CONTRACT-DRIFT-01 已修 provider_type/status 真漂移（FIELD_MISSING 已消）。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_EXTRA",
-      "method": "GET",
-      "path": "/api/manage/libraries",
-      "reason": "前端声明丰富列表字段（description/type_label/item_count/status/...），后端 GET/POST/PATCH 只返回扁平 {id,name,kind}（实证 live server）。**真漂移（后端 feature gap）**：丰富 DTO 未落地；前端 mapper 已安全缺省（不再崩），但 status 恒 attention、itemCount 恒 0。建议立卡补后端 DTO。"
-    },
-    {
-      "rule": "MANIFEST_ENDPOINT_STALE",
-      "method": "GET",
-      "path": "/api/manage/developer/endpoints",
-      "reason": "V1F-04b（w2）分支基线不含 w1 的该路由（合并时序差）；主代理合并后自然一致。"
-    },
-    {
-      "rule": "MANIFEST_ENDPOINT_STALE",
-      "method": "GET",
-      "path": "/api/manage/events",
-      "reason": "V1F-04b（w2）分支基线不含该路由（合并时序差）；主代理合并后自然一致。"
-    },
-    {
-      "rule": "MANIFEST_ENDPOINT_STALE",
-      "method": "GET",
-      "path": "/api/manage/events/{id}",
-      "reason": "V1F-04b（w2）分支基线不含该路由（合并时序差）；主代理合并后自然一致。"
     }
   ]
 }
