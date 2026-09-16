@@ -1335,6 +1335,187 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/upstreams/{id}/apple-cms/categories",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/upstreams/{id}/apple-cms/category-bindings",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "UpstreamCategoryBindingsWriteDto",
+      "requestFields": [
+        "bindings"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/emby/libraries",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/upstreams/{id}/emby/library-bindings",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "UpstreamCategoryBindingsWriteDto",
+      "requestFields": [
+        "bindings"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/bindings",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "BindingListQuery",
+      "requestFields": [
+        "library_id"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/mapping/presets",
+      "status": "implemented",
+      "responseType": "UpstreamMappingPresetListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/mapping/presets",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "UpstreamMappingPresetWriteDto",
+      "requestFields": [
+        "name",
+        "include_keywords",
+        "exclude_keywords",
+        "include_category_ids",
+        "exclude_category_ids",
+        "default_library_type",
+        "create_missing_libraries",
+        "enabled"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/upstreams/{id}/mapping/presets/{preset_id}",
+      "status": "implemented",
+      "responseType": "UpstreamMappingPresetDto",
+      "responseFields": [
+        "id",
+        "source_id",
+        "name",
+        "include_keywords",
+        "exclude_keywords",
+        "include_category_ids",
+        "exclude_category_ids",
+        "default_library_type",
+        "create_missing_libraries",
+        "enabled",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "UpstreamMappingPresetWriteDto",
+      "requestFields": [
+        "name",
+        "include_keywords",
+        "exclude_keywords",
+        "include_category_ids",
+        "exclude_category_ids",
+        "default_library_type",
+        "create_missing_libraries",
+        "enabled"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/upstreams/{id}/mapping/presets/{preset_id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/mapping/preview",
+      "status": "implemented",
+      "responseType": "UpstreamMappingPreviewResultDto",
+      "responseFields": [
+        "source_id",
+        "items",
+        "creates",
+        "bind_count",
+        "create_count",
+        "skip_count",
+        "conflict_count"
+      ],
+      "requestType": "UpstreamMappingPreviewDto",
+      "requestFields": [
+        "preset_id",
+        "include_keywords",
+        "exclude_keywords",
+        "include_category_ids",
+        "exclude_category_ids",
+        "selected_category_ids",
+        "default_library_type",
+        "create_missing_libraries",
+        "overrides"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/mapping/apply",
+      "status": "implemented",
+      "responseType": "UpstreamMappingApplyResultDto",
+      "responseFields": [
+        "source_id",
+        "created_library_count",
+        "bound_category_count",
+        "preset"
+      ],
+      "requestType": "UpstreamMappingApplyDto",
+      "requestFields": [
+        "preview",
+        "save_preset_name"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/rewards/accounts/{user_id}",
       "status": "implemented",
       "responseType": "RewardsAccountSummaryDto",
@@ -2218,6 +2399,24 @@
       "responseFields": null,
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/account-pools/{pool_id}/lease",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/account-pools/{pool_id}/report",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
     }
   ],
   "planned": [],
@@ -2546,18 +2745,6 @@
       "method": "GET",
       "path": "/api/manage/libraries",
       "reason": "前端声明丰富列表字段（description/type_label/item_count/status/...），后端 GET/POST/PATCH 只返回扁平 {id,name,kind}（实证 live server）。**真漂移（后端 feature gap）**：丰富 DTO 未落地；前端 mapper 已安全缺省（不再崩），但 status 恒 attention、itemCount 恒 0。建议立卡补后端 DTO。"
-    },
-    {
-      "rule": "BACKEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/yun139/account-pools/{pool_id}/lease",
-      "reason": "V1F-04b（w2）新增调度端点，本分支后端已实现、清单尚未登记——主代理合并后统一 --write 重生成并删本条。"
-    },
-    {
-      "rule": "BACKEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/yun139/account-pools/{pool_id}/report",
-      "reason": "V1F-04b（w2）新增调度端点，本分支后端已实现、清单尚未登记——主代理合并后统一 --write 重生成并删本条。"
     },
     {
       "rule": "MANIFEST_ENDPOINT_STALE",
