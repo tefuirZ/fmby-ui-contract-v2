@@ -2090,27 +2090,59 @@
     {
       "method": "GET",
       "path": "/api/manage/media-items",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "ManagedMediaItemsResponse",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "MediaItemsQuery",
+      "requestFields": [
+        "page",
+        "page_size",
+        "keyword",
+        "library_id",
+        "media_type",
+        "sort_by",
+        "sort_order"
+      ]
     },
     {
       "method": "GET",
       "path": "/api/manage/media-items/{id}",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
+      "status": "implemented",
+      "responseType": "ManagedMediaItemDetailResponse",
+      "responseFields": [
+        "item",
+        "metadata_status",
+        "base_metadata",
+        "effective_metadata",
+        "remote_metadata",
+        "scraped_metadata",
+        "scraped_artworks",
+        "local_metadata_override",
+        "sources",
+        "remote_assets",
+        "artwork_overrides",
+        "subtitle_overrides",
+        "latest_metadata_raw_content"
+      ],
       "requestType": null,
       "requestFields": null
     },
     {
       "method": "GET",
       "path": "/api/manage/media-items/{id}/pipeline",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
+      "status": "implemented",
+      "responseType": "ManagedMediaItemPipelineDto",
+      "responseFields": [
+        "item_id",
+        "identify_task",
+        "identity_binding",
+        "scrape_task",
+        "current_metadata_source",
+        "review_status"
+      ],
       "requestType": null,
       "requestFields": null
     },
@@ -2318,7 +2350,7 @@
     {
       "method": "GET",
       "path": "/api/manage/task-center/overview",
-      "status": "stub",
+      "status": "implemented",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -2327,16 +2359,23 @@
     {
       "method": "GET",
       "path": "/api/manage/task-center/items",
-      "status": "stub",
+      "status": "implemented",
       "responseType": "Value",
       "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "requestType": "TaskCenterItemsQuery",
+      "requestFields": [
+        "category",
+        "status",
+        "from",
+        "to",
+        "page",
+        "size"
+      ]
     },
     {
       "method": "GET",
       "path": "/api/manage/task-center/items/{category}/{id}",
-      "status": "stub",
+      "status": "implemented",
       "responseType": "Value",
       "responseFields": null,
       "requestType": null,
@@ -2345,11 +2384,13 @@
     {
       "method": "POST",
       "path": "/api/manage/task-center/items/{category}/{id}/actions",
-      "status": "stub",
+      "status": "implemented",
       "responseType": "Value",
       "responseFields": null,
-      "requestType": "Value",
-      "requestFields": null
+      "requestType": "TaskCenterActionPayload",
+      "requestFields": [
+        "action"
+      ]
     },
     {
       "method": "GET",
@@ -2372,11 +2413,20 @@
     {
       "method": "GET",
       "path": "/api/manage/audit-logs",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "ManagedAuditLogsResponse",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "AuditLogsQuery",
+      "requestFields": [
+        "page",
+        "page_size",
+        "user_id",
+        "action",
+        "request_id"
+      ]
     },
     {
       "method": "GET",
