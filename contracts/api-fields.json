@@ -1105,6 +1105,37 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/scan",
+      "status": "implemented",
+      "responseType": "ScanTriggerResponse",
+      "responseFields": [
+        "mount_id",
+        "task_key",
+        "task_id",
+        "created"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts/{id}/scan",
+      "status": "implemented",
+      "responseType": "ScanStatusResponse",
+      "responseFields": [
+        "mount_id",
+        "state",
+        "terminal",
+        "attempt",
+        "max_attempts",
+        "error_class",
+        "checkpoint"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "GET",
       "path": "/api/manage/mounts/{id}/libraries",
       "status": "implemented",
