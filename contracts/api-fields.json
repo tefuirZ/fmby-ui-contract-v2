@@ -1330,6 +1330,44 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/collections/{id}/members/reorder",
+      "status": "implemented",
+      "responseType": "CollectionsOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "ManagedCollectionMemberReorder",
+      "requestFields": [
+        "member_ids"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/collections/{id}/members/{member_id}",
+      "status": "implemented",
+      "responseType": "ManagedCollectionMemberDto",
+      "responseFields": [
+        "id",
+        "collection_id",
+        "title_snapshot",
+        "year_snapshot",
+        "media_kind",
+        "poster_url_snapshot",
+        "is_enabled",
+        "release_order",
+        "watch_order",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "ManagedCollectionMemberPatch",
+      "requestFields": [
+        "is_enabled",
+        "release_order",
+        "watch_order"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/manage/upstreams",
       "status": "implemented",
