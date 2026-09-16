@@ -2546,6 +2546,36 @@
       "method": "GET",
       "path": "/api/manage/libraries",
       "reason": "前端声明丰富列表字段（description/type_label/item_count/status/...），后端 GET/POST/PATCH 只返回扁平 {id,name,kind}（实证 live server）。**真漂移（后端 feature gap）**：丰富 DTO 未落地；前端 mapper 已安全缺省（不再崩），但 status 恒 attention、itemCount 恒 0。建议立卡补后端 DTO。"
+    },
+    {
+      "rule": "BACKEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/yun139/account-pools/{pool_id}/lease",
+      "reason": "V1F-04b（w2）新增调度端点，本分支后端已实现、清单尚未登记——主代理合并后统一 --write 重生成并删本条。"
+    },
+    {
+      "rule": "BACKEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/yun139/account-pools/{pool_id}/report",
+      "reason": "V1F-04b（w2）新增调度端点，本分支后端已实现、清单尚未登记——主代理合并后统一 --write 重生成并删本条。"
+    },
+    {
+      "rule": "MANIFEST_ENDPOINT_STALE",
+      "method": "GET",
+      "path": "/api/manage/developer/endpoints",
+      "reason": "V1F-04b（w2）分支基线不含 w1 的该路由（合并时序差）；主代理合并后自然一致。"
+    },
+    {
+      "rule": "MANIFEST_ENDPOINT_STALE",
+      "method": "GET",
+      "path": "/api/manage/events",
+      "reason": "V1F-04b（w2）分支基线不含该路由（合并时序差）；主代理合并后自然一致。"
+    },
+    {
+      "rule": "MANIFEST_ENDPOINT_STALE",
+      "method": "GET",
+      "path": "/api/manage/events/{id}",
+      "reason": "V1F-04b（w2）分支基线不含该路由（合并时序差）；主代理合并后自然一致。"
     }
   ]
 }
