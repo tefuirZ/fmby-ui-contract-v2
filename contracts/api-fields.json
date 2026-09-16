@@ -1687,6 +1687,32 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/events",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "EventsListRequest",
+      "requestFields": [
+        "kind",
+        "request_id",
+        "actor",
+        "action",
+        "search",
+        "page",
+        "page_size"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/events/{request_id}",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/probe-tasks",
       "status": "stub",
       "responseType": "Value",
