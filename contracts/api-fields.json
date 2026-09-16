@@ -1696,12 +1696,95 @@
         "source_id",
         "created_library_count",
         "bound_category_count",
+        "submitted_sync_job_count",
+        "sync_jobs",
         "preset"
       ],
       "requestType": "UpstreamMappingApplyDto",
       "requestFields": [
         "preview",
         "save_preset_name"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/sync-jobs",
+      "status": "implemented",
+      "responseType": "UpstreamSyncJobListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/apple-cms/sync-page",
+      "status": "implemented",
+      "responseType": "UpstreamAppleCmsSyncPageDto",
+      "responseFields": [
+        "source_id",
+        "category_id",
+        "library_id",
+        "page",
+        "page_count",
+        "total",
+        "imported_item_count",
+        "imported_variant_count",
+        "synced_at"
+      ],
+      "requestType": "UpstreamAppleCmsSyncPageRequest",
+      "requestFields": [
+        "category_id",
+        "page",
+        "page_size"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/apple-cms/sync",
+      "status": "implemented",
+      "responseType": "UpstreamAppleCmsSyncDto",
+      "responseFields": [
+        "source_id",
+        "page_size",
+        "worker_count",
+        "category_count",
+        "discovered_category_count",
+        "bound_category_count",
+        "skipped_unbound_category_count",
+        "imported_item_count",
+        "imported_variant_count",
+        "categories",
+        "skipped_unbound_categories",
+        "synced_at"
+      ],
+      "requestType": "UpstreamAppleCmsSyncRequest",
+      "requestFields": [
+        "category_id",
+        "page_size",
+        "worker_count"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/emby/sync",
+      "status": "implemented",
+      "responseType": "UpstreamEmbySyncDto",
+      "responseFields": [
+        "source_id",
+        "page_size",
+        "category_count",
+        "imported_item_count",
+        "imported_variant_count",
+        "categories",
+        "synced_at"
+      ],
+      "requestType": "UpstreamEmbySyncRequest",
+      "requestFields": [
+        "category_id",
+        "page_size"
       ]
     },
     {
