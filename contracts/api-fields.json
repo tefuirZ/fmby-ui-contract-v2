@@ -2843,6 +2843,288 @@
         "oauth_client",
         "note"
       ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/enable",
+      "status": "implemented",
+      "responseType": "MicrosoftAuthAccountDto",
+      "responseFields": [
+        "id",
+        "auth_profile_id",
+        "provider_type",
+        "tenant_id",
+        "drive_id",
+        "service_kind",
+        "oauth_client_kind",
+        "note",
+        "status",
+        "principal_id",
+        "user_principal_name",
+        "display_name",
+        "last_used_at",
+        "last_success_at",
+        "last_error_at",
+        "last_error_message",
+        "throttled_until",
+        "consecutive_throttle_count",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/disable",
+      "status": "implemented",
+      "responseType": "MicrosoftAuthAccountDto",
+      "responseFields": [
+        "id",
+        "auth_profile_id",
+        "provider_type",
+        "tenant_id",
+        "drive_id",
+        "service_kind",
+        "oauth_client_kind",
+        "note",
+        "status",
+        "principal_id",
+        "user_principal_name",
+        "display_name",
+        "last_used_at",
+        "last_success_at",
+        "last_error_at",
+        "last_error_message",
+        "throttled_until",
+        "consecutive_throttle_count",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/recover",
+      "status": "implemented",
+      "responseType": "MicrosoftAuthAccountDto",
+      "responseFields": [
+        "id",
+        "auth_profile_id",
+        "provider_type",
+        "tenant_id",
+        "drive_id",
+        "service_kind",
+        "oauth_client_kind",
+        "note",
+        "status",
+        "principal_id",
+        "user_principal_name",
+        "display_name",
+        "last_used_at",
+        "last_success_at",
+        "last_error_at",
+        "last_error_message",
+        "throttled_until",
+        "consecutive_throttle_count",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/note",
+      "status": "implemented",
+      "responseType": "MicrosoftAuthAccountDto",
+      "responseFields": [
+        "id",
+        "auth_profile_id",
+        "provider_type",
+        "tenant_id",
+        "drive_id",
+        "service_kind",
+        "oauth_client_kind",
+        "note",
+        "status",
+        "principal_id",
+        "user_principal_name",
+        "display_name",
+        "last_used_at",
+        "last_success_at",
+        "last_error_at",
+        "last_error_message",
+        "throttled_until",
+        "consecutive_throttle_count",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "UpdateMicrosoftAuthAccountNoteRequest",
+      "requestFields": [
+        "note"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/drives",
+      "status": "implemented",
+      "responseType": "MicrosoftDriveListResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/sites",
+      "status": "implemented",
+      "responseType": "MicrosoftSiteListResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": "MicrosoftSiteSearchQuery",
+      "requestFields": [
+        "q"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/sites/{site_id}/drives",
+      "status": "implemented",
+      "responseType": "MicrosoftDriveListResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/drives/{drive_id}/quota",
+      "status": "implemented",
+      "responseType": "MicrosoftDriveDto",
+      "responseFields": [
+        "id",
+        "name",
+        "drive_type",
+        "web_url",
+        "quota"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/write/create-folder",
+      "status": "implemented",
+      "responseType": "MicrosoftDriveItemDto",
+      "responseFields": [
+        "id",
+        "name",
+        "web_url"
+      ],
+      "requestType": "MicrosoftCreateFolderRequest",
+      "requestFields": [
+        "parent_path",
+        "name"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/write/rename",
+      "status": "implemented",
+      "responseType": "MicrosoftDriveItemDto",
+      "responseFields": [
+        "id",
+        "name",
+        "web_url"
+      ],
+      "requestType": "MicrosoftRenameItemRequest",
+      "requestFields": [
+        "item_path",
+        "name"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/write/move",
+      "status": "implemented",
+      "responseType": "MicrosoftDriveItemDto",
+      "responseFields": [
+        "id",
+        "name",
+        "web_url"
+      ],
+      "requestType": "MicrosoftMoveItemRequest",
+      "requestFields": [
+        "item_path",
+        "target_parent_path",
+        "name"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/write/delete",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "MicrosoftDeleteItemRequest",
+      "requestFields": [
+        "item_path"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/write/upload-session",
+      "status": "implemented",
+      "responseType": "MicrosoftUploadSessionResponse",
+      "responseFields": [
+        "upload_url",
+        "expiration_date_time"
+      ],
+      "requestType": "MicrosoftCreateUploadSessionRequest",
+      "requestFields": [
+        "item_path",
+        "conflict_behavior"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/auth/accounts/{account_id}/delta",
+      "status": "implemented",
+      "responseType": "MicrosoftDeltaResponse",
+      "responseFields": [
+        "items",
+        "delta_link",
+        "next_link"
+      ],
+      "requestType": "MicrosoftDeltaRequest",
+      "requestFields": [
+        "path",
+        "delta_link"
+      ]
     }
   ],
   "planned": [],
