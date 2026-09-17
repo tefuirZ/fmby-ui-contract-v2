@@ -2469,11 +2469,30 @@
     {
       "method": "GET",
       "path": "/api/manage/runtime-logs",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "ManagedRuntimeLogsResponse",
+      "responseFields": [
+        "items",
+        "total",
+        "truncated",
+        "log_dir",
+        "available_targets"
+      ],
+      "requestType": "RuntimeLogsQuery",
+      "requestFields": [
+        "page",
+        "page_size",
+        "level",
+        "target",
+        "search",
+        "method",
+        "path",
+        "client",
+        "ip",
+        "user",
+        "request_id",
+        "all"
+      ]
     },
     {
       "method": "GET",
