@@ -1343,6 +1343,20 @@
       ]
     },
     {
+      "method": "POST",
+      "path": "/api/manage/collections/{id}/members/add",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDetailDto",
+      "responseFields": [
+        "collection",
+        "members"
+      ],
+      "requestType": "ManagedCollectionMemberAdd",
+      "requestFields": [
+        "item_id"
+      ]
+    },
+    {
       "method": "PATCH",
       "path": "/api/manage/collections/{id}/members/{member_id}",
       "status": "implemented",
