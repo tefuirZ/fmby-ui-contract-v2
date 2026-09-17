@@ -805,7 +805,7 @@
     {
       "method": "DELETE",
       "path": "/api/manage/users/{id}",
-      "status": "stub",
+      "status": "implemented",
       "responseType": null,
       "responseFields": null,
       "requestType": "ConfirmQuery",
