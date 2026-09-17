@@ -2169,6 +2169,17 @@
       "requestFields": null
     },
     {
+      "method": "DELETE",
+      "path": "/api/manage/media-items/{id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/manage/media-items/{id}/pipeline",
       "status": "implemented",
@@ -2180,6 +2191,31 @@
         "scrape_task",
         "current_metadata_source",
         "review_status"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/media-items/{id}/sources/{sourceId}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/scan",
+      "status": "implemented",
+      "responseType": "ScanTriggerResponse",
+      "responseFields": [
+        "mount_id",
+        "task_key",
+        "task_id",
+        "created"
       ],
       "requestType": null,
       "requestFields": null
