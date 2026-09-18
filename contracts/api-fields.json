@@ -2463,6 +2463,15 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/identity/manual-match",
+      "status": "implemented",
+      "responseType": "ManualMatchResponse",
+      "responseFields": null,
+      "requestType": "ManualMatchRequest",
+      "requestFields": null
+    },
+    {
       "method": "GET",
       "path": "/api/manage/media-reviews",
       "status": "implemented",
