@@ -752,10 +752,10 @@
       "requestType": "ManageUsersQuery",
       "requestFields": [
         "page",
-        "page_size",
+        "pageSize",
         "search",
         "status",
-        "account_kind"
+        "accountKind"
       ]
     },
     {
@@ -998,7 +998,7 @@
       "requestType": "ManagedRegistrationCodesQuery",
       "requestFields": [
         "page",
-        "page_size",
+        "pageSize",
         "search",
         "status"
       ]
@@ -1042,6 +1042,36 @@
         "allow_reactivation",
         "require_approval"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts/health",
+      "status": "implemented",
+      "responseType": "MountHealthListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "MountHealthQuery",
+      "requestFields": [
+        "status"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/probe",
+      "status": "implemented",
+      "responseType": "MountProbeDto",
+      "responseFields": [
+        "mount_id",
+        "probe_status",
+        "latency_ms",
+        "message",
+        "health_status",
+        "status_message"
+      ],
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "PATCH",
@@ -1150,11 +1180,11 @@
       "requestType": "ManageMountsQuery",
       "requestFields": [
         "page",
-        "page_size",
+        "pageSize",
         "search",
-        "health_status",
-        "provider_type",
-        "library_id"
+        "healthStatus",
+        "providerType",
+        "libraryId"
       ]
     },
     {
@@ -1195,11 +1225,11 @@
       ],
       "requestType": "MountBrowseRequest",
       "requestFields": [
-        "provider_type",
-        "config_json",
-        "mount_id",
-        "preview_id",
-        "root_path",
+        "providerType",
+        "configJson",
+        "mountId",
+        "previewId",
+        "rootPath",
         "path"
       ]
     },
@@ -1279,9 +1309,9 @@
       "status": "implemented",
       "responseType": "ScanTriggerResponse",
       "responseFields": [
-        "mount_id",
-        "task_key",
-        "task_id",
+        "mountId",
+        "taskKey",
+        "taskId",
         "created"
       ],
       "requestType": null,
@@ -1293,12 +1323,12 @@
       "status": "implemented",
       "responseType": "ScanStatusResponse",
       "responseFields": [
-        "mount_id",
+        "mountId",
         "state",
         "terminal",
         "attempt",
-        "max_attempts",
-        "error_class",
+        "maxAttempts",
+        "errorClass",
         "checkpoint"
       ],
       "requestType": null,
@@ -1310,13 +1340,13 @@
       "status": "implemented",
       "responseType": "LibraryScanTriggerResponse",
       "responseFields": [
-        "library_id",
+        "libraryId",
         "tasks",
-        "skipped_mount_ids"
+        "skippedMountIds"
       ],
       "requestType": "TriggerLibraryScanRequest",
       "requestFields": [
-        "task_type"
+        "taskType"
       ]
     },
     {
@@ -1567,6 +1597,20 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/upstreams/health",
+      "status": "implemented",
+      "responseType": "UpstreamHealthListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "UpstreamHealthQuery",
+      "requestFields": [
+        "status"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/upstreams",
       "status": "implemented",
       "responseType": "UpstreamSourceListDto",
@@ -1576,7 +1620,7 @@
       ],
       "requestType": "UpstreamSourceListQuery",
       "requestFields": [
-        "source_type",
+        "sourceType",
         "status"
       ]
     },
@@ -1589,15 +1633,15 @@
       "requestType": "UpstreamSourceWriteDto",
       "requestFields": [
         "name",
-        "source_type",
-        "base_url",
-        "auth_method",
+        "sourceType",
+        "baseUrl",
+        "authMethod",
         "username",
         "password",
-        "api_key",
-        "user_agent",
+        "apiKey",
+        "userAgent",
         "referer",
-        "extra_headers",
+        "extraHeaders",
         "retain_secret",
         "enabled"
       ]
@@ -1660,15 +1704,15 @@
       "requestType": "UpstreamSourceWriteDto",
       "requestFields": [
         "name",
-        "source_type",
-        "base_url",
-        "auth_method",
+        "sourceType",
+        "baseUrl",
+        "authMethod",
         "username",
         "password",
-        "api_key",
-        "user_agent",
+        "apiKey",
+        "userAgent",
         "referer",
-        "extra_headers",
+        "extraHeaders",
         "retain_secret",
         "enabled"
       ]
@@ -1853,7 +1897,7 @@
       ],
       "requestType": "BindingListQuery",
       "requestFields": [
-        "library_id"
+        "libraryId"
       ]
     },
     {
@@ -1877,11 +1921,11 @@
       "requestType": "UpstreamMappingPresetWriteDto",
       "requestFields": [
         "name",
-        "include_keywords",
-        "exclude_keywords",
-        "include_category_ids",
-        "exclude_category_ids",
-        "default_library_type",
+        "includeKeywords",
+        "excludeKeywords",
+        "includeCategoryIds",
+        "excludeCategoryIds",
+        "defaultLibraryType",
         "create_missing_libraries",
         "enabled"
       ]
@@ -1909,11 +1953,11 @@
       "requestType": "UpstreamMappingPresetWriteDto",
       "requestFields": [
         "name",
-        "include_keywords",
-        "exclude_keywords",
-        "include_category_ids",
-        "exclude_category_ids",
-        "default_library_type",
+        "includeKeywords",
+        "excludeKeywords",
+        "includeCategoryIds",
+        "excludeCategoryIds",
+        "defaultLibraryType",
         "create_missing_libraries",
         "enabled"
       ]
@@ -1943,14 +1987,14 @@
       ],
       "requestType": "UpstreamMappingPreviewDto",
       "requestFields": [
-        "preset_id",
-        "include_keywords",
-        "exclude_keywords",
-        "include_category_ids",
-        "exclude_category_ids",
-        "selected_category_ids",
-        "default_library_type",
-        "create_missing_libraries",
+        "presetId",
+        "includeKeywords",
+        "excludeKeywords",
+        "includeCategoryIds",
+        "excludeCategoryIds",
+        "selectedCategoryIds",
+        "defaultLibraryType",
+        "createMissingLibraries",
         "overrides"
       ]
     },
@@ -1970,7 +2014,7 @@
       "requestType": "UpstreamMappingApplyDto",
       "requestFields": [
         "preview",
-        "save_preset_name"
+        "savePresetName"
       ]
     },
     {
@@ -2003,9 +2047,9 @@
       ],
       "requestType": "UpstreamAppleCmsSyncPageRequest",
       "requestFields": [
-        "category_id",
+        "categoryId",
         "page",
-        "page_size"
+        "pageSize"
       ]
     },
     {
@@ -2029,9 +2073,9 @@
       ],
       "requestType": "UpstreamAppleCmsSyncRequest",
       "requestFields": [
-        "category_id",
-        "page_size",
-        "worker_count"
+        "categoryId",
+        "pageSize",
+        "workerCount"
       ]
     },
     {
@@ -2050,8 +2094,8 @@
       ],
       "requestType": "UpstreamEmbySyncRequest",
       "requestFields": [
-        "category_id",
-        "page_size"
+        "categoryId",
+        "pageSize"
       ]
     },
     {
@@ -2335,12 +2379,12 @@
       "requestType": "MediaItemsQuery",
       "requestFields": [
         "page",
-        "page_size",
+        "pageSize",
         "keyword",
-        "library_id",
-        "media_type",
-        "sort_by",
-        "sort_order"
+        "libraryId",
+        "mediaType",
+        "sortBy",
+        "sortOrder"
       ]
     },
     {
@@ -2410,9 +2454,9 @@
       "status": "implemented",
       "responseType": "ScanTriggerResponse",
       "responseFields": [
-        "mount_id",
-        "task_key",
-        "task_id",
+        "mountId",
+        "taskKey",
+        "taskId",
         "created"
       ],
       "requestType": null,
@@ -2428,9 +2472,9 @@
       "requestFields": [
         "stage",
         "status",
-        "media_item_id",
+        "mediaItemId",
         "page",
-        "page_size"
+        "pageSize"
       ]
     },
     {
@@ -2443,7 +2487,7 @@
       "requestFields": [
         "provider",
         "query",
-        "entity_type",
+        "entityType",
         "year"
       ]
     },
@@ -2498,7 +2542,7 @@
         "scope",
         "q",
         "page",
-        "page_size"
+        "pageSize"
       ]
     },
     {
@@ -2510,12 +2554,12 @@
       "requestType": "EventsListRequest",
       "requestFields": [
         "kind",
-        "request_id",
+        "requestId",
         "actor",
         "action",
         "search",
         "page",
-        "page_size"
+        "pageSize"
       ]
     },
     {
@@ -2694,10 +2738,10 @@
       "requestType": "AuditLogsQuery",
       "requestFields": [
         "page",
-        "page_size",
-        "user_id",
+        "pageSize",
+        "userId",
         "action",
-        "request_id"
+        "requestId"
       ]
     },
     {
@@ -2715,7 +2759,7 @@
       "requestType": "RuntimeLogsQuery",
       "requestFields": [
         "page",
-        "page_size",
+        "pageSize",
         "level",
         "target",
         "search",
@@ -2724,7 +2768,7 @@
         "client",
         "ip",
         "user",
-        "request_id",
+        "requestId",
         "all"
       ]
     },
@@ -3122,12 +3166,12 @@
       ],
       "requestType": "ManageMicrosoftAuthProfilesQuery",
       "requestFields": [
-        "provider_type",
-        "auth_profile_id",
-        "account_id",
-        "tenant_id",
-        "drive_id",
-        "service_kind"
+        "providerType",
+        "authProfileId",
+        "accountId",
+        "tenantId",
+        "driveId",
+        "serviceKind"
       ]
     },
     {
@@ -3147,12 +3191,12 @@
       ],
       "requestType": "StartMicrosoftAuthRequest",
       "requestFields": [
-        "provider_type",
-        "tenant_id",
-        "drive_id",
-        "service_kind",
-        "oauth_client",
-        "auth_profile_id",
+        "providerType",
+        "tenantId",
+        "driveId",
+        "serviceKind",
+        "oauthClient",
+        "authProfileId",
         "note"
       ]
     },
@@ -3175,8 +3219,8 @@
       ],
       "requestType": "CompleteMicrosoftAuthRequest",
       "requestFields": [
-        "authorization_id",
-        "callback_url"
+        "authorizationId",
+        "callbackUrl"
       ]
     },
     {
@@ -3189,11 +3233,11 @@
       ],
       "requestType": "MicrosoftTokenDriveListRequest",
       "requestFields": [
-        "provider_type",
-        "access_token",
-        "refresh_token",
-        "site_id",
-        "oauth_client"
+        "providerType",
+        "accessToken",
+        "refreshToken",
+        "siteId",
+        "oauthClient"
       ]
     },
     {
@@ -3212,9 +3256,9 @@
       ],
       "requestType": "StartMicrosoftTokenAuthRequest",
       "requestFields": [
-        "provider_type",
-        "service_kind",
-        "oauth_client"
+        "providerType",
+        "serviceKind",
+        "oauthClient"
       ]
     },
     {
@@ -3237,8 +3281,8 @@
       ],
       "requestType": "CompleteMicrosoftTokenAuthRequest",
       "requestFields": [
-        "authorization_id",
-        "callback_url"
+        "authorizationId",
+        "callbackUrl"
       ]
     },
     {
@@ -3251,11 +3295,11 @@
       ],
       "requestType": "MicrosoftTokenSiteSearchRequest",
       "requestFields": [
-        "provider_type",
-        "access_token",
-        "refresh_token",
+        "providerType",
+        "accessToken",
+        "refreshToken",
         "q",
-        "oauth_client"
+        "oauthClient"
       ]
     },
     {
@@ -3287,15 +3331,15 @@
       ],
       "requestType": "ImportMicrosoftTokenAccountRequest",
       "requestFields": [
-        "provider_type",
-        "service_kind",
-        "access_token",
-        "refresh_token",
-        "tenant_id",
-        "drive_id",
-        "auth_profile_id",
-        "site_id",
-        "oauth_client",
+        "providerType",
+        "serviceKind",
+        "accessToken",
+        "refreshToken",
+        "tenantId",
+        "driveId",
+        "authProfileId",
+        "siteId",
+        "oauthClient",
         "note"
       ]
     },
