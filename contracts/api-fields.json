@@ -761,11 +761,26 @@
     {
       "method": "POST",
       "path": "/api/manage/users",
-      "status": "stub",
-      "responseType": "Value",
+      "status": "implemented",
+      "responseType": null,
       "responseFields": null,
-      "requestType": "Value",
-      "requestFields": null
+      "requestType": "CreateManagedUserRequest",
+      "requestFields": [
+        "username",
+        "display_name",
+        "email",
+        "password",
+        "account_kind",
+        "role",
+        "role_template_id",
+        "status",
+        "max_sessions",
+        "valid_until",
+        "max_concurrent_playbacks",
+        "library_access_mode",
+        "library_ids",
+        "source_grants"
+      ]
     },
     {
       "method": "GET",
@@ -796,11 +811,28 @@
     {
       "method": "PATCH",
       "path": "/api/manage/users/{id}",
-      "status": "stub",
-      "responseType": "Value",
+      "status": "implemented",
+      "responseType": null,
       "responseFields": null,
-      "requestType": "Value",
-      "requestFields": null
+      "requestType": "UpdateUserFullRequest",
+      "requestFields": [
+        "display_name",
+        "email",
+        "account_kind",
+        "roles",
+        "role_template_id",
+        "valid_until",
+        "confirm_validity_shortening",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "must_change_password",
+        "library_access_mode",
+        "library_ids",
+        "source_grants",
+        "confirm_action",
+        "session_confirmation",
+        "current_password"
+      ]
     },
     {
       "method": "DELETE",
@@ -945,20 +977,157 @@
     {
       "method": "GET",
       "path": "/api/manage/registration-codes",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeBatchDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind",
+        "total_codes",
+        "available_codes",
+        "used_codes",
+        "disabled_codes",
+        "expired_codes",
+        "total_used_count",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at",
+        "items"
+      ],
+      "requestType": "ManagedRegistrationCodesQuery",
+      "requestFields": [
+        "page",
+        "page_size",
+        "search",
+        "status"
+      ]
     },
     {
       "method": "POST",
       "path": "/api/manage/registration-codes",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": "Value",
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeBatchDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind",
+        "total_codes",
+        "available_codes",
+        "used_codes",
+        "disabled_codes",
+        "expired_codes",
+        "total_used_count",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at",
+        "items"
+      ],
+      "requestType": "CreateRegistrationCodeRequest",
+      "requestFields": [
+        "mode",
+        "batch_name",
+        "generate_count",
+        "code_length",
+        "code",
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/{id}",
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeDto",
+      "responseFields": [
+        "id",
+        "batch_id",
+        "code",
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "used_count",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval",
+        "status",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at"
+      ],
+      "requestType": "UpdateRegistrationCodeRequest",
+      "requestFields": [
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/{id}/status",
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeDto",
+      "responseFields": [
+        "id",
+        "batch_id",
+        "code",
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "used_count",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval",
+        "status",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at"
+      ],
+      "requestType": "UpdateRegistrationCodeStatusRequest",
+      "requestFields": [
+        "status"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/registration-codes/{id}",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
     },
     {
       "method": "GET",
@@ -3622,6 +3791,12 @@
       "method": "POST",
       "path": "/api/manage/media-items/{*}/scan",
       "reason": "契约仓 G-05：条目级子资源端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_MISSING",
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/{id}",
+      "reason": "后端 DTO 与 V1 RegistrationCodeDto 逐字段一致（含 role_template_id / max_concurrent_playbacks，V1 dto/registration_codes.rs:99/101），但前端 RawRegistrationCodeRecord（fmby-web/shared/src/contracts/manage/raw-types.ts:85）缺这两字段且 mapper 未消费。REG-CODES-B 端点由 stub→implemented 后字段级对账启用才暴露。须前端卡补齐 RawRegistrationCodeRecord + mapper；补齐后本条自动转 stale 警告，届时删除。"
     }
   ]
 }
