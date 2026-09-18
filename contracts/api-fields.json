@@ -1289,6 +1289,62 @@
     },
     {
       "method": "POST",
+      "path": "/api/manage/mounts/{id}/validate",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/refresh-access",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/batch/refresh-abnormal",
+      "status": "implemented",
+      "responseType": "BatchRefreshAbnormalMountsResponse",
+      "responseFields": [
+        "total",
+        "refreshed",
+        "active",
+        "unreachable",
+        "skipped",
+        "failed",
+        "results"
+      ],
+      "requestType": "BatchRefreshAbnormalMountsRequest",
+      "requestFields": [
+        "mount_ids",
+        "limit"
+      ]
+    },
+    {
+      "method": "POST",
       "path": "/api/manage/mounts/{id}/verify",
       "status": "implemented",
       "responseType": "ManagedMountDto",
@@ -2464,12 +2520,44 @@
     },
     {
       "method": "POST",
+      "path": "/api/manage/media-items/{id}/identify",
+      "status": "implemented",
+      "responseType": "IdentifyTriggerResponse",
+      "responseFields": [
+        "itemId",
+        "taskId",
+        "outcome",
+        "status",
+        "fingerprint",
+        "sources"
+      ],
+      "requestType": "IdentifyTriggerRequest",
+      "requestFields": [
+        "reason",
+        "force"
+      ]
+    },
+    {
+      "method": "POST",
       "path": "/api/manage/media-items/{id}/identity/manual-match",
       "status": "implemented",
       "responseType": "ManualMatchResponse",
       "responseFields": null,
       "requestType": "ManualMatchRequest",
       "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/visibility/{state}",
+      "status": "implemented",
+      "responseType": "ManageVisibilityOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
     },
     {
       "method": "GET",
@@ -2971,6 +3059,105 @@
       "responseFields": null,
       "requestType": "Value",
       "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/server/cdn-operations",
+      "status": "implemented",
+      "responseType": "CdnOperationsSettingsDto",
+      "responseFields": [
+        "provider",
+        "configured",
+        "secret_fields_configured",
+        "huawei_enterprise_project_id"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/server/cdn-operations",
+      "status": "implemented",
+      "responseType": "CdnOperationsSettingsDto",
+      "responseFields": [
+        "provider",
+        "configured",
+        "secret_fields_configured",
+        "huawei_enterprise_project_id"
+      ],
+      "requestType": "UpdateCdnOperationsSettingsRequest",
+      "requestFields": [
+        "provider",
+        "cloudflareZoneId",
+        "aliyunEndpoint",
+        "tencentEndpoint",
+        "tencentRegion",
+        "huaweiEndpoint",
+        "huaweiEnterpriseProjectId",
+        "secretConfig",
+        "clearSecretConfig",
+        "clearSecretFields",
+        "keepExistingSecretConfig"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/settings/server/cdn-operations/test",
+      "status": "implemented",
+      "responseType": "CdnOperationsHealthDto",
+      "responseFields": [
+        "ok",
+        "provider",
+        "providerConfigured",
+        "checkedAt",
+        "message",
+        "warnings",
+        "secretFieldsConfigured"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/settings/server/cdn-operations/refresh",
+      "status": "implemented",
+      "responseType": "CdnOperationsActionResponseDto",
+      "responseFields": [
+        "accepted",
+        "action",
+        "provider",
+        "targetCount",
+        "submittedUrls",
+        "message",
+        "warnings"
+      ],
+      "requestType": "CdnOperationsActionRequest",
+      "requestFields": [
+        "urls",
+        "includeHealthUrl",
+        "useDirectory"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/settings/server/cdn-operations/preheat",
+      "status": "implemented",
+      "responseType": "CdnOperationsActionResponseDto",
+      "responseFields": [
+        "accepted",
+        "action",
+        "provider",
+        "targetCount",
+        "submittedUrls",
+        "message",
+        "warnings"
+      ],
+      "requestType": "CdnOperationsActionRequest",
+      "requestFields": [
+        "urls",
+        "includeHealthUrl",
+        "useDirectory"
+      ]
     },
     {
       "method": "GET",
