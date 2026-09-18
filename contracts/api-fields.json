@@ -950,29 +950,106 @@
     {
       "method": "GET",
       "path": "/api/manage/role-templates",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
+      "status": "implemented",
+      "responseType": "RoleTemplateDto",
+      "responseFields": [
+        "id",
+        "code",
+        "name",
+        "description",
+        "capabilities",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days",
+        "is_system",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
       "requestType": null,
       "requestFields": null
     },
     {
       "method": "POST",
       "path": "/api/manage/role-templates",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": "Value",
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "RoleTemplateDto",
+      "responseFields": [
+        "id",
+        "code",
+        "name",
+        "description",
+        "capabilities",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days",
+        "is_system",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "CreateRoleTemplateRequest",
+      "requestFields": [
+        "code",
+        "name",
+        "description",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days"
+      ]
     },
     {
-      "method": "GET",
+      "method": "PATCH",
       "path": "/api/manage/role-templates/{id}",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "RoleTemplateDto",
+      "responseFields": [
+        "id",
+        "code",
+        "name",
+        "description",
+        "capabilities",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days",
+        "is_system",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "UpdateRoleTemplateRequest",
+      "requestFields": [
+        "name",
+        "description",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/role-templates/{id}",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
     },
     {
       "method": "GET",
