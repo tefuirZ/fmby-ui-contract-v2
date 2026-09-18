@@ -4285,19 +4285,7 @@
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "PATCH",
-      "path": "/api/manage/registration-codes/{*}",
-      "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "PATCH",
       "path": "/api/manage/registration-codes/batches/{*}",
-      "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "DELETE",
-      "path": "/api/manage/registration-codes/{*}",
       "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
     },
     {
@@ -4308,69 +4296,9 @@
     },
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "DELETE",
-      "path": "/api/manage/role-templates/{*}",
-      "reason": "role-templates 删除端点未实现（前端 deleteRoleTemplate 已接）。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "GET",
       "path": "/api/manage/advanced",
       "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_EXTRA",
-      "method": "GET",
-      "path": "/api/manage/libraries/{*}",
-      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_MISSING",
-      "method": "GET",
-      "path": "/api/manage/libraries/{*}",
-      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_EXTRA",
-      "method": "POST",
-      "path": "/api/manage/libraries",
-      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_MISSING",
-      "method": "POST",
-      "path": "/api/manage/libraries",
-      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_EXTRA",
-      "method": "PATCH",
-      "path": "/api/manage/libraries/{*}",
-      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_MISSING",
-      "method": "PATCH",
-      "path": "/api/manage/libraries/{*}",
-      "reason": "形状漂移（真）：后端 GET/POST/PATCH /manage/libraries 返回扁平 ManagedLibraryDto{id,name,kind}；前端 RawManagedLibraryDetailResponse 期待 {library:{...},source_bindings,access_grants,recent_scan_tasks} → raw.library undefined，mapper 运行期 TypeError。根因=后端 feature gap（丰富 detail DTO 未冻结），建议立卡（后端补 DTO 或前端 mapper 容错）。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/libraries/{*}/scan",
-      "reason": "契约仓 G-08：触发扫描端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/mounts/{*}/validate",
-      "reason": "契约仓 G-09：挂载校验/刷新访问端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/mounts/{*}/refresh-access",
-      "reason": "契约仓 G-09：挂载校验/刷新访问端点未实现。"
     },
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
@@ -4436,12 +4364,6 @@
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "DELETE",
       "path": "/api/manage/media-items/{*}/subtitles/{*}",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "DELETE",
-      "path": "/api/manage/media-items/{*}/sources/{*}",
       "reason": "契约仓 G-05：条目级子资源端点未实现。"
     },
     {
