@@ -1442,14 +1442,49 @@
       "requestFields": null
     },
     {
-      "method": "GET",
-      "path": "/api/manage/libraries",
+      "method": "PUT",
+      "path": "/api/manage/libraries/order",
       "status": "implemented",
-      "responseType": "ManagedLibraryDto",
+      "responseType": "ManagedLibraryRecord",
       "responseFields": [
         "id",
         "name",
-        "kind"
+        "description",
+        "kind",
+        "type_label",
+        "item_count",
+        "total_items",
+        "status",
+        "visibility_label",
+        "updated_at",
+        "last_scan_at",
+        "sources",
+        "actual_sources"
+      ],
+      "requestType": "ReorderManagedLibrariesRequest",
+      "requestFields": [
+        "libraryIds"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/libraries",
+      "status": "implemented",
+      "responseType": "ManagedLibraryRecord",
+      "responseFields": [
+        "id",
+        "name",
+        "description",
+        "kind",
+        "type_label",
+        "item_count",
+        "total_items",
+        "status",
+        "visibility_label",
+        "updated_at",
+        "last_scan_at",
+        "sources",
+        "actual_sources"
       ],
       "requestType": null,
       "requestFields": null
@@ -1458,27 +1493,32 @@
       "method": "POST",
       "path": "/api/manage/libraries",
       "status": "implemented",
-      "responseType": "ManagedLibraryDto",
+      "responseType": "ManagedLibraryDetailDto",
       "responseFields": [
-        "id",
-        "name",
-        "kind"
+        "library",
+        "source_bindings",
+        "access_grants",
+        "recent_scan_tasks"
       ],
-      "requestType": "ManagedLibraryWrite",
+      "requestType": "CreateManagedLibraryRequest",
       "requestFields": [
         "name",
-        "kind"
+        "library_type",
+        "description",
+        "source_bindings",
+        "grant_user_ids"
       ]
     },
     {
       "method": "GET",
       "path": "/api/manage/libraries/{id}",
       "status": "implemented",
-      "responseType": "ManagedLibraryDto",
+      "responseType": "ManagedLibraryDetailDto",
       "responseFields": [
-        "id",
-        "name",
-        "kind"
+        "library",
+        "source_bindings",
+        "access_grants",
+        "recent_scan_tasks"
       ],
       "requestType": null,
       "requestFields": null
@@ -1487,16 +1527,20 @@
       "method": "PATCH",
       "path": "/api/manage/libraries/{id}",
       "status": "implemented",
-      "responseType": "ManagedLibraryDto",
+      "responseType": "ManagedLibraryDetailDto",
       "responseFields": [
-        "id",
-        "name",
-        "kind"
+        "library",
+        "source_bindings",
+        "access_grants",
+        "recent_scan_tasks"
       ],
-      "requestType": "ManagedLibraryWrite",
+      "requestType": "UpdateManagedLibraryRequest",
       "requestFields": [
         "name",
-        "kind"
+        "library_type",
+        "description",
+        "replace_source_bindings",
+        "replace_grant_user_ids"
       ]
     },
     {
