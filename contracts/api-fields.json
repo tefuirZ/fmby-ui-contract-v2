@@ -5,228 +5,6 @@
   "endpoints": [
     {
       "method": "POST",
-      "path": "/api/manage/pan115/imghost/qr-login",
-      "status": "implemented",
-      "responseType": "Pan115ImghostQrLoginResponse",
-      "responseFields": [
-        "session_id",
-        "uid",
-        "qr_url",
-        "qr_image"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/pan115/imghost/qr-status",
-      "status": "implemented",
-      "responseType": "Pan115ImghostQrStatusResponse",
-      "responseFields": [
-        "status"
-      ],
-      "requestType": "String, String",
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/pan115/imghost/activate",
-      "status": "implemented",
-      "responseType": "Pan115ImghostOkResponse",
-      "responseFields": [
-        "ok"
-      ],
-      "requestType": "Pan115ImghostActivateRequest",
-      "requestFields": [
-        "session_id",
-        "cookie_app"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/pan115/imghost/credentials",
-      "status": "implemented",
-      "responseType": "Pan115ImghostCredentialsResponse",
-      "responseFields": [
-        "id",
-        "status",
-        "has_cookie",
-        "last_active_at",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "DELETE",
-      "path": "/api/manage/pan115/imghost/credentials",
-      "status": "implemented",
-      "responseType": "Pan115ImghostOkResponse",
-      "responseFields": [
-        "ok"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/pan115/imghost/upload",
-      "status": "implemented",
-      "responseType": "Pan115ImghostUploadResponse",
-      "responseFields": [
-        "id",
-        "sha1",
-        "size",
-        "mime",
-        "mirror_status",
-        "local_url",
-        "host_url"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/pan115/imghost/assets",
-      "status": "implemented",
-      "responseType": "Pan115ImghostAssetListResponse",
-      "responseFields": [
-        "total",
-        "page",
-        "page_size",
-        "items"
-      ],
-      "requestType": "Pan115ImghostAssetsQuery",
-      "requestFields": [
-        "page",
-        "pageSize"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/pan115/imghost/raw/{sha1}",
-      "status": "implemented",
-      "responseType": null,
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/pan115/qr-login",
-      "status": "implemented",
-      "responseType": "CredentialQrLoginDto",
-      "responseFields": [
-        "session_id",
-        "uid",
-        "qr_url",
-        "qr_image"
-      ],
-      "requestType": "Value",
-      "requestFields": null
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/pan115/qr-status",
-      "status": "implemented",
-      "responseType": "CredentialQrStatusDto",
-      "responseFields": [
-        "status"
-      ],
-      "requestType": "String, String",
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/pan115/activate",
-      "status": "implemented",
-      "responseType": "CredentialActivateResponse",
-      "responseFields": [
-        "ok",
-        "mount_id"
-      ],
-      "requestType": "CredentialActivateRequest",
-      "requestFields": [
-        "session_id",
-        "mount_id",
-        "cookie_app",
-        "cookie_header"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/pan115/accounts/{mount_id}",
-      "status": "implemented",
-      "responseType": "CredentialAccountDto",
-      "responseFields": [
-        "mount_id",
-        "uid",
-        "status",
-        "has_cookie",
-        "has_open_token",
-        "last_active_at",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/pan115/accounts/{mount_id}/refresh",
-      "status": "implemented",
-      "responseType": "CredentialOkDto",
-      "responseFields": [
-        "ok"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/pan115/accounts/{mount_id}/health",
-      "status": "implemented",
-      "responseType": "CredentialHealthDto",
-      "responseFields": [
-        "ok",
-        "reason"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/pan115/accounts/{mount_id}/browse",
-      "status": "implemented",
-      "responseType": "CredentialBrowseDto",
-      "responseFields": [
-        "mount_id",
-        "current_path",
-        "entries",
-        "total_count",
-        "next_offset"
-      ],
-      "requestType": "CredentialBrowseRequest",
-      "requestFields": [
-        "path",
-        "offset",
-        "limit"
-      ]
-    },
-    {
-      "method": "DELETE",
-      "path": "/api/manage/pan115/accounts/{mount_id}",
-      "status": "implemented",
-      "responseType": "CredentialOkDto",
-      "responseFields": [
-        "ok"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
       "path": "/api/auth/login",
       "status": "implemented",
       "responseType": null,
@@ -1665,6 +1443,10 @@
         "poster_url",
         "source_kind",
         "visibility",
+        "collection_kind",
+        "auto_expand_enabled",
+        "min_effective_members",
+        "artwork_mode",
         "created_at",
         "updated_at"
       ],
@@ -1672,6 +1454,56 @@
       "requestFields": [
         "collection_ids"
       ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/collections/rules/preview",
+      "status": "implemented",
+      "responseType": "ManagedCollectionRulePreviewResponse",
+      "responseFields": [
+        "match_count",
+        "visible",
+        "sample_items",
+        "artwork_items"
+      ],
+      "requestType": "PreviewManagedCollectionRulesRequest",
+      "requestFields": [
+        "min_effective_members",
+        "rules"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/collections/{id}/rules",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDetailDto",
+      "responseFields": [
+        "collection",
+        "members",
+        "rules",
+        "member_overrides"
+      ],
+      "requestType": "ManageCollectionRulesUpdateRequest",
+      "requestFields": [
+        "auto_expand_enabled",
+        "min_effective_members",
+        "artwork_mode",
+        "rules"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/collections/{id}/sync",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDetailDto",
+      "responseFields": [
+        "collection",
+        "members",
+        "rules",
+        "member_overrides"
+      ],
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "GET",
@@ -1685,6 +1517,10 @@
         "poster_url",
         "source_kind",
         "visibility",
+        "collection_kind",
+        "auto_expand_enabled",
+        "min_effective_members",
+        "artwork_mode",
         "created_at",
         "updated_at"
       ],
@@ -1702,7 +1538,13 @@
         "title",
         "overview",
         "poster_url",
-        "visibility"
+        "visibility",
+        "collection_kind",
+        "auto_expand_enabled",
+        "min_effective_members",
+        "artwork_mode",
+        "rules",
+        "member_item_ids"
       ]
     },
     {
@@ -1712,7 +1554,9 @@
       "responseType": "ManagedCollectionDetailDto",
       "responseFields": [
         "collection",
-        "members"
+        "members",
+        "rules",
+        "member_overrides"
       ],
       "requestType": null,
       "requestFields": null
@@ -1729,6 +1573,10 @@
         "poster_url",
         "source_kind",
         "visibility",
+        "collection_kind",
+        "auto_expand_enabled",
+        "min_effective_members",
+        "artwork_mode",
         "created_at",
         "updated_at"
       ],
@@ -1737,7 +1585,13 @@
         "title",
         "overview",
         "poster_url",
-        "visibility"
+        "visibility",
+        "collection_kind",
+        "auto_expand_enabled",
+        "min_effective_members",
+        "artwork_mode",
+        "rules",
+        "member_item_ids"
       ]
     },
     {
@@ -1782,7 +1636,9 @@
       "responseType": "ManagedCollectionDetailDto",
       "responseFields": [
         "collection",
-        "members"
+        "members",
+        "rules",
+        "member_overrides"
       ],
       "requestType": "ManagedCollectionMemberAdd",
       "requestFields": [
@@ -1796,7 +1652,9 @@
       "responseType": "ManagedCollectionDetailDto",
       "responseFields": [
         "collection",
-        "members"
+        "members",
+        "rules",
+        "member_overrides"
       ],
       "requestType": "ManagedCollectionMemberRemove",
       "requestFields": [
@@ -1811,6 +1669,8 @@
       "responseFields": [
         "id",
         "collection_id",
+        "bound_item_id",
+        "member_origin",
         "title_snapshot",
         "year_snapshot",
         "media_kind",
@@ -3375,6 +3235,33 @@
     },
     {
       "method": "GET",
+      "path": "/api/settings/integrations/outbound-http",
+      "status": "implemented",
+      "responseType": "OutboundHttpSettingsView",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/integrations/outbound-http",
+      "status": "implemented",
+      "responseType": "OutboundHttpSettingsView",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/settings/integrations/outbound-http/test",
+      "status": "implemented",
+      "responseType": "OutboundHttpTestView",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/admin/site-settings",
       "status": "implemented",
       "responseType": "SiteSettingsDto",
@@ -4082,6 +3969,260 @@
         "path",
         "delta_link"
       ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/imghost/qr-login",
+      "status": "implemented",
+      "responseType": "Pan115ImghostQrLoginResponse",
+      "responseFields": [
+        "session_id",
+        "uid",
+        "qr_url",
+        "qr_image"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/qr-status",
+      "status": "implemented",
+      "responseType": "Pan115ImghostQrStatusResponse",
+      "responseFields": [
+        "status"
+      ],
+      "requestType": "String, String",
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/imghost/activate",
+      "status": "implemented",
+      "responseType": "Pan115ImghostOkResponse",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "Pan115ImghostActivateRequest",
+      "requestFields": [
+        "session_id",
+        "cookie_app"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/credentials",
+      "status": "implemented",
+      "responseType": "Pan115ImghostCredentialsResponse",
+      "responseFields": [
+        "id",
+        "status",
+        "has_cookie",
+        "last_active_at",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/pan115/imghost/credentials",
+      "status": "implemented",
+      "responseType": "Pan115ImghostOkResponse",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/imghost/upload",
+      "status": "implemented",
+      "responseType": "Pan115ImghostUploadResponse",
+      "responseFields": [
+        "id",
+        "sha1",
+        "size",
+        "mime",
+        "mirror_status",
+        "local_url",
+        "host_url"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/assets",
+      "status": "implemented",
+      "responseType": "Pan115ImghostAssetListResponse",
+      "responseFields": [
+        "total",
+        "page",
+        "page_size",
+        "items"
+      ],
+      "requestType": "Pan115ImghostAssetsQuery",
+      "requestFields": [
+        "page",
+        "pageSize"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/raw/{sha1}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/qr-login",
+      "status": "implemented",
+      "responseType": "CredentialQrLoginDto",
+      "responseFields": [
+        "session_id",
+        "uid",
+        "qr_url",
+        "qr_image"
+      ],
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/qr-status",
+      "status": "implemented",
+      "responseType": "CredentialQrStatusDto",
+      "responseFields": [
+        "status"
+      ],
+      "requestType": "String, String",
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/activate",
+      "status": "implemented",
+      "responseType": "CredentialActivateResponse",
+      "responseFields": [
+        "ok",
+        "mount_id"
+      ],
+      "requestType": "CredentialActivateRequest",
+      "requestFields": [
+        "session_id",
+        "mount_id",
+        "cookie_app",
+        "cookie_header"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/accounts/{mount_id}",
+      "status": "implemented",
+      "responseType": "CredentialAccountDto",
+      "responseFields": [
+        "mount_id",
+        "uid",
+        "status",
+        "has_cookie",
+        "has_open_token",
+        "last_active_at",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/accounts/{mount_id}/refresh",
+      "status": "implemented",
+      "responseType": "CredentialOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/accounts/{mount_id}/health",
+      "status": "implemented",
+      "responseType": "CredentialHealthDto",
+      "responseFields": [
+        "ok",
+        "reason"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/accounts/{mount_id}/browse",
+      "status": "implemented",
+      "responseType": "CredentialBrowseDto",
+      "responseFields": [
+        "mount_id",
+        "current_path",
+        "entries",
+        "total_count",
+        "next_offset"
+      ],
+      "requestType": "CredentialBrowseRequest",
+      "requestFields": [
+        "path",
+        "offset",
+        "limit"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/pan115/accounts/{mount_id}",
+      "status": "implemented",
+      "responseType": "CredentialOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/sync/mounts/{mount_id}",
+      "status": "implemented",
+      "responseType": "Pan115SyncOverviewResponse",
+      "responseFields": [
+        "mountId",
+        "providerType",
+        "sources",
+        "checkpoints",
+        "recentTasks",
+        "supportedActions"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/sync/mounts/{mount_id}/enqueue",
+      "status": "implemented",
+      "responseType": "Pan115SyncTriggerResponse",
+      "responseFields": [
+        "mountId",
+        "action",
+        "accepted",
+        "message"
+      ],
+      "requestType": "Pan115SyncTriggerRequest",
+      "requestFields": [
+        "action"
+      ]
     }
   ],
   "planned": [],
@@ -4301,12 +4442,6 @@
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "DELETE",
       "path": "/api/manage/media-items/{*}/sources/{*}",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/media-items/{*}/scan",
       "reason": "契约仓 G-05：条目级子资源端点未实现。"
     },
     {
