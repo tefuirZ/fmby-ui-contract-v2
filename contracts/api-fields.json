@@ -37,6 +37,89 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/auth/mfa/totp/verify",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "MfaVerifyRequest",
+      "requestFields": [
+        "challenge_id",
+        "code"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/mfa/totp",
+      "status": "implemented",
+      "responseType": "MfaStatusResponse",
+      "responseFields": [
+        "enabled",
+        "pending_confirmation",
+        "recovery_codes_remaining"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/mfa/totp",
+      "status": "implemented",
+      "responseType": "MfaEnrollmentResponse",
+      "responseFields": [
+        "secret",
+        "otpauth_url",
+        "qr_image_data_url"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/auth/mfa/totp",
+      "status": "implemented",
+      "responseType": "MfaOkResponse",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "MfaPasswordRequest",
+      "requestFields": [
+        "current_password"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/mfa/totp/confirm",
+      "status": "implemented",
+      "responseType": "MfaRecoveryCodesResponse",
+      "responseFields": [
+        "enabled",
+        "pending_confirmation",
+        "recovery_codes_remaining",
+        "recovery_codes"
+      ],
+      "requestType": "MfaCodeRequest",
+      "requestFields": [
+        "code"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/mfa/totp/recovery-codes",
+      "status": "implemented",
+      "responseType": "MfaRecoveryCodesResponse",
+      "responseFields": [
+        "enabled",
+        "pending_confirmation",
+        "recovery_codes_remaining",
+        "recovery_codes"
+      ],
+      "requestType": "MfaPasswordRequest",
+      "requestFields": [
+        "current_password"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/auth/entry/status",
       "status": "implemented",
@@ -48,6 +131,37 @@
       ],
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/setup",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "SetupRequest",
+      "requestFields": [
+        "username",
+        "password",
+        "display_name"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register",
+      "status": "implemented",
+      "responseType": "RegisterResponse",
+      "responseFields": [
+        "status",
+        "message",
+        "user"
+      ],
+      "requestType": "RegisterRequest",
+      "requestFields": [
+        "code",
+        "username",
+        "password",
+        "display_name"
+      ]
     },
     {
       "method": "GET",
@@ -463,6 +577,103 @@
     },
     {
       "method": "GET",
+      "path": "/api/rewards/me",
+      "status": "implemented",
+      "responseType": "RewardsMySummaryDto",
+      "responseFields": [
+        "user_id",
+        "account",
+        "total_checkin_days",
+        "current_streak_days",
+        "latest_ledger"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/rewards/rule",
+      "status": "implemented",
+      "responseType": "RewardsRuleVersionDto",
+      "responseFields": [
+        "id",
+        "version",
+        "status",
+        "created_by",
+        "created_at",
+        "published_at",
+        "config"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/rewards/checkins",
+      "status": "implemented",
+      "responseType": "RewardsCheckinResultDto",
+      "responseFields": [
+        "created",
+        "awarded_points",
+        "checkin_date",
+        "streak_days",
+        "total_checkin_days",
+        "status",
+        "checked_in_at"
+      ],
+      "requestType": "CheckinRequest",
+      "requestFields": [
+        "source"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/rewards/redemptions/server-days",
+      "status": "implemented",
+      "responseType": "RewardsRedemptionResultDto",
+      "responseFields": [
+        "id",
+        "idempotency_key",
+        "applied",
+        "redemption_type",
+        "quantity",
+        "points_spent",
+        "rule_version",
+        "created_at",
+        "balance",
+        "valid_until_after"
+      ],
+      "requestType": "RedeemBody",
+      "requestFields": [
+        "idempotency_key",
+        "quantity"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/rewards/redemptions/media-request-credits",
+      "status": "implemented",
+      "responseType": "RewardsRedemptionResultDto",
+      "responseFields": [
+        "id",
+        "idempotency_key",
+        "applied",
+        "redemption_type",
+        "quantity",
+        "points_spent",
+        "rule_version",
+        "created_at",
+        "balance",
+        "valid_until_after"
+      ],
+      "requestType": "RedeemBody",
+      "requestFields": [
+        "idempotency_key",
+        "quantity"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/admin/overview",
       "status": "implemented",
       "responseType": "OverviewDto",
@@ -704,6 +915,75 @@
         "id",
         "result",
         "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/{id}/mfa/totp/reset",
+      "status": "implemented",
+      "responseType": "MfaOkResponse",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/{id}/approve-registration",
+      "status": "implemented",
+      "responseType": "ManagedUserDto",
+      "responseFields": [
+        "id",
+        "username",
+        "display_name",
+        "email",
+        "account_kind",
+        "status",
+        "roles",
+        "source_grants",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_until",
+        "must_change_password",
+        "created_at",
+        "updated_at",
+        "last_activity_at",
+        "recent_client_info"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/{id}/reject-registration",
+      "status": "implemented",
+      "responseType": "ManagedUserDto",
+      "responseFields": [
+        "id",
+        "username",
+        "display_name",
+        "email",
+        "account_kind",
+        "status",
+        "roles",
+        "source_grants",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_until",
+        "must_change_password",
+        "created_at",
+        "updated_at",
+        "last_activity_at",
+        "recent_client_info"
       ],
       "requestType": "ConfirmQuery",
       "requestFields": [
@@ -1690,509 +1970,6 @@
     },
     {
       "method": "GET",
-      "path": "/api/manage/upstreams/health",
-      "status": "implemented",
-      "responseType": "UpstreamHealthListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": "UpstreamHealthQuery",
-      "requestFields": [
-        "status"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams",
-      "status": "implemented",
-      "responseType": "UpstreamSourceListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": "UpstreamSourceListQuery",
-      "requestFields": [
-        "sourceType",
-        "status"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams",
-      "status": "implemented",
-      "responseType": null,
-      "responseFields": null,
-      "requestType": "UpstreamSourceWriteDto",
-      "requestFields": [
-        "name",
-        "sourceType",
-        "baseUrl",
-        "authMethod",
-        "username",
-        "password",
-        "apiKey",
-        "userAgent",
-        "referer",
-        "extraHeaders",
-        "retain_secret",
-        "enabled"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams/{id}",
-      "status": "implemented",
-      "responseType": "UpstreamSourceDto",
-      "responseFields": [
-        "id",
-        "name",
-        "source_type",
-        "source_type_label",
-        "base_url",
-        "auth_method",
-        "status",
-        "username",
-        "user_agent",
-        "referer",
-        "extra_headers",
-        "has_secret",
-        "last_health_check_at",
-        "last_sync_at",
-        "last_error_at",
-        "last_error_message",
-        "created_by",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "PATCH",
-      "path": "/api/manage/upstreams/{id}",
-      "status": "implemented",
-      "responseType": "UpstreamSourceDto",
-      "responseFields": [
-        "id",
-        "name",
-        "source_type",
-        "source_type_label",
-        "base_url",
-        "auth_method",
-        "status",
-        "username",
-        "user_agent",
-        "referer",
-        "extra_headers",
-        "has_secret",
-        "last_health_check_at",
-        "last_sync_at",
-        "last_error_at",
-        "last_error_message",
-        "created_by",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": "UpstreamSourceWriteDto",
-      "requestFields": [
-        "name",
-        "sourceType",
-        "baseUrl",
-        "authMethod",
-        "username",
-        "password",
-        "apiKey",
-        "userAgent",
-        "referer",
-        "extraHeaders",
-        "retain_secret",
-        "enabled"
-      ]
-    },
-    {
-      "method": "DELETE",
-      "path": "/api/manage/upstreams/{id}",
-      "status": "implemented",
-      "responseType": "UpstreamOkDto",
-      "responseFields": [
-        "ok"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/enable",
-      "status": "implemented",
-      "responseType": "UpstreamSourceDto",
-      "responseFields": [
-        "id",
-        "name",
-        "source_type",
-        "source_type_label",
-        "base_url",
-        "auth_method",
-        "status",
-        "username",
-        "user_agent",
-        "referer",
-        "extra_headers",
-        "has_secret",
-        "last_health_check_at",
-        "last_sync_at",
-        "last_error_at",
-        "last_error_message",
-        "created_by",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/disable",
-      "status": "implemented",
-      "responseType": "UpstreamSourceDto",
-      "responseFields": [
-        "id",
-        "name",
-        "source_type",
-        "source_type_label",
-        "base_url",
-        "auth_method",
-        "status",
-        "username",
-        "user_agent",
-        "referer",
-        "extra_headers",
-        "has_secret",
-        "last_health_check_at",
-        "last_sync_at",
-        "last_error_at",
-        "last_error_message",
-        "created_by",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/emby/discover-lan",
-      "status": "implemented",
-      "responseType": "UpstreamLanDiscoveryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/health-check",
-      "status": "implemented",
-      "responseType": "CredentialHealthDto",
-      "responseFields": [
-        "ok",
-        "reason"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/apple-cms/discover-categories",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/emby/discover-libraries",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams/{id}/apple-cms/categories",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "PUT",
-      "path": "/api/manage/upstreams/{id}/apple-cms/category-bindings",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": "UpstreamCategoryBindingsWriteDto",
-      "requestFields": [
-        "bindings"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams/{id}/emby/libraries",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "PUT",
-      "path": "/api/manage/upstreams/{id}/emby/library-bindings",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": "UpstreamCategoryBindingsWriteDto",
-      "requestFields": [
-        "bindings"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams/{id}/bindings",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": "BindingListQuery",
-      "requestFields": [
-        "libraryId"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams/{id}/mapping/presets",
-      "status": "implemented",
-      "responseType": "UpstreamMappingPresetListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/mapping/presets",
-      "status": "implemented",
-      "responseType": null,
-      "responseFields": null,
-      "requestType": "UpstreamMappingPresetWriteDto",
-      "requestFields": [
-        "name",
-        "includeKeywords",
-        "excludeKeywords",
-        "includeCategoryIds",
-        "excludeCategoryIds",
-        "defaultLibraryType",
-        "create_missing_libraries",
-        "enabled"
-      ]
-    },
-    {
-      "method": "PUT",
-      "path": "/api/manage/upstreams/{id}/mapping/presets/{preset_id}",
-      "status": "implemented",
-      "responseType": "UpstreamMappingPresetDto",
-      "responseFields": [
-        "id",
-        "source_id",
-        "name",
-        "include_keywords",
-        "exclude_keywords",
-        "include_category_ids",
-        "exclude_category_ids",
-        "default_library_type",
-        "create_missing_libraries",
-        "enabled",
-        "created_by",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": "UpstreamMappingPresetWriteDto",
-      "requestFields": [
-        "name",
-        "includeKeywords",
-        "excludeKeywords",
-        "includeCategoryIds",
-        "excludeCategoryIds",
-        "defaultLibraryType",
-        "create_missing_libraries",
-        "enabled"
-      ]
-    },
-    {
-      "method": "DELETE",
-      "path": "/api/manage/upstreams/{id}/mapping/presets/{preset_id}",
-      "status": "implemented",
-      "responseType": null,
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/mapping/preview",
-      "status": "implemented",
-      "responseType": "UpstreamMappingPreviewResultDto",
-      "responseFields": [
-        "source_id",
-        "items",
-        "creates",
-        "bind_count",
-        "create_count",
-        "skip_count",
-        "conflict_count"
-      ],
-      "requestType": "UpstreamMappingPreviewDto",
-      "requestFields": [
-        "presetId",
-        "includeKeywords",
-        "excludeKeywords",
-        "includeCategoryIds",
-        "excludeCategoryIds",
-        "selectedCategoryIds",
-        "defaultLibraryType",
-        "createMissingLibraries",
-        "overrides"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/mapping/apply",
-      "status": "implemented",
-      "responseType": "UpstreamMappingApplyResultDto",
-      "responseFields": [
-        "source_id",
-        "created_library_count",
-        "bound_category_count",
-        "submitted_sync_job_count",
-        "sync_jobs",
-        "preset"
-      ],
-      "requestType": "UpstreamMappingApplyDto",
-      "requestFields": [
-        "preview",
-        "savePresetName"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams/{id}/sync-jobs",
-      "status": "implemented",
-      "responseType": "UpstreamSyncJobListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/apple-cms/sync-page",
-      "status": "implemented",
-      "responseType": "UpstreamAppleCmsSyncPageDto",
-      "responseFields": [
-        "source_id",
-        "category_id",
-        "library_id",
-        "page",
-        "page_count",
-        "total",
-        "imported_item_count",
-        "imported_variant_count",
-        "synced_at"
-      ],
-      "requestType": "UpstreamAppleCmsSyncPageRequest",
-      "requestFields": [
-        "categoryId",
-        "page",
-        "pageSize"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/apple-cms/sync",
-      "status": "implemented",
-      "responseType": "UpstreamAppleCmsSyncDto",
-      "responseFields": [
-        "source_id",
-        "page_size",
-        "worker_count",
-        "category_count",
-        "discovered_category_count",
-        "bound_category_count",
-        "skipped_unbound_category_count",
-        "imported_item_count",
-        "imported_variant_count",
-        "categories",
-        "skipped_unbound_categories",
-        "synced_at"
-      ],
-      "requestType": "UpstreamAppleCmsSyncRequest",
-      "requestFields": [
-        "categoryId",
-        "pageSize",
-        "workerCount"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/emby/sync",
-      "status": "implemented",
-      "responseType": "UpstreamEmbySyncDto",
-      "responseFields": [
-        "source_id",
-        "page_size",
-        "category_count",
-        "imported_item_count",
-        "imported_variant_count",
-        "categories",
-        "synced_at"
-      ],
-      "requestType": "UpstreamEmbySyncRequest",
-      "requestFields": [
-        "categoryId",
-        "pageSize"
-      ]
-    },
-    {
-      "method": "GET",
       "path": "/api/manage/rewards/accounts/{user_id}",
       "status": "implemented",
       "responseType": "RewardsAccountSummaryDto",
@@ -2224,6 +2001,87 @@
       "requestType": "LedgerQuery",
       "requestFields": [
         "limit"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/rewards/rule",
+      "status": "implemented",
+      "responseType": "RewardsRuleVersionDto",
+      "responseFields": [
+        "id",
+        "version",
+        "status",
+        "created_by",
+        "created_at",
+        "published_at",
+        "config"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/rewards/rule",
+      "status": "implemented",
+      "responseType": "RewardsRuleVersionDto",
+      "responseFields": [
+        "id",
+        "version",
+        "status",
+        "created_by",
+        "created_at",
+        "published_at",
+        "config"
+      ],
+      "requestType": "RewardsRuleConfigDto",
+      "requestFields": [
+        "checkin_enabled",
+        "reward_mode",
+        "tiers",
+        "random_min_points",
+        "random_max_points",
+        "watch_task",
+        "allow_expired_checkin",
+        "server_days",
+        "media_request_credits",
+        "media_request_cost"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/rewards/stats",
+      "status": "implemented",
+      "responseType": "RewardsAdminStatsDto",
+      "responseFields": [
+        "points_outstanding",
+        "checkins_today",
+        "pending_checkins",
+        "redemptions_today",
+        "pending_media_requests",
+        "processing_media_requests"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/rewards/points/adjust",
+      "status": "implemented",
+      "responseType": "AdminAdjustResultDto",
+      "responseFields": [
+        "user_id",
+        "balance",
+        "lifetime_earned",
+        "lifetime_spent",
+        "applied"
+      ],
+      "requestType": "AdjustPointsRequestDto",
+      "requestFields": [
+        "user_id",
+        "idempotency_key",
+        "delta",
+        "reason"
       ]
     },
     {
@@ -2313,6 +2171,87 @@
         "daily_checkin_points",
         "streak_bonus_points",
         "max_streak_days"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/rewards/media-requests",
+      "status": "implemented",
+      "responseType": "MediaRequestCreateResponse",
+      "responseFields": [
+        "mediaRequest",
+        "quota",
+        "created"
+      ],
+      "requestType": "MediaRequestCreateRequest",
+      "requestFields": [
+        "idempotencyKey",
+        "media_type",
+        "title",
+        "year",
+        "externalId",
+        "requestNote"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/rewards/media-requests/quota",
+      "status": "implemented",
+      "responseType": "MediaRequestQuotaLedgerDto",
+      "responseFields": [
+        "deltaAvailable",
+        "deltaReserved",
+        "transactionType",
+        "sourceType",
+        "sourceId",
+        "createdAt"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/rewards/media-requests/{requestId}/cancel",
+      "status": "implemented",
+      "responseType": "MediaRequestTransitionResponse",
+      "responseFields": [
+        "mediaRequest",
+        "quota",
+        "applied"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/rewards/media-requests",
+      "status": "implemented",
+      "responseType": "ManagedMediaRequestsResponse",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "MediaRequestsAdminQuery",
+      "requestFields": [
+        "status",
+        "page",
+        "pageSize"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/rewards/media-requests/{requestId}/transition",
+      "status": "implemented",
+      "responseType": "MediaRequestTransitionResponse",
+      "responseFields": [
+        "mediaRequest",
+        "quota",
+        "applied"
+      ],
+      "requestType": "MediaRequestTransitionBody",
+      "requestFields": [
+        "to",
+        "handlingNote"
       ]
     },
     {
@@ -2585,6 +2524,80 @@
     },
     {
       "method": "POST",
+      "path": "/api/manage/media-items/ratings/backfill",
+      "status": "implemented",
+      "responseType": "MediaRatingBackfillResponse",
+      "responseFields": [
+        "limit",
+        "scanned",
+        "updated",
+        "skipped",
+        "truncated"
+      ],
+      "requestType": "MediaRatingBackfillRequest",
+      "requestFields": [
+        "limit"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/scrape",
+      "status": "implemented",
+      "responseType": "RequestManagedMediaItemScrapeResponse",
+      "responseFields": [
+        "item_id",
+        "task_id",
+        "outcome",
+        "status",
+        "fingerprint"
+      ],
+      "requestType": "RequestManagedMediaItemScrape",
+      "requestFields": [
+        "reason",
+        "force"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/scrape/refresh",
+      "status": "implemented",
+      "responseType": "RequestManagedMediaItemScrapeResponse",
+      "responseFields": [
+        "item_id",
+        "task_id",
+        "outcome",
+        "status",
+        "fingerprint"
+      ],
+      "requestType": "RequestManagedMediaItemScrape",
+      "requestFields": [
+        "reason",
+        "force"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/media-items/{id}/provider-search",
+      "status": "implemented",
+      "responseType": "SearchManagedMediaItemProviderResponse",
+      "responseFields": [
+        "provider",
+        "entity_type",
+        "query",
+        "candidates"
+      ],
+      "requestType": "SearchManagedMediaItemProviderRequest",
+      "requestFields": [
+        "provider",
+        "query",
+        "entityType",
+        "year",
+        "language",
+        "region"
+      ]
+    },
+    {
+      "method": "POST",
       "path": "/api/manage/media-items/{id}/visibility/{state}",
       "status": "implemented",
       "responseType": "ManageVisibilityOkDto",
@@ -2734,6 +2747,20 @@
       "requestFields": [
         "days"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/advanced",
+      "status": "implemented",
+      "responseType": "ManageAdvancedResponse",
+      "responseFields": [
+        "refreshed_at",
+        "database",
+        "security",
+        "settings"
+      ],
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "GET",
@@ -2970,7 +2997,35 @@
         "ip",
         "user",
         "requestId",
-        "all"
+        "all",
+        "format",
+        "from",
+        "to"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/runtime-logs/export",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "RuntimeLogsQuery",
+      "requestFields": [
+        "page",
+        "pageSize",
+        "level",
+        "target",
+        "search",
+        "method",
+        "path",
+        "client",
+        "ip",
+        "user",
+        "requestId",
+        "all",
+        "format",
+        "from",
+        "to"
       ]
     },
     {
@@ -3125,6 +3180,11 @@
         "provider",
         "configured",
         "secret_fields_configured",
+        "cloudflareZoneId",
+        "aliyunEndpoint",
+        "tencentEndpoint",
+        "tencentRegion",
+        "huaweiEndpoint",
         "huawei_enterprise_project_id"
       ],
       "requestType": null,
@@ -3139,6 +3199,11 @@
         "provider",
         "configured",
         "secret_fields_configured",
+        "cloudflareZoneId",
+        "aliyunEndpoint",
+        "tencentEndpoint",
+        "tencentRegion",
+        "huaweiEndpoint",
         "huawei_enterprise_project_id"
       ],
       "requestType": "UpdateCdnOperationsSettingsRequest",
@@ -3166,6 +3231,9 @@
         "provider",
         "providerConfigured",
         "checkedAt",
+        "healthUrl",
+        "httpStatus",
+        "cacheControl",
         "message",
         "warnings",
         "secretFieldsConfigured"
@@ -3182,6 +3250,7 @@
         "accepted",
         "action",
         "provider",
+        "providerTaskId",
         "targetCount",
         "submittedUrls",
         "message",
@@ -3203,6 +3272,7 @@
         "accepted",
         "action",
         "provider",
+        "providerTaskId",
         "targetCount",
         "submittedUrls",
         "message",
@@ -4223,6 +4293,697 @@
       "requestFields": [
         "action"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/health",
+      "status": "implemented",
+      "responseType": "UpstreamHealthListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "UpstreamHealthQuery",
+      "requestFields": [
+        "status"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams",
+      "status": "implemented",
+      "responseType": "UpstreamSourceListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "UpstreamSourceListQuery",
+      "requestFields": [
+        "sourceType",
+        "status"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "UpstreamSourceWriteDto",
+      "requestFields": [
+        "name",
+        "sourceType",
+        "baseUrl",
+        "authMethod",
+        "username",
+        "password",
+        "apiKey",
+        "userAgent",
+        "referer",
+        "extraHeaders",
+        "retain_secret",
+        "enabled"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}",
+      "status": "implemented",
+      "responseType": "UpstreamSourceDto",
+      "responseFields": [
+        "id",
+        "name",
+        "source_type",
+        "source_type_label",
+        "base_url",
+        "auth_method",
+        "status",
+        "username",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "has_secret",
+        "last_health_check_at",
+        "last_sync_at",
+        "last_error_at",
+        "last_error_message",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/upstreams/{id}",
+      "status": "implemented",
+      "responseType": "UpstreamSourceDto",
+      "responseFields": [
+        "id",
+        "name",
+        "source_type",
+        "source_type_label",
+        "base_url",
+        "auth_method",
+        "status",
+        "username",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "has_secret",
+        "last_health_check_at",
+        "last_sync_at",
+        "last_error_at",
+        "last_error_message",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "UpstreamSourceWriteDto",
+      "requestFields": [
+        "name",
+        "sourceType",
+        "baseUrl",
+        "authMethod",
+        "username",
+        "password",
+        "apiKey",
+        "userAgent",
+        "referer",
+        "extraHeaders",
+        "retain_secret",
+        "enabled"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/upstreams/{id}",
+      "status": "implemented",
+      "responseType": "UpstreamOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/enable",
+      "status": "implemented",
+      "responseType": "UpstreamSourceDto",
+      "responseFields": [
+        "id",
+        "name",
+        "source_type",
+        "source_type_label",
+        "base_url",
+        "auth_method",
+        "status",
+        "username",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "has_secret",
+        "last_health_check_at",
+        "last_sync_at",
+        "last_error_at",
+        "last_error_message",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/disable",
+      "status": "implemented",
+      "responseType": "UpstreamSourceDto",
+      "responseFields": [
+        "id",
+        "name",
+        "source_type",
+        "source_type_label",
+        "base_url",
+        "auth_method",
+        "status",
+        "username",
+        "user_agent",
+        "referer",
+        "extra_headers",
+        "has_secret",
+        "last_health_check_at",
+        "last_sync_at",
+        "last_error_at",
+        "last_error_message",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/emby/discover-lan",
+      "status": "implemented",
+      "responseType": "UpstreamLanDiscoveryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/health-check",
+      "status": "implemented",
+      "responseType": "CredentialHealthDto",
+      "responseFields": [
+        "ok",
+        "reason"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/apple-cms/discover-categories",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/emby/discover-libraries",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/apple-cms/categories",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/upstreams/{id}/apple-cms/category-bindings",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "UpstreamCategoryBindingsWriteDto",
+      "requestFields": [
+        "bindings"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/emby/libraries",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/upstreams/{id}/emby/library-bindings",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "UpstreamCategoryBindingsWriteDto",
+      "requestFields": [
+        "bindings"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/bindings",
+      "status": "implemented",
+      "responseType": "UpstreamCategoryListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "BindingListQuery",
+      "requestFields": [
+        "libraryId"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/mapping/presets",
+      "status": "implemented",
+      "responseType": "UpstreamMappingPresetListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/mapping/presets",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "UpstreamMappingPresetWriteDto",
+      "requestFields": [
+        "name",
+        "includeKeywords",
+        "excludeKeywords",
+        "includeCategoryIds",
+        "excludeCategoryIds",
+        "defaultLibraryType",
+        "create_missing_libraries",
+        "enabled"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/upstreams/{id}/mapping/presets/{preset_id}",
+      "status": "implemented",
+      "responseType": "UpstreamMappingPresetDto",
+      "responseFields": [
+        "id",
+        "source_id",
+        "name",
+        "include_keywords",
+        "exclude_keywords",
+        "include_category_ids",
+        "exclude_category_ids",
+        "default_library_type",
+        "create_missing_libraries",
+        "enabled",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "UpstreamMappingPresetWriteDto",
+      "requestFields": [
+        "name",
+        "includeKeywords",
+        "excludeKeywords",
+        "includeCategoryIds",
+        "excludeCategoryIds",
+        "defaultLibraryType",
+        "create_missing_libraries",
+        "enabled"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/upstreams/{id}/mapping/presets/{preset_id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/mapping/preview",
+      "status": "implemented",
+      "responseType": "UpstreamMappingPreviewResultDto",
+      "responseFields": [
+        "source_id",
+        "items",
+        "creates",
+        "bind_count",
+        "create_count",
+        "skip_count",
+        "conflict_count"
+      ],
+      "requestType": "UpstreamMappingPreviewDto",
+      "requestFields": [
+        "presetId",
+        "includeKeywords",
+        "excludeKeywords",
+        "includeCategoryIds",
+        "excludeCategoryIds",
+        "selectedCategoryIds",
+        "defaultLibraryType",
+        "createMissingLibraries",
+        "overrides"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/mapping/apply",
+      "status": "implemented",
+      "responseType": "UpstreamMappingApplyResultDto",
+      "responseFields": [
+        "source_id",
+        "created_library_count",
+        "bound_category_count",
+        "submitted_sync_job_count",
+        "sync_jobs",
+        "preset"
+      ],
+      "requestType": "UpstreamMappingApplyDto",
+      "requestFields": [
+        "preview",
+        "savePresetName"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/sync-jobs",
+      "status": "implemented",
+      "responseType": "UpstreamSyncJobListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/apple-cms/sync-page",
+      "status": "implemented",
+      "responseType": "UpstreamAppleCmsSyncPageDto",
+      "responseFields": [
+        "source_id",
+        "category_id",
+        "library_id",
+        "page",
+        "page_count",
+        "total",
+        "imported_item_count",
+        "imported_variant_count",
+        "synced_at"
+      ],
+      "requestType": "UpstreamAppleCmsSyncPageRequest",
+      "requestFields": [
+        "categoryId",
+        "page",
+        "pageSize"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/apple-cms/sync",
+      "status": "implemented",
+      "responseType": "UpstreamAppleCmsSyncDto",
+      "responseFields": [
+        "source_id",
+        "page_size",
+        "worker_count",
+        "category_count",
+        "discovered_category_count",
+        "bound_category_count",
+        "skipped_unbound_category_count",
+        "imported_item_count",
+        "imported_variant_count",
+        "categories",
+        "skipped_unbound_categories",
+        "synced_at"
+      ],
+      "requestType": "UpstreamAppleCmsSyncRequest",
+      "requestFields": [
+        "categoryId",
+        "pageSize",
+        "workerCount"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/emby/sync",
+      "status": "implemented",
+      "responseType": "UpstreamEmbySyncDto",
+      "responseFields": [
+        "source_id",
+        "page_size",
+        "category_count",
+        "imported_item_count",
+        "imported_variant_count",
+        "categories",
+        "synced_at"
+      ],
+      "requestType": "UpstreamEmbySyncRequest",
+      "requestFields": [
+        "categoryId",
+        "pageSize"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/artwork",
+      "status": "implemented",
+      "responseType": "ManagedMediaItemDetailResponse",
+      "responseFields": [
+        "item",
+        "metadata_status",
+        "base_metadata",
+        "effective_metadata",
+        "remote_metadata",
+        "scraped_metadata",
+        "scraped_artworks",
+        "local_metadata_override",
+        "sources",
+        "remote_assets",
+        "artwork_overrides",
+        "subtitle_overrides",
+        "latest_metadata_raw_content"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/media-items/{id}/artwork/{overrideId}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/media-items/{id}/artwork/{overrideId}",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/subtitles",
+      "status": "implemented",
+      "responseType": "ManagedMediaItemDetailResponse",
+      "responseFields": [
+        "item",
+        "metadata_status",
+        "base_metadata",
+        "effective_metadata",
+        "remote_metadata",
+        "scraped_metadata",
+        "scraped_artworks",
+        "local_metadata_override",
+        "sources",
+        "remote_assets",
+        "artwork_overrides",
+        "subtitle_overrides",
+        "latest_metadata_raw_content"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/media-items/{id}/subtitles/{overrideId}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/media-items/{id}/subtitles/{overrideId}",
+      "status": "implemented",
+      "responseType": "ManagedMediaItemDetailResponse",
+      "responseFields": [
+        "item",
+        "metadata_status",
+        "base_metadata",
+        "effective_metadata",
+        "remote_metadata",
+        "scraped_metadata",
+        "scraped_artworks",
+        "local_metadata_override",
+        "sources",
+        "remote_assets",
+        "artwork_overrides",
+        "subtitle_overrides",
+        "latest_metadata_raw_content"
+      ],
+      "requestType": "UpdateMediaItemSubtitleOverrideRequest",
+      "requestFields": [
+        "language",
+        "is_active",
+        "is_default",
+        "sort_order"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/media-items/{id}/subtitles/{overrideId}",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/media-items/{id}/metadata",
+      "status": "implemented",
+      "responseType": "ManagedMediaItemDetailResponse",
+      "responseFields": [
+        "item",
+        "metadata_status",
+        "base_metadata",
+        "effective_metadata",
+        "remote_metadata",
+        "scraped_metadata",
+        "scraped_artworks",
+        "local_metadata_override",
+        "sources",
+        "remote_assets",
+        "artwork_overrides",
+        "subtitle_overrides",
+        "latest_metadata_raw_content"
+      ],
+      "requestType": "UpdateMediaItemMetadataRequest",
+      "requestFields": [
+        "sort_title",
+        "overview",
+        "community_rating",
+        "premiered"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/metadata/reset",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/refresh-metadata",
+      "status": "implemented",
+      "responseType": "ManagedMediaItemDetailResponse",
+      "responseFields": [
+        "item",
+        "metadata_status",
+        "base_metadata",
+        "effective_metadata",
+        "remote_metadata",
+        "scraped_metadata",
+        "scraped_artworks",
+        "local_metadata_override",
+        "sources",
+        "remote_assets",
+        "artwork_overrides",
+        "subtitle_overrides",
+        "latest_metadata_raw_content"
+      ],
+      "requestType": null,
+      "requestFields": null
     }
   ],
   "planned": [],
@@ -4233,18 +4994,6 @@
       "method": "GET",
       "path": "/api/browse/search",
       "reason": "契约仓 G-15 前端路径笔误（应为 /api/search）。已在**前端仓分支 w/zcode/writer1-contract-sync 修复**；主仓门禁读前端 main，前端分支合并后本条自动转 stale 警告，届时从 known_drift 删除。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/auth/register",
-      "reason": "契约仓 G-02：注册/初始化端点未实现（前端已就绪，后端缺失）。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/auth/setup",
-      "reason": "契约仓 G-02：注册/初始化端点未实现（前端已就绪，后端缺失）。"
     },
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
@@ -4272,18 +5021,6 @@
     },
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/users/{*}/approve-registration",
-      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/users/{*}/reject-registration",
-      "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "PATCH",
       "path": "/api/manage/registration-codes/batches/{*}",
       "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
@@ -4293,12 +5030,6 @@
       "method": "POST",
       "path": "/api/manage/registration-codes/batch/delete",
       "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "GET",
-      "path": "/api/manage/advanced",
-      "reason": "契约仓 G-14：高级维护 / 115 图床端点未实现。"
     },
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
@@ -4317,60 +5048,6 @@
       "method": "POST",
       "path": "/api/manage/probe-tasks/{*}/refresh",
       "reason": "契约仓 G-10：探测任务操作端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "PATCH",
-      "path": "/api/manage/media-items/{*}/metadata",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/media-items/{*}/metadata/reset",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/media-items/{*}/refresh-metadata",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/media-items/{*}/artwork",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "DELETE",
-      "path": "/api/manage/media-items/{*}/artwork/{*}",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/media-items/{*}/subtitles",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "PATCH",
-      "path": "/api/manage/media-items/{*}/subtitles/{*}",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "DELETE",
-      "path": "/api/manage/media-items/{*}/subtitles/{*}",
-      "reason": "契约仓 G-05：条目级子资源端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_MISSING",
-      "method": "PATCH",
-      "path": "/api/manage/registration-codes/{id}",
-      "reason": "后端 DTO 与 V1 RegistrationCodeDto 逐字段一致（含 role_template_id / max_concurrent_playbacks，V1 dto/registration_codes.rs:99/101），但前端 RawRegistrationCodeRecord（fmby-web/shared/src/contracts/manage/raw-types.ts:85）缺这两字段且 mapper 未消费。REG-CODES-B 端点由 stub→implemented 后字段级对账启用才暴露。须前端卡补齐 RawRegistrationCodeRecord + mapper；补齐后本条自动转 stale 警告，届时删除。"
     },
     {
       "rule": "FRONTEND_FIELD_MISSING",
