@@ -2705,19 +2705,19 @@
     {
       "method": "POST",
       "path": "/api/manage/naming-cleanup/replay-identify",
-      "status": "stub",
-      "responseType": "Value",
+      "status": "implemented",
+      "responseType": "NamingReplayIdentifyView",
       "responseFields": null,
-      "requestType": "Value",
+      "requestType": "NamingReplayIdentifyRequest",
       "requestFields": null
     },
     {
       "method": "POST",
       "path": "/api/manage/naming-scrape/batch-repair",
-      "status": "stub",
-      "responseType": "Value",
+      "status": "implemented",
+      "responseType": "NamingBatchRepairView",
       "responseFields": null,
-      "requestType": "Value",
+      "requestType": "NamingBatchRepairRequest",
       "requestFields": null
     },
     {
