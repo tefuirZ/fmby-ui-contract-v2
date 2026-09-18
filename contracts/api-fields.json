@@ -1305,6 +1305,21 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/libraries/{id}/scan",
+      "status": "implemented",
+      "responseType": "LibraryScanTriggerResponse",
+      "responseFields": [
+        "library_id",
+        "tasks",
+        "skipped_mount_ids"
+      ],
+      "requestType": "TriggerLibraryScanRequest",
+      "requestFields": [
+        "task_type"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/manage/mounts/{id}/libraries",
       "status": "implemented",
@@ -3797,6 +3812,18 @@
       "method": "PATCH",
       "path": "/api/manage/registration-codes/{id}",
       "reason": "后端 DTO 与 V1 RegistrationCodeDto 逐字段一致（含 role_template_id / max_concurrent_playbacks，V1 dto/registration_codes.rs:99/101），但前端 RawRegistrationCodeRecord（fmby-web/shared/src/contracts/manage/raw-types.ts:85）缺这两字段且 mapper 未消费。REG-CODES-B 端点由 stub→implemented 后字段级对账启用才暴露。须前端卡补齐 RawRegistrationCodeRecord + mapper；补齐后本条自动转 stale 警告，届时删除。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_MISSING",
+      "method": "POST",
+      "path": "/api/manage/libraries/{id}/scan",
+      "reason": "后端 LibraryScanTriggerResponse 返回 skipped_mount_ids（库级=被跳过的挂载），前端 triggerLibraryScan（fmby-web/shared/src/contracts/manage/api.ts:748）却复用挂载级 DTO RawManageScanTriggerResponse（含 task_type/skipped_source_ids）→ 字段不匹配。SCAN-TRIGGER-B2 新增该端点后字段级对账才启用。须前端卡补库级专用 Raw DTO + mapper。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_EXTRA",
+      "method": "POST",
+      "path": "/api/manage/libraries/{id}/scan",
+      "reason": "同 FRONTEND_FIELD_MISSING：前端复用挂载级 DTO，多出 task_type/skipped_source_ids 两个库级响应不存在的字段。须前端卡拆分库级 DTO。"
     }
   ]
 }
