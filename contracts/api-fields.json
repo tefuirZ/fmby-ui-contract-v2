@@ -100,7 +100,7 @@
       "requestType": "Pan115ImghostAssetsQuery",
       "requestFields": [
         "page",
-        "page_size"
+        "pageSize"
       ]
     },
     {
@@ -371,7 +371,7 @@
       ],
       "requestType": "BrowseRootsQuery",
       "requestFields": [
-        "library_id",
+        "libraryId",
         "kind"
       ]
     },
@@ -417,7 +417,7 @@
       "requestType": "LibraryDetailQuery",
       "requestFields": [
         "page",
-        "page_size",
+        "pageSize",
         "cursor"
       ]
     },
@@ -433,7 +433,7 @@
       "requestType": "HistoryQuery",
       "requestFields": [
         "page",
-        "page_size"
+        "pageSize"
       ]
     },
     {
@@ -469,16 +469,16 @@
       "requestType": "SearchQuery",
       "requestFields": [
         "q",
-        "library_ids",
-        "media_types",
-        "root_only",
-        "has_effective_source",
-        "has_poster",
-        "has_subtitle",
-        "has_local_override",
-        "source_status",
-        "mount_status",
-        "metadata_status",
+        "libraryIds",
+        "mediaTypes",
+        "rootOnly",
+        "hasEffectiveSource",
+        "hasPoster",
+        "hasSubtitle",
+        "hasLocalOverride",
+        "sourceStatus",
+        "mountStatus",
+        "metadataStatus",
         "offset",
         "limit",
         "sort"
@@ -542,7 +542,7 @@
       "requestType": "ItemDescendantsQuery",
       "requestFields": [
         "page",
-        "page_size",
+        "pageSize",
         "cursor"
       ]
     },
@@ -2625,6 +2625,7 @@
         "pageSize",
         "search",
         "status",
+        "libraryId",
         "mountId"
       ]
     },
@@ -2659,8 +2660,8 @@
     {
       "method": "GET",
       "path": "/api/manage/naming-scrape",
-      "status": "stub",
-      "responseType": "Value",
+      "status": "implemented",
+      "responseType": "NamingScrapeView",
       "responseFields": null,
       "requestType": null,
       "requestFields": null
@@ -2668,17 +2669,17 @@
     {
       "method": "PUT",
       "path": "/api/manage/naming-scrape",
-      "status": "stub",
-      "responseType": "Value",
+      "status": "implemented",
+      "responseType": "NamingScrapeView",
       "responseFields": null,
-      "requestType": "Value",
+      "requestType": "UpdateNamingScrapeSettings",
       "requestFields": null
     },
     {
       "method": "GET",
       "path": "/api/manage/naming-cleanup",
-      "status": "stub",
-      "responseType": "Value",
+      "status": "implemented",
+      "responseType": "NamingCleanupView",
       "responseFields": null,
       "requestType": null,
       "requestFields": null
@@ -2686,19 +2687,19 @@
     {
       "method": "PUT",
       "path": "/api/manage/naming-cleanup",
-      "status": "stub",
-      "responseType": "Value",
+      "status": "implemented",
+      "responseType": "NamingCleanupView",
       "responseFields": null,
-      "requestType": "Value",
+      "requestType": "UpdateNamingCleanupSettings",
       "requestFields": null
     },
     {
       "method": "POST",
       "path": "/api/manage/naming-cleanup/preview",
-      "status": "stub",
-      "responseType": "Value",
+      "status": "implemented",
+      "responseType": "NamingCleanupPreviewView",
       "responseFields": null,
-      "requestType": "Value",
+      "requestType": "NamingCleanupPreviewRequest",
       "requestFields": null
     },
     {
