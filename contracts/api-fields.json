@@ -2856,20 +2856,39 @@
     {
       "method": "GET",
       "path": "/api/manage/sessions",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "ManagedSessionDto",
+      "responseFields": [
+        "id",
+        "user_id",
+        "username",
+        "display_name",
+        "client_info",
+        "ip_address",
+        "status",
+        "created_at",
+        "expires_at",
+        "last_activity_at",
+        "now_playing"
+      ],
+      "requestType": "ManagedSessionsQuery",
+      "requestFields": [
+        "status",
+        "userId",
+        "page",
+        "pageSize"
+      ]
     },
     {
       "method": "DELETE",
       "path": "/api/manage/sessions/{id}",
-      "status": "stub",
+      "status": "implemented",
       "responseType": null,
       "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
     },
     {
       "method": "GET",
