@@ -716,7 +716,7 @@
     {
       "method": "POST",
       "path": "/api/manage/source-availability/{id}/recover",
-      "status": "stub",
+      "status": "implemented",
       "responseType": "ManageSourceAvailabilityRecoverResponse",
       "responseFields": [
         "library_source_id",
@@ -2529,6 +2529,25 @@
         "action",
         "payload"
       ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/ai-interventions/media/{id}/suggest",
+      "status": "implemented",
+      "responseType": "AiSuggestResponse",
+      "responseFields": [
+        "mediaItemId",
+        "suggestedTitle",
+        "suggestedYear",
+        "suggestedSeason",
+        "suggestedEpisode",
+        "externalId",
+        "confidence",
+        "reasoning",
+        "wouldAutoBind"
+      ],
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "GET",
