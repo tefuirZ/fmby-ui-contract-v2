@@ -2585,20 +2585,48 @@
     {
       "method": "GET",
       "path": "/api/manage/probe-tasks",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "ManagedProbeTasksResponse",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "ManagedProbeTasksQuery",
+      "requestFields": [
+        "page",
+        "pageSize",
+        "search",
+        "status",
+        "mountId"
+      ]
     },
     {
       "method": "POST",
       "path": "/api/manage/probe-tasks",
-      "status": "stub",
-      "responseType": "Value",
-      "responseFields": null,
-      "requestType": "Value",
-      "requestFields": null
+      "status": "implemented",
+      "responseType": "ManagedProbeTaskDto",
+      "responseFields": [
+        "source_id",
+        "mount_id",
+        "source_path",
+        "provider_type",
+        "status",
+        "priority",
+        "request_reason",
+        "attempt_count",
+        "requested_at",
+        "started_at",
+        "finished_at",
+        "next_retry_at",
+        "lease_owner",
+        "last_error",
+        "technical_summary"
+      ],
+      "requestType": "ProbeTaskEnqueueRequest",
+      "requestFields": [
+        "sourceId",
+        "force"
+      ]
     },
     {
       "method": "GET",
@@ -2911,6 +2939,24 @@
       "path": "/api/settings/server/session-policy",
       "status": "implemented",
       "responseType": "Value",
+      "responseFields": null,
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/integrations/ai-assist",
+      "status": "implemented",
+      "responseType": "AiAssistSettingsView",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/integrations/ai-assist",
+      "status": "implemented",
+      "responseType": "AiAssistSettingsView",
       "responseFields": null,
       "requestType": "Value",
       "requestFields": null
