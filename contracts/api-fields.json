@@ -1633,6 +1633,48 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/collections/member-candidates",
+      "status": "implemented",
+      "responseType": "ManagedCollectionMemberCandidateDto",
+      "responseFields": [
+        "item_id",
+        "library_id",
+        "library_name",
+        "title",
+        "original_title",
+        "media_kind",
+        "year",
+        "overview",
+        "community_rating",
+        "poster_url"
+      ],
+      "requestType": "CollectionMemberCandidateQuery",
+      "requestFields": [
+        "keyword"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/collections/order",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDto",
+      "responseFields": [
+        "id",
+        "title",
+        "overview",
+        "poster_url",
+        "source_kind",
+        "visibility",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "ManagedCollectionReorder",
+      "requestFields": [
+        "collection_ids"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/collections",
       "status": "implemented",
       "responseType": "ManagedCollectionDto",
@@ -1743,6 +1785,20 @@
         "members"
       ],
       "requestType": "ManagedCollectionMemberAdd",
+      "requestFields": [
+        "item_id"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/collections/{id}/members/remove",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDetailDto",
+      "responseFields": [
+        "collection",
+        "members"
+      ],
+      "requestType": "ManagedCollectionMemberRemove",
       "requestFields": [
         "item_id"
       ]
