@@ -2,7 +2,8 @@
 
 > ★ **这是本仓库最重要的文件**。它回答一个问题：**v2 到底已经做了什么、还没做什么。**
 >
-> - 基线：**v0.1.105**（2026-09-14）
+> - 基线：**v0.1.122**（2026-09-18 G 表全量复核；后端端点 307、契约闸 PASS）
+> - G 表核对方法：api-fields.json（307 端点）× 主仓 routes grep 双证；前端侧以 fmby-web main（含 origin/main）源码为准；引用文件:行见各行标注
 > - 数据来源：主仓 `docs/plans/v2-dev/BOARD.md`（全量任务卡）+ 前后端端点对账（代码实测）
 > - 状态图例：✅ 已实现 ｜ 🟡 部分实现 ｜ ⛔ 未实现（已规划）｜ ⚪ v1 有 / v2 暂未对齐 ｜ 🔬 需真机真账号验收
 >
@@ -63,50 +64,54 @@
 | 内置主题 `darkroom` | ✅ 默认，完整 |
 | 内置主题 `template` | ✅ 骨架 |
 | tokens 热替换 | ✅ |
-| 主题选择**跨端持久化** | ⛔ 见 G-01 |
+| 主题选择**跨端持久化** | 🟡 部分：appearance KV 已持久化但 theme 值域不含皮肤 manifest id（见 G-01） |
 
 ---
 
 ## 三、⛔ 未实现 / 🟡 部分实现（**重点**）
 
-### A. 前后端不一致（前端已写 client，后端未注册）— 41 条
+### A. 前后端不一致（历史清单 G-01..G-17）— 2026-09-18 全量复核版
+
+> 复核方法：api-fields.json 307 端点（implemented 状态）× 主仓 routes grep 双证；
+> 前端侧以 fmby-web main（origin/main）源码为准。历史「41 条」为 v0.1.105 期快照，
+> 其中大量项已随后续卡落地，逐条状态见下表。
 
 #### A1. ★多主题相关（做多主题必须先解决）
 
-| # | 问题 | 影响 |
-|---|---|---|
-| **G-01** | 用户所选**主题 id** 无后端持久化（只存 localStorage） | 换设备/清缓存丢失；无法跨端同步 |
-| **G-16** | `appearance.theme` 前后端**值域不匹配**（后端 `["dark","template","light"]` vs 前端 `'system'\|'dark'\|'light'`） | 用户选「跟随系统」必被 400；语义混淆 |
+| # | 问题 | 状态（2026-09-18 核对） | 影响 |
+|---|---|---|---|
+| **G-01** 🟡 | 用户所选**主题 id** 跨端持久化 | 🟡 **部分**：`PUT /api/settings/user/appearance` 已实现（routes/settings.rs:111；bridges/settings.rs:199-240 KV `user.appearance.{user_id}`），但 `theme` 值域硬限 `["dark","template","light"]`（settings.rs one_of 校验）——**皮肤 manifest id（如 `darkroom`）存不进去**；主题 id 仍靠 localStorage | 换设备/清缓存丢失皮肤选择 |
+| **G-16** ⚠️ | `appearance.theme` 前后端**值域不匹配**（后端 `["dark","template","light"]`，settings/models.rs:24-25 ThemeMode vs 前端 `'system'\|'dark'\|'light'`，settings/raw-types.ts:36） | ⛔ 仍未对齐 | 用户选「跟随系统」必被 400；语义混淆 |
 
 #### A2. 鉴权 / 用户
 
-| # | 端点 | 说明 |
+| # | 端点 | 状态（2026-09-18 核对） |
 |---|---|---|
-| G-02 | `POST /api/auth/register`、`/api/auth/setup` | 注册页 / 初始化向导 |
-| G-03 | `GET /api/users/me` | 可由 `/api/auth/me` + `/settings/user/profile` 替代 |
-| G-04 | `/api/manage/users/{id}/{reset-password,approve-registration,reject-registration,login-risk/reset}`、`/api/manage/users/batch/{delete,disable,update}`、`/api/manage/login-risk/ip/reset` | 用户管理增强：批量、注册审批、密码重置、风控 |
+| G-02 | `POST /api/auth/register`、`/api/auth/setup` | ✅ **已实现**（SELF-REGISTER：后端 routes/mod.rs:143-144 + 432cb276/c2560174/9cd5081d，merge f5b021a3；api-fields 307 端点登记 implemented） |
+| G-03 | `GET /api/users/me` | ⛔ 未实现（api-fields 无 / main routes 无）；可由 `/api/auth/me` + `/settings/user/profile` 替代（维持原判定） |
+| G-04 | 用户管理增强 | 🟡 **大部分已实现**：`{id}/reset-password`、`{id}/approve-registration`、`{id}/reject-registration`、`{id}/login-risk/reset`、`/login-risk/ip/reset`、`batch/{disable,update,permanent-delete}` 全 implemented（api-fields + routes/manage_users.rs）。差异：V1 `/batch/delete` 在 V2 落地为 `/batch/permanent-delete`（manage_users.rs:146 注释，V1 全仓无 `/batch/delete` 直删语义） |
 
 #### A3. 媒体条目操作面
 
-| # | 端点 | 说明 |
+| # | 端点 | 状态（2026-09-18 核对） |
 |---|---|---|
-| G-05 | `/api/manage/media-items/{id}/{artwork,artwork/{id},metadata,metadata/reset,refresh-metadata,scan,scrape,scrape/refresh,sources/{id},subtitles,subtitles/{id}}` | 条目级：图片、元数据、刮削、扫描、字幕、源 |
-| G-08 | `/api/manage/libraries/{id}/scan`、`/api/manage/scans` | 触发扫描 / 扫描列表 |
-| G-10 | `/api/manage/probe-tasks/{id}`、`/{id}/enqueue`、`/{id}/refresh` | 探测任务操作 |
-| G-12 | — | （pipeline 详情已实现） |
+| G-05 | 条目级操作面 | ✅ **已实现**（16 条子路由全 implemented：artwork、artwork/{overrideId}、metadata、metadata/reset、refresh-metadata、scan、scrape、scrape/refresh、sources/{sourceId}、subtitles、subtitles/{overrideId}、pipeline、provider-search、identify、identity/manual-match、visibility/{state}；routes/mod.rs:633-685 + media_metadata.rs:474-504；卡片 CRUD-MEDIA-METADATA merge fa8e952d/daecac96、CRUD-MEDIA-SCRAPE merge aaf839ee、CRUD-MEDIA-IDENTITY merge f5b227fe） |
+| G-08 | `/api/manage/libraries/{id}/scan`、`/api/manage/scans` | 🟡 **部分**：`{id}/scan` 触发已实现（SCAN-TRIGGER-B2，routes/scan_trigger.rs；契约重生成 28789373）；`/api/manage/scans` 扫描列表仍无（api-fields 无 + routes 无） |
+| G-10 | `/api/manage/probe-tasks/{id}`、`/{id}/enqueue`、`/{id}/refresh` | ⛔ **未实现**（api-fields 与 routes 均只有列表 `GET /manage/probe-tasks` 与创建 POST，routes/mod.rs:746-748；`{id}` 子路径零命中） |
+| G-12 | — | ✅ pipeline 详情已实现（`/api/manage/media-items/{id}/pipeline`，routes/mod.rs:643） |
 
 #### A4. 挂载 / 资产 / 注册码 / 其他
 
-| # | 端点 | 说明 |
+| # | 端点 | 状态（2026-09-18 核对） |
 |---|---|---|
-| G-09 | `/api/manage/mounts/{id}/validate`、`/{id}/refresh-access` | 挂载校验 / 刷新访问（与 P2-06-R5 同线） |
-| G-11 | `/api/manage/registration-codes/{id}`、`/{id}/status`、`/batches/{id}`、`/batch/delete` | 注册码增强 |
-| G-13 | `/api/assets`、`/api/assets/items/{id}/images/{id}`、`/api/assets/libraries/{id}/images/{id}`、`/api/assets/subtitles` | 资产子路由（当前只有 `/api/assets/{blob_id}`） |
-| G-14 | `/api/manage/advanced` | 高级维护（115 图床 `pan115/imghost` 已于 V1F-01 实现并移出本项） |
-| G-17 | `/api/manage/yun139/*` **前端接线** | 后端段 A（11 端点）已实现；**前端页面与交互待用户接手**（契约见 `api/domains/manage/yun139.md`） |
-| G-06 | ⚠️ **危险操作确认口径不一致**：后端 `?confirmed=true` vs 前端 body `confirm_action` | 所有 DELETE 类 |
-| G-07 | ⚠️ 前端**细粒度能力守卫未落**（仅 `manage:access` 粗粒度） | 审计/设置页应各自守卫 |
-| G-15 | ⚠️ 前端路径笔误：`/api/browse/search` 应为 `/api/search` | 前端修正 |
+| G-09 | `/api/manage/mounts/{id}/validate`、`/{id}/refresh-access` | ✅ **已实现**（CRUD-MOUNTS merge 1c35df09；routes/mod.rs:354-358；语义：validate=只读探活+审计、refresh-access 能力位真探活/noop；VERIFY-SEMANTICS ba666446 起 verify=真探活+落状态） |
+| G-11 | `/api/manage/registration-codes/{id}`、`/{id}/status`、`/batches/{id}`、`/batch/delete` | 🟡 **部分**：`{id}` PATCH+DELETE、`{id}/status` PATCH 已实现（REG-CODES-B merge 70854d8d，routes/mod.rs:330-338）；`/batches/{id}`、`/batch/delete` 仍无（api-fields/routes 零命中） |
+| G-13 | `/api/assets`、`/api/assets/items/{id}/images/{id}`、`/api/assets/libraries/{id}/images/{id}`、`/api/assets/subtitles` | ⛔ **未实现**（api-fields/routes 仍只有 `/api/assets/{blob_id}`） |
+| G-14 | `/api/manage/advanced` | ✅ **已实现**（MANAGE-ADVANCED merge bbab7e29：settings 组 7 项真值直出；`security.revoked_sessions` 诚实省略——V2 吊销=物理 DELETE 无行可数，前端已回落「—」，见 fmby-web MANAGE-ADVANCED handoff） |
+| G-17 | `/api/manage/yun139/*` **前端接线** | 🟡 维持：后端段 A（11 端点）implemented（api-fields）；**前端页面与交互待用户接手**（fmby-web main 无 yun139 页面，grep 零命中） |
+| G-06 | ⚠️ **危险操作确认口径不一致**：后端 `?confirmed=true` vs 前端 body `confirm_action` | ✅ **已收口**：前端统一 `?confirmed=true`（fmby-web api.ts 14 处 `params:{confirmed:true}`；后端 confirm-gate 闸 PASSED——前端危险写调用均发 params.confirmed；fix/fe-confirm-registration 已合入） |
+| G-07 | ⚠️ 前端**细粒度能力守卫未落**（仅 `manage:access` 粗粒度） | ⛔ 维持：host 仅有 `guards/PermissionGate.tsx` 通用守卫组件，审计/设置页各自的细粒度守卫未见接线 |
+| G-15 | ⚠️ 前端路径笔误：`/api/browse/search` 应为 `/api/search` | ⛔ **main 未修**：fmby-web main（含 origin/main）`browse/search/api.ts:8` 仍为 `/api/browse/search`（后端真路由 `GET /api/search`，routes/mod.rs:165）；修正在前端仓分支 `w/zcode/writer1-contract-sync`，**未合并**（known_drift 保留该条豁免） |
 
 ### B. 未完成的任务卡（主仓 BOARD）
 
@@ -127,11 +132,11 @@
 | 项 | 说明 |
 |---|---|
 | ⚪ P115 命名歧义 | `P115`（外部 runtime）与 `Pan115`（原生 SDK）并存，UI 层禁止合并（已处理） |
-| ⚪ 注册/审批流 | v1 有注册码 + 审批，v2 未完整对齐（见 G-02/G-04） |
-| ⚪ 媒体审核工单 | v1 有 media-reviews，v2 未实现 |
-| 🟡 **139 账号管理** | v1 有 `yun139-accounts` 页；v2 **段 A（存管）已实现** —— 端点 11 个 + 迁移 0037 + SecretBox 凭据；**段 B（池取流调度）未接线** |
-| ⚪ 上游源网关 | v1 有 upstreams（AppleCMS/Emby 导入），v2 未实现 |
-| ⚪ Microsoft Graph 数据面 | v1 有完整 Graph，v2 仍是 P0-07 fail-closed stub |
+| ✅ 注册/审批流 | 后端 G-02/G-04 端点已落地（SELF-REGISTER + 用户管理增强，见 A2 表）；前端注册/审批页已接确认闸（G-06 收口） |
+| ✅ 媒体审核工单 | v2 已实现（media_review_queue 迁移 0020 + media_review_tickets 迁移 0036、SqliteMediaReviewRepository、identify NeedsReview 落审核台账；tests/media_review_repo.rs 端到端） |
+| 🟡 **139 账号管理** | v1 有 yun139-accounts 页；v2 **段 A（存管）已实现** —— 端点 11 个 + 迁移 0037 + SecretBox 凭据；**段 B（池取流调度）未接线** |
+| ✅ 上游源网关 | v2 已实现（upstreams_routes.rs：CRUD/enable/disable/health-check/discover-lan/categories/libraries 全注册；bridges/upstream_discovery.rs 真 probe；OpenAPI/路由双证） |
+| 🟡 Microsoft Graph 数据面 | 已有 microsoft_graph.rs（分页游标 fail-closed、游标推进断言），不再是 P0-07 空壳 stub；真实 OAuth+账号池联调仍归真机验收（第四节 #3） |
 
 ---
 
