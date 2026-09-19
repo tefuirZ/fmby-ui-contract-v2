@@ -1209,6 +1209,60 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/registration-codes/batch/delete",
+      "status": "implemented",
+      "responseType": "ManageBatchRegistrationCodeActionResponse",
+      "responseFields": [
+        "updated_count",
+        "results"
+      ],
+      "requestType": "BatchDeleteRegistrationCodeBatchesRequest",
+      "requestFields": [
+        "batch_ids",
+        "confirm_action",
+        "session_confirmation",
+        "current_password"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/batches/{id}",
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeBatchDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind",
+        "total_codes",
+        "available_codes",
+        "used_codes",
+        "disabled_codes",
+        "expired_codes",
+        "total_used_count",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at",
+        "items"
+      ],
+      "requestType": "UpdateRegistrationCodeBatchRequest",
+      "requestFields": [
+        "batch_name",
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "code",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval"
+      ]
+    },
+    {
       "method": "PATCH",
       "path": "/api/manage/registration-codes/{id}",
       "status": "implemented",
@@ -1750,6 +1804,36 @@
       "requestFields": [
         "min_effective_members",
         "rules"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/collections/presets",
+      "status": "implemented",
+      "responseType": "ManagedCollectionPresetDto",
+      "responseFields": [
+        "key",
+        "title",
+        "overview",
+        "item_count"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/collections/presets/create",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDetailDto",
+      "responseFields": [
+        "collection",
+        "members",
+        "rules",
+        "member_overrides"
+      ],
+      "requestType": "CreateCollectionFromPresetRequest",
+      "requestFields": [
+        "preset_key"
       ]
     },
     {
