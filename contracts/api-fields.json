@@ -330,6 +330,40 @@
     },
     {
       "method": "GET",
+      "path": "/api/browse/resume",
+      "status": "implemented",
+      "responseType": "ResumeResponse",
+      "responseFields": [
+        "items",
+        "next_cursor",
+        "has_more"
+      ],
+      "requestType": "BrowsePagedQuery",
+      "requestFields": [
+        "pageSize",
+        "cursor",
+        "libraryId"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/browse/recently-added",
+      "status": "implemented",
+      "responseType": "RecentlyAddedResponse",
+      "responseFields": [
+        "items",
+        "next_cursor",
+        "has_more"
+      ],
+      "requestType": "BrowsePagedQuery",
+      "requestFields": [
+        "pageSize",
+        "cursor",
+        "libraryId"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/browse/items/{id}",
       "status": "implemented",
       "responseType": "ItemDetailDto",
