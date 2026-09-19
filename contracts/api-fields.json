@@ -2860,6 +2860,22 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/system/about",
+      "status": "implemented",
+      "responseType": "SystemAboutResponse",
+      "responseFields": [
+        "generated_at",
+        "app",
+        "links",
+        "runtime",
+        "dependencies",
+        "warnings"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/probe-tasks",
       "status": "implemented",
       "responseType": "ManagedProbeTasksResponse",
