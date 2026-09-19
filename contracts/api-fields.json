@@ -1212,7 +1212,10 @@
         "latency_ms",
         "message",
         "health_status",
-        "status_message"
+        "status_message",
+        "fault_kind",
+        "fault_title",
+        "fault_action"
       ],
       "requestType": null,
       "requestFields": null
