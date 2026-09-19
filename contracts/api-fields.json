@@ -405,6 +405,15 @@
     },
     {
       "method": "GET",
+      "path": "/api/assets/items/{item_id}/images/{kind}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/items/{id}",
       "status": "implemented",
       "responseType": "ItemDetailWebDto",
@@ -5086,28 +5095,10 @@
       "reason": "形状漂移（真）：后端 OverviewDto{total_items,total_libraries,total_mounts,active_admin_count,uptime_secs} 5 平字段（bridges/manage.rs 无端口 → fail-closed）；前端 RawManageOverviewResponse 期待 18 嵌套字段（kpis/alerts/...）。前端 mapper 对缺字段有回落（不崩但 KPI 恒 0/不可用）。根因=后端 overview 端口未接。"
     },
     {
-      "rule": "FRONTEND_FIELD_MISSING",
-      "method": "GET",
-      "path": "/api/manage/overview",
-      "reason": "形状漂移（真）：后端 OverviewDto{total_items,total_libraries,total_mounts,active_admin_count,uptime_secs} 5 平字段（bridges/manage.rs 无端口 → fail-closed）；前端 RawManageOverviewResponse 期待 18 嵌套字段（kpis/alerts/...）。前端 mapper 对缺字段有回落（不崩但 KPI 恒 0/不可用）。根因=后端 overview 端口未接。"
-    },
-    {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "POST",
       "path": "/api/manage/users/batch/delete",
       "reason": "契约仓 G-04：用户管理增强（批量/审批/改密/风控）端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "PATCH",
-      "path": "/api/manage/registration-codes/batches/{*}",
-      "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/registration-codes/batch/delete",
-      "reason": "契约仓 G-11：注册码增强端点（改/删/批次）未实现。"
     },
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
@@ -5126,12 +5117,6 @@
       "method": "POST",
       "path": "/api/manage/probe-tasks/{*}/refresh",
       "reason": "契约仓 G-10：探测任务操作端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_FIELD_MISSING",
-      "method": "POST",
-      "path": "/api/manage/libraries/{id}/scan",
-      "reason": "后端 LibraryScanTriggerResponse 返回 skipped_mount_ids（库级=被跳过的挂载），前端 triggerLibraryScan（fmby-web/shared/src/contracts/manage/api.ts:748）却复用挂载级 DTO RawManageScanTriggerResponse（含 task_type/skipped_source_ids）→ 字段不匹配。SCAN-TRIGGER-B2 新增该端点后字段级对账才启用。须前端卡补库级专用 Raw DTO + mapper。"
     },
     {
       "rule": "FRONTEND_FIELD_EXTRA",
