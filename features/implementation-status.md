@@ -111,7 +111,7 @@
 | G-17 | `/api/manage/yun139/*` **前端接线** | 🟡 维持：后端段 A（11 端点）implemented（api-fields）；**前端页面与交互待用户接手**（fmby-web main 无 yun139 页面，grep 零命中） |
 | G-06 | ⚠️ **危险操作确认口径不一致**：后端 `?confirmed=true` vs 前端 body `confirm_action` | ✅ **已收口**：前端统一 `?confirmed=true`（fmby-web api.ts 14 处 `params:{confirmed:true}`；后端 confirm-gate 闸 PASSED——前端危险写调用均发 params.confirmed；fix/fe-confirm-registration 已合入） |
 | G-07 | ⚠️ 前端**细粒度能力守卫未落**（仅 `manage:access` 粗粒度） | ⛔ 维持：host 仅有 `guards/PermissionGate.tsx` 通用守卫组件，审计/设置页各自的细粒度守卫未见接线 |
-| G-15 | ⚠️ 前端路径笔误：`/api/browse/search` 应为 `/api/search` | ⛔ **main 未修**：fmby-web main（含 origin/main）`browse/search/api.ts:8` 仍为 `/api/browse/search`（后端真路由 `GET /api/search`，routes/mod.rs:165）；修正在前端仓分支 `w/zcode/writer1-contract-sync`，**未合并**（known_drift 保留该条豁免） |
+| G-15 | ⚠️ 前端路径笔误：`/api/browse/search` 应为 `/api/search` | ✅ **已修复**（2026-09-18）：fmby-web main `browse/search/api.ts:8` 改为 `/api/search`（commit `4cc05ba`，已推 origin/main）；契约仓 known_drift 对应豁免条目已同步删除（12→11） |
 
 ### B. 未完成的任务卡（主仓 BOARD）
 

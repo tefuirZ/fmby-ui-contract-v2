@@ -4991,12 +4991,6 @@
   "known_drift": [
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "GET",
-      "path": "/api/browse/search",
-      "reason": "契约仓 G-15 前端路径笔误（应为 /api/search）。已在**前端仓分支 w/zcode/writer1-contract-sync 修复**；主仓门禁读前端 main，前端分支合并后本条自动转 stale 警告，届时从 known_drift 删除。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "DELETE",
       "path": "/api/auth/logout",
       "reason": "前端 logout 的 DELETE 兜底分支（POST 已存在，DELETE 永不触发）→ 死代码，非真缺陷。"
