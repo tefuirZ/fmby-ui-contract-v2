@@ -448,6 +448,31 @@
       ]
     },
     {
+      "method": "POST",
+      "path": "/api/items/{id}/played",
+      "status": "implemented",
+      "responseType": "ItemPlayedActionDto",
+      "responseFields": [
+        "ok",
+        "item_id",
+        "action"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/items/{id}/likes",
+      "status": "implemented",
+      "responseType": "ItemLikesDto",
+      "responseFields": [
+        "item_id",
+        "likes"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "GET",
       "path": "/api/items/people/{id}",
       "status": "implemented",
@@ -1013,634 +1038,6 @@
       "requestFields": [
         "ip_address"
       ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/role-templates",
-      "status": "implemented",
-      "responseType": "RoleTemplateDto",
-      "responseFields": [
-        "id",
-        "code",
-        "name",
-        "description",
-        "capabilities",
-        "default_library_ids",
-        "source_grants",
-        "default_max_sessions",
-        "default_max_concurrent_playbacks",
-        "default_valid_days",
-        "is_system",
-        "status",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/role-templates",
-      "status": "implemented",
-      "responseType": "RoleTemplateDto",
-      "responseFields": [
-        "id",
-        "code",
-        "name",
-        "description",
-        "capabilities",
-        "default_library_ids",
-        "source_grants",
-        "default_max_sessions",
-        "default_max_concurrent_playbacks",
-        "default_valid_days",
-        "is_system",
-        "status",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": "CreateRoleTemplateRequest",
-      "requestFields": [
-        "code",
-        "name",
-        "description",
-        "default_library_ids",
-        "source_grants",
-        "default_max_sessions",
-        "default_max_concurrent_playbacks",
-        "default_valid_days"
-      ]
-    },
-    {
-      "method": "PATCH",
-      "path": "/api/manage/role-templates/{id}",
-      "status": "implemented",
-      "responseType": "RoleTemplateDto",
-      "responseFields": [
-        "id",
-        "code",
-        "name",
-        "description",
-        "capabilities",
-        "default_library_ids",
-        "source_grants",
-        "default_max_sessions",
-        "default_max_concurrent_playbacks",
-        "default_valid_days",
-        "is_system",
-        "status",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": "UpdateRoleTemplateRequest",
-      "requestFields": [
-        "name",
-        "description",
-        "default_library_ids",
-        "source_grants",
-        "default_max_sessions",
-        "default_max_concurrent_playbacks",
-        "default_valid_days"
-      ]
-    },
-    {
-      "method": "DELETE",
-      "path": "/api/manage/role-templates/{id}",
-      "status": "implemented",
-      "responseType": "ManageActionResultDto",
-      "responseFields": [
-        "id",
-        "result",
-        "message"
-      ],
-      "requestType": "ConfirmQuery",
-      "requestFields": [
-        "confirmed"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/registration-codes",
-      "status": "implemented",
-      "responseType": "ManagedRegistrationCodeBatchDto",
-      "responseFields": [
-        "id",
-        "name",
-        "kind",
-        "total_codes",
-        "available_codes",
-        "used_codes",
-        "disabled_codes",
-        "expired_codes",
-        "total_used_count",
-        "created_by",
-        "created_by_username",
-        "created_by_display_name",
-        "created_at",
-        "items"
-      ],
-      "requestType": "ManagedRegistrationCodesQuery",
-      "requestFields": [
-        "page",
-        "pageSize",
-        "search",
-        "status"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/registration-codes",
-      "status": "implemented",
-      "responseType": "ManagedRegistrationCodeBatchDto",
-      "responseFields": [
-        "id",
-        "name",
-        "kind",
-        "total_codes",
-        "available_codes",
-        "used_codes",
-        "disabled_codes",
-        "expired_codes",
-        "total_used_count",
-        "created_by",
-        "created_by_username",
-        "created_by_display_name",
-        "created_at",
-        "items"
-      ],
-      "requestType": "CreateRegistrationCodeRequest",
-      "requestFields": [
-        "mode",
-        "batch_name",
-        "generate_count",
-        "code_length",
-        "code",
-        "role_template",
-        "role_template_id",
-        "default_library_ids",
-        "max_uses",
-        "max_sessions",
-        "max_concurrent_playbacks",
-        "valid_days",
-        "expires_at",
-        "allow_reactivation",
-        "require_approval"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/mounts/health",
-      "status": "implemented",
-      "responseType": "MountHealthListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": "MountHealthQuery",
-      "requestFields": [
-        "status"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/mounts/{id}/probe",
-      "status": "implemented",
-      "responseType": "MountProbeDto",
-      "responseFields": [
-        "mount_id",
-        "probe_status",
-        "latency_ms",
-        "message",
-        "health_status",
-        "status_message",
-        "fault_kind",
-        "fault_title",
-        "fault_action"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/registration-codes/batch/delete",
-      "status": "implemented",
-      "responseType": "ManageBatchRegistrationCodeActionResponse",
-      "responseFields": [
-        "updated_count",
-        "results"
-      ],
-      "requestType": "BatchDeleteRegistrationCodeBatchesRequest",
-      "requestFields": [
-        "batch_ids",
-        "confirm_action",
-        "session_confirmation",
-        "current_password"
-      ]
-    },
-    {
-      "method": "PATCH",
-      "path": "/api/manage/registration-codes/batches/{id}",
-      "status": "implemented",
-      "responseType": "ManagedRegistrationCodeBatchDto",
-      "responseFields": [
-        "id",
-        "name",
-        "kind",
-        "total_codes",
-        "available_codes",
-        "used_codes",
-        "disabled_codes",
-        "expired_codes",
-        "total_used_count",
-        "created_by",
-        "created_by_username",
-        "created_by_display_name",
-        "created_at",
-        "items"
-      ],
-      "requestType": "UpdateRegistrationCodeBatchRequest",
-      "requestFields": [
-        "batch_name",
-        "role_template",
-        "role_template_id",
-        "default_library_ids",
-        "code",
-        "max_uses",
-        "max_sessions",
-        "max_concurrent_playbacks",
-        "valid_days",
-        "expires_at",
-        "allow_reactivation",
-        "require_approval"
-      ]
-    },
-    {
-      "method": "PATCH",
-      "path": "/api/manage/registration-codes/{id}",
-      "status": "implemented",
-      "responseType": "ManagedRegistrationCodeDto",
-      "responseFields": [
-        "id",
-        "batch_id",
-        "code",
-        "role_template",
-        "role_template_id",
-        "default_library_ids",
-        "max_uses",
-        "max_sessions",
-        "max_concurrent_playbacks",
-        "valid_days",
-        "used_count",
-        "expires_at",
-        "allow_reactivation",
-        "require_approval",
-        "status",
-        "created_by",
-        "created_by_username",
-        "created_by_display_name",
-        "created_at"
-      ],
-      "requestType": "UpdateRegistrationCodeRequest",
-      "requestFields": [
-        "role_template",
-        "role_template_id",
-        "default_library_ids",
-        "max_uses",
-        "max_sessions",
-        "max_concurrent_playbacks",
-        "valid_days",
-        "expires_at",
-        "allow_reactivation",
-        "require_approval"
-      ]
-    },
-    {
-      "method": "PATCH",
-      "path": "/api/manage/registration-codes/{id}/status",
-      "status": "implemented",
-      "responseType": "ManagedRegistrationCodeDto",
-      "responseFields": [
-        "id",
-        "batch_id",
-        "code",
-        "role_template",
-        "role_template_id",
-        "default_library_ids",
-        "max_uses",
-        "max_sessions",
-        "max_concurrent_playbacks",
-        "valid_days",
-        "used_count",
-        "expires_at",
-        "allow_reactivation",
-        "require_approval",
-        "status",
-        "created_by",
-        "created_by_username",
-        "created_by_display_name",
-        "created_at"
-      ],
-      "requestType": "UpdateRegistrationCodeStatusRequest",
-      "requestFields": [
-        "status"
-      ]
-    },
-    {
-      "method": "DELETE",
-      "path": "/api/manage/registration-codes/{id}",
-      "status": "implemented",
-      "responseType": "ManageActionResultDto",
-      "responseFields": [
-        "id",
-        "result",
-        "message"
-      ],
-      "requestType": "ConfirmQuery",
-      "requestFields": [
-        "confirmed"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/mounts",
-      "status": "implemented",
-      "responseType": "ManagedMountSummaryDto",
-      "responseFields": [
-        "id",
-        "name",
-        "provider_type",
-        "type_label",
-        "status",
-        "path",
-        "path_label",
-        "description",
-        "capabilities",
-        "linked_libraries",
-        "last_checked_at"
-      ],
-      "requestType": "ManageMountsQuery",
-      "requestFields": [
-        "page",
-        "pageSize",
-        "search",
-        "healthStatus",
-        "providerType",
-        "libraryId"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/mounts",
-      "status": "implemented",
-      "responseType": "ManagedMountDetailDto",
-      "responseFields": [
-        "mount",
-        "provider_type",
-        "root_path",
-        "config_json",
-        "capability_state",
-        "path_policies",
-        "linked_sources",
-        "recent_scan_tasks"
-      ],
-      "requestType": "ManagedMountCreateRequest",
-      "requestFields": [
-        "name",
-        "provider_type",
-        "root_path",
-        "config_json",
-        "status",
-        "capabilities",
-        "path_policies"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/mounts/browse-directories",
-      "status": "implemented",
-      "responseType": "MountBrowseResponse",
-      "responseFields": [
-        "current_path",
-        "parent_path",
-        "directories"
-      ],
-      "requestType": "MountBrowseRequest",
-      "requestFields": [
-        "providerType",
-        "configJson",
-        "mountId",
-        "previewId",
-        "rootPath",
-        "path"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/mounts/{id}",
-      "status": "implemented",
-      "responseType": "ManagedMountDetailDto",
-      "responseFields": [
-        "mount",
-        "provider_type",
-        "root_path",
-        "config_json",
-        "capability_state",
-        "path_policies",
-        "linked_sources",
-        "recent_scan_tasks"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "PATCH",
-      "path": "/api/manage/mounts/{id}",
-      "status": "implemented",
-      "responseType": "ManagedMountDetailDto",
-      "responseFields": [
-        "mount",
-        "provider_type",
-        "root_path",
-        "config_json",
-        "capability_state",
-        "path_policies",
-        "linked_sources",
-        "recent_scan_tasks"
-      ],
-      "requestType": "ManagedMountUpdateRequest",
-      "requestFields": [
-        "name",
-        "root_path",
-        "config_json",
-        "status",
-        "capabilities",
-        "path_policies"
-      ]
-    },
-    {
-      "method": "DELETE",
-      "path": "/api/manage/mounts/{id}",
-      "status": "implemented",
-      "responseType": null,
-      "responseFields": null,
-      "requestType": "ConfirmQuery",
-      "requestFields": [
-        "confirmed"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/mounts/{id}/validate",
-      "status": "implemented",
-      "responseType": "ManagedMountDetailDto",
-      "responseFields": [
-        "mount",
-        "provider_type",
-        "root_path",
-        "config_json",
-        "capability_state",
-        "path_policies",
-        "linked_sources",
-        "recent_scan_tasks"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/mounts/{id}/refresh-access",
-      "status": "implemented",
-      "responseType": "ManagedMountDetailDto",
-      "responseFields": [
-        "mount",
-        "provider_type",
-        "root_path",
-        "config_json",
-        "capability_state",
-        "path_policies",
-        "linked_sources",
-        "recent_scan_tasks"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/mounts/batch/refresh-abnormal",
-      "status": "implemented",
-      "responseType": "BatchRefreshAbnormalMountsResponse",
-      "responseFields": [
-        "total",
-        "refreshed",
-        "active",
-        "unreachable",
-        "skipped",
-        "failed",
-        "results"
-      ],
-      "requestType": "BatchRefreshAbnormalMountsRequest",
-      "requestFields": [
-        "mount_ids",
-        "limit"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/mounts/{id}/verify",
-      "status": "implemented",
-      "responseType": "ManagedMountDto",
-      "responseFields": [
-        "id",
-        "name",
-        "mount_type",
-        "config_hash",
-        "verified_at",
-        "status"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/mounts/{id}/scan",
-      "status": "implemented",
-      "responseType": "ScanTriggerResponse",
-      "responseFields": [
-        "mountId",
-        "taskKey",
-        "taskId",
-        "created"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/mounts/{id}/scan",
-      "status": "implemented",
-      "responseType": "ScanStatusResponse",
-      "responseFields": [
-        "mountId",
-        "state",
-        "terminal",
-        "attempt",
-        "maxAttempts",
-        "errorClass",
-        "checkpoint"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/libraries/{id}/scan",
-      "status": "implemented",
-      "responseType": "LibraryScanTriggerResponse",
-      "responseFields": [
-        "libraryId",
-        "tasks",
-        "skippedMountIds"
-      ],
-      "requestType": "TriggerLibraryScanRequest",
-      "requestFields": [
-        "taskType"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/mounts/{id}/libraries",
-      "status": "implemented",
-      "responseType": "GovernanceLibrarySetDto",
-      "responseFields": [
-        "mount_id",
-        "library_ids"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/mounts/{id}/libraries",
-      "status": "implemented",
-      "responseType": "GovernanceOkDto",
-      "responseFields": [
-        "ok"
-      ],
-      "requestType": "GovernanceBindRequest",
-      "requestFields": [
-        "library_id"
-      ]
-    },
-    {
-      "method": "DELETE",
-      "path": "/api/manage/mounts/{id}/libraries/{library_id}",
-      "status": "implemented",
-      "responseType": "GovernanceOkDto",
-      "responseFields": [
-        "ok"
-      ],
-      "requestType": null,
-      "requestFields": null
     },
     {
       "method": "PUT",
@@ -4405,6 +3802,634 @@
       "requestFields": [
         "action"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/role-templates",
+      "status": "implemented",
+      "responseType": "RoleTemplateDto",
+      "responseFields": [
+        "id",
+        "code",
+        "name",
+        "description",
+        "capabilities",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days",
+        "is_system",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/role-templates",
+      "status": "implemented",
+      "responseType": "RoleTemplateDto",
+      "responseFields": [
+        "id",
+        "code",
+        "name",
+        "description",
+        "capabilities",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days",
+        "is_system",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "CreateRoleTemplateRequest",
+      "requestFields": [
+        "code",
+        "name",
+        "description",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/role-templates/{id}",
+      "status": "implemented",
+      "responseType": "RoleTemplateDto",
+      "responseFields": [
+        "id",
+        "code",
+        "name",
+        "description",
+        "capabilities",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days",
+        "is_system",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "UpdateRoleTemplateRequest",
+      "requestFields": [
+        "name",
+        "description",
+        "default_library_ids",
+        "source_grants",
+        "default_max_sessions",
+        "default_max_concurrent_playbacks",
+        "default_valid_days"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/role-templates/{id}",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/registration-codes",
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeBatchDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind",
+        "total_codes",
+        "available_codes",
+        "used_codes",
+        "disabled_codes",
+        "expired_codes",
+        "total_used_count",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at",
+        "items"
+      ],
+      "requestType": "ManagedRegistrationCodesQuery",
+      "requestFields": [
+        "page",
+        "pageSize",
+        "search",
+        "status"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/registration-codes",
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeBatchDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind",
+        "total_codes",
+        "available_codes",
+        "used_codes",
+        "disabled_codes",
+        "expired_codes",
+        "total_used_count",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at",
+        "items"
+      ],
+      "requestType": "CreateRegistrationCodeRequest",
+      "requestFields": [
+        "mode",
+        "batch_name",
+        "generate_count",
+        "code_length",
+        "code",
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts/health",
+      "status": "implemented",
+      "responseType": "MountHealthListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "MountHealthQuery",
+      "requestFields": [
+        "status"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/probe",
+      "status": "implemented",
+      "responseType": "MountProbeDto",
+      "responseFields": [
+        "mount_id",
+        "probe_status",
+        "latency_ms",
+        "message",
+        "health_status",
+        "status_message",
+        "fault_kind",
+        "fault_title",
+        "fault_action"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/registration-codes/batch/delete",
+      "status": "implemented",
+      "responseType": "ManageBatchRegistrationCodeActionResponse",
+      "responseFields": [
+        "updated_count",
+        "results"
+      ],
+      "requestType": "BatchDeleteRegistrationCodeBatchesRequest",
+      "requestFields": [
+        "batch_ids",
+        "confirm_action",
+        "session_confirmation",
+        "current_password"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/batches/{id}",
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeBatchDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind",
+        "total_codes",
+        "available_codes",
+        "used_codes",
+        "disabled_codes",
+        "expired_codes",
+        "total_used_count",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at",
+        "items"
+      ],
+      "requestType": "UpdateRegistrationCodeBatchRequest",
+      "requestFields": [
+        "batch_name",
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "code",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/{id}",
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeDto",
+      "responseFields": [
+        "id",
+        "batch_id",
+        "code",
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "used_count",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval",
+        "status",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at"
+      ],
+      "requestType": "UpdateRegistrationCodeRequest",
+      "requestFields": [
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/{id}/status",
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeDto",
+      "responseFields": [
+        "id",
+        "batch_id",
+        "code",
+        "role_template",
+        "role_template_id",
+        "default_library_ids",
+        "max_uses",
+        "max_sessions",
+        "max_concurrent_playbacks",
+        "valid_days",
+        "used_count",
+        "expires_at",
+        "allow_reactivation",
+        "require_approval",
+        "status",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at"
+      ],
+      "requestType": "UpdateRegistrationCodeStatusRequest",
+      "requestFields": [
+        "status"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/registration-codes/{id}",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts",
+      "status": "implemented",
+      "responseType": "ManagedMountSummaryDto",
+      "responseFields": [
+        "id",
+        "name",
+        "provider_type",
+        "type_label",
+        "status",
+        "path",
+        "path_label",
+        "description",
+        "capabilities",
+        "linked_libraries",
+        "last_checked_at"
+      ],
+      "requestType": "ManageMountsQuery",
+      "requestFields": [
+        "page",
+        "pageSize",
+        "search",
+        "healthStatus",
+        "providerType",
+        "libraryId"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": "ManagedMountCreateRequest",
+      "requestFields": [
+        "name",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "status",
+        "capabilities",
+        "path_policies"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/browse-directories",
+      "status": "implemented",
+      "responseType": "MountBrowseResponse",
+      "responseFields": [
+        "current_path",
+        "parent_path",
+        "directories"
+      ],
+      "requestType": "MountBrowseRequest",
+      "requestFields": [
+        "providerType",
+        "configJson",
+        "mountId",
+        "previewId",
+        "rootPath",
+        "path"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts/{id}",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/mounts/{id}",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": "ManagedMountUpdateRequest",
+      "requestFields": [
+        "name",
+        "root_path",
+        "config_json",
+        "status",
+        "capabilities",
+        "path_policies"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/mounts/{id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/validate",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/refresh-access",
+      "status": "implemented",
+      "responseType": "ManagedMountDetailDto",
+      "responseFields": [
+        "mount",
+        "provider_type",
+        "root_path",
+        "config_json",
+        "capability_state",
+        "path_policies",
+        "linked_sources",
+        "recent_scan_tasks"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/batch/refresh-abnormal",
+      "status": "implemented",
+      "responseType": "BatchRefreshAbnormalMountsResponse",
+      "responseFields": [
+        "total",
+        "refreshed",
+        "active",
+        "unreachable",
+        "skipped",
+        "failed",
+        "results"
+      ],
+      "requestType": "BatchRefreshAbnormalMountsRequest",
+      "requestFields": [
+        "mount_ids",
+        "limit"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/verify",
+      "status": "implemented",
+      "responseType": "ManagedMountDto",
+      "responseFields": [
+        "id",
+        "name",
+        "mount_type",
+        "config_hash",
+        "verified_at",
+        "status"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/scan",
+      "status": "implemented",
+      "responseType": "ScanTriggerResponse",
+      "responseFields": [
+        "mountId",
+        "taskKey",
+        "taskId",
+        "created"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts/{id}/scan",
+      "status": "implemented",
+      "responseType": "ScanStatusResponse",
+      "responseFields": [
+        "mountId",
+        "state",
+        "terminal",
+        "attempt",
+        "maxAttempts",
+        "errorClass",
+        "checkpoint"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/libraries/{id}/scan",
+      "status": "implemented",
+      "responseType": "LibraryScanTriggerResponse",
+      "responseFields": [
+        "libraryId",
+        "tasks",
+        "skippedMountIds"
+      ],
+      "requestType": "TriggerLibraryScanRequest",
+      "requestFields": [
+        "taskType"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/mounts/{id}/libraries",
+      "status": "implemented",
+      "responseType": "GovernanceLibrarySetDto",
+      "responseFields": [
+        "mount_id",
+        "library_ids"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/mounts/{id}/libraries",
+      "status": "implemented",
+      "responseType": "GovernanceOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "GovernanceBindRequest",
+      "requestFields": [
+        "library_id"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/mounts/{id}/libraries/{library_id}",
+      "status": "implemented",
+      "responseType": "GovernanceOkDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "GET",
