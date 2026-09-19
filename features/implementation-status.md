@@ -80,7 +80,7 @@
 
 | # | 问题 | 状态（2026-09-18 核对） | 影响 |
 |---|---|---|---|
-| **G-01** 🟡 | 用户所选**主题 id** 跨端持久化 | 🟡 **部分**：`PUT /api/settings/user/appearance` 已实现（routes/settings.rs:111；bridges/settings.rs:199-240 KV `user.appearance.{user_id}`），但 `theme` 值域硬限 `["dark","template","light"]`（settings.rs one_of 校验）——**皮肤 manifest id（如 `darkroom`）存不进去**；主题 id 仍靠 localStorage | 换设备/清缓存丢失皮肤选择 |
+| **G-01** 🟡 | 用户所选**主题 id** 跨端持久化 | 🟡 **部分**：`PUT /api/settings/user/appearance` 已实现（routes/settings.rs:111；bridges/settings.rs:199-240 KV `user.appearance.{user_id}`），但 `theme` 值域硬限 `["dark","template","light"]`（settings.rs one_of 校验）——**皮肤 manifest id（如 `darkroom`）存不进去**；主题 id 仍靠 localStorage。**已立卡 `THEME-VALUE-DOMAIN`（主仓 `ORCHESTRATION-INBOX.md`，P3 待派）** | 换设备/清缓存丢失皮肤选择 |
 | **G-16** ⚠️ | `appearance.theme` 前后端**值域不匹配**（后端 `["dark","template","light"]`，settings/models.rs:24-25 ThemeMode vs 前端 `'system'\|'dark'\|'light'`，settings/raw-types.ts:36） | ⛔ 仍未对齐 | 用户选「跟随系统」必被 400；语义混淆 |
 
 #### A2. 鉴权 / 用户
