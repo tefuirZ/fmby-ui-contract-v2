@@ -134,6 +134,26 @@
     },
     {
       "method": "POST",
+      "path": "/api/auth/password/change-required",
+      "status": "implemented",
+      "responseType": "LoginResponse",
+      "responseFields": [
+        "user_id",
+        "expires_in_secs",
+        "status",
+        "challenge_id",
+        "expires_at",
+        "must_change_password",
+        "password_change_endpoint"
+      ],
+      "requestType": "ChangePasswordRequest",
+      "requestFields": [
+        "current_password",
+        "new_password"
+      ]
+    },
+    {
+      "method": "POST",
       "path": "/api/auth/password-reset/telegram/status",
       "status": "implemented",
       "responseType": "PasswordResetStatusDto",
@@ -2454,6 +2474,60 @@
       "requestType": "OperationsOverviewRequest",
       "requestFields": [
         "days"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/operations/runtime",
+      "status": "implemented",
+      "responseType": "ManageRuntimeObservabilityResponse",
+      "responseFields": [
+        "sampledAt",
+        "processHostCacheStatus",
+        "redisCacheStatus",
+        "startupLatencyCacheStatus",
+        "workerHealthCacheStatus",
+        "process",
+        "host",
+        "pgPool",
+        "runtimeThreads",
+        "databasePools",
+        "workloadGovernor",
+        "redis",
+        "startupLatency",
+        "workerHealth"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/operations/data-sources/load",
+      "status": "implemented",
+      "responseType": "ManageDataSourceLoadResponse",
+      "responseFields": [
+        "sampledAt",
+        "cacheStatus",
+        "items"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/operations/playback/active",
+      "status": "implemented",
+      "responseType": "ManageActivePlaybackResponse",
+      "responseFields": [
+        "sampledAt",
+        "cacheStatus",
+        "limit",
+        "totalReturned",
+        "sessions"
+      ],
+      "requestType": "ActivePlaybackRequest",
+      "requestFields": [
+        "limit"
       ]
     },
     {
