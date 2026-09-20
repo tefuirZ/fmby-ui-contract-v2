@@ -5380,7 +5380,9 @@
       "responseType": "SiteSettingsDto",
       "responseFields": [
         "theme_mode",
-        "timezone_display"
+        "timezone_display",
+        "site_name",
+        "brand_logo_url"
       ],
       "requestType": null,
       "requestFields": null
@@ -5394,7 +5396,9 @@
       "requestType": "SiteSettingsDto",
       "requestFields": [
         "theme_mode",
-        "timezone_display"
+        "timezone_display",
+        "site_name",
+        "brand_logo_url"
       ]
     },
     {
