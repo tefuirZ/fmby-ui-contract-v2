@@ -5303,6 +5303,12 @@
       "method": "POST",
       "path": "/api/manage/probe-tasks/{*}/refresh",
       "reason": "契约仓 G-10：探测任务操作端点未实现。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/auth/identity/telegram/login/status",
+      "reason": "前端硬编码具体 provider（telegram）而后端声明为 {provider} 模板（routes/mod.rs:185），运行时可正确匹配，仅契约字面比对差异；login/status 仅 Telegram 支持故前端不参数化。"
     }
   ]
 }
