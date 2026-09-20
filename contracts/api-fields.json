@@ -180,6 +180,38 @@
     },
     {
       "method": "POST",
+      "path": "/api/auth/password-reset/start",
+      "status": "implemented",
+      "responseType": "PasswordResetEmailStartDto",
+      "responseFields": [
+        "accepted",
+        "delivery",
+        "challenge",
+        "expires_at_ms"
+      ],
+      "requestType": "PasswordResetEmailStartRequest",
+      "requestFields": [
+        "email",
+        "session_id"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/password-reset/complete",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "PasswordResetEmailCompleteRequest",
+      "requestFields": [
+        "ticket",
+        "session_id",
+        "email",
+        "code",
+        "new_password"
+      ]
+    },
+    {
+      "method": "POST",
       "path": "/api/auth/setup",
       "status": "implemented",
       "responseType": "Value",
@@ -3057,6 +3089,76 @@
         "clearSecretConfig",
         "clearSecretFields",
         "keepExistingSecretConfig"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings/server/email",
+      "status": "implemented",
+      "responseType": "EmailChannelSettingsDto",
+      "responseFields": [
+        "configured",
+        "secret_fields_configured",
+        "host",
+        "port",
+        "security",
+        "username",
+        "from_address",
+        "reset_delivery",
+        "code_len",
+        "code_ttl_minutes",
+        "link_ttl_minutes",
+        "html_template"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/settings/server/email",
+      "status": "implemented",
+      "responseType": "EmailChannelSettingsDto",
+      "responseFields": [
+        "configured",
+        "secret_fields_configured",
+        "host",
+        "port",
+        "security",
+        "username",
+        "from_address",
+        "reset_delivery",
+        "code_len",
+        "code_ttl_minutes",
+        "link_ttl_minutes",
+        "html_template"
+      ],
+      "requestType": "UpdateEmailChannelSettingsRequest",
+      "requestFields": [
+        "host",
+        "port",
+        "security",
+        "username",
+        "password",
+        "from_address",
+        "reset_delivery",
+        "code_len",
+        "code_ttl_minutes",
+        "link_ttl_minutes",
+        "html_template"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/settings/server/email/test",
+      "status": "implemented",
+      "responseType": "SendTestEmailResponseDto",
+      "responseFields": [
+        "sent",
+        "to"
+      ],
+      "requestType": "SendTestEmailRequest",
+      "requestFields": [
+        "to"
       ]
     },
     {
