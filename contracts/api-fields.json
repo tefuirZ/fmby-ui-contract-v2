@@ -3060,6 +3060,12 @@
         "path",
         "path_label",
         "description",
+        "note",
+        "rate_config",
+        "sidecar_nfo",
+        "sidecar_subtitle",
+        "sidecar_poster",
+        "visibility_rule",
         "capabilities",
         "linked_libraries",
         "last_checked_at"
@@ -3097,7 +3103,13 @@
         "config_json",
         "status",
         "capabilities",
-        "path_policies"
+        "path_policies",
+        "note",
+        "rate_config",
+        "sidecar_nfo",
+        "sidecar_subtitle",
+        "sidecar_poster",
+        "visibility_rule"
       ]
     },
     {
@@ -3160,7 +3172,13 @@
         "config_json",
         "status",
         "capabilities",
-        "path_policies"
+        "path_policies",
+        "note",
+        "rate_config",
+        "sidecar_nfo",
+        "sidecar_subtitle",
+        "sidecar_poster",
+        "visibility_rule"
       ]
     },
     {
@@ -3241,7 +3259,13 @@
         "mount_type",
         "config_hash",
         "verified_at",
-        "status"
+        "status",
+        "note",
+        "rate_config",
+        "sidecar_nfo",
+        "sidecar_subtitle",
+        "sidecar_poster",
+        "visibility_rule"
       ],
       "requestType": null,
       "requestFields": null
@@ -5671,13 +5695,32 @@
     }
   ],
   "planned": [],
-  "exempt": [],
+  "exempt": [
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "DELETE",
+      "path": "/api/auth/logout",
+      "reason": "前端 auth/api.ts 调 DELETE /api/auth/logout；后端登出实际为多分支之一且 POST /api/auth/logout 正确路径已在清单。运行时功能完好，属前端侧方法字面差异（DISPATCH-REVERIFY 影响评估：良性）。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/users/batch/delete",
+      "reason": "前端全仓未实际调用该路径（DISPATCH-REVERIFY 实测），V1 亦无此端点；保留 exempt 防止误接。"
+    }
+  ],
   "known_drift": [
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "POST",
       "path": "/api/auth/identity/telegram/login/status",
       "reason": "前端硬编码具体 provider（telegram）而后端声明为 {provider} 模板（routes/mod.rs:185），运行时可正确匹配，仅契约字面比对差异；login/status 仅 Telegram 支持故前端不参数化。"
+    },
+    {
+      "rule": "FRONTEND_FIELD_EXTRA",
+      "method": "POST",
+      "path": "/api/manage/libraries/{*}/scan",
+      "reason": "前端类型 RawManageScanTriggerResponse 声明了 library_id/task_type/skipped_source_ids 三个清单外字段（前端类型冗余，后端不回传），非用户可见 bug（DISPATCH-REVERIFY 影响评估）。"
     }
   ]
 }
