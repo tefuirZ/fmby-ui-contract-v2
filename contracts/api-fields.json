@@ -134,6 +134,32 @@
     },
     {
       "method": "POST",
+      "path": "/api/auth/password-reset/telegram/status",
+      "status": "implemented",
+      "responseType": "PasswordResetStatusDto",
+      "responseFields": [
+        "expires_at",
+        "totp_required"
+      ],
+      "requestType": "PasswordResetStatusRequest",
+      "requestFields": [
+        "ticket"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/password-reset/telegram/complete",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "PasswordResetCompleteRequest",
+      "requestFields": [
+        "ticket",
+        "new_password"
+      ]
+    },
+    {
+      "method": "POST",
       "path": "/api/auth/setup",
       "status": "implemented",
       "responseType": "Value",
@@ -206,6 +232,73 @@
       "requestType": "UnbindRequest",
       "requestFields": [
         "provider"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/identity/{provider}/login/start",
+      "status": "implemented",
+      "responseType": "IdentityLoginStartResponse",
+      "responseFields": [
+        "provider",
+        "challenge_id",
+        "action",
+        "authorize_url",
+        "delivery_status",
+        "completion_token",
+        "message",
+        "expires_at"
+      ],
+      "requestType": "IdentityLoginStartRequest",
+      "requestFields": [
+        "email",
+        "redirect_uri"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/identity/{provider}/login/complete",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "IdentityLoginCompleteRequest",
+      "requestFields": [
+        "challenge_id",
+        "code",
+        "verification_code"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/identity/{provider}/login/status",
+      "status": "implemented",
+      "responseType": "IdentityLoginStatusResponse",
+      "responseFields": [
+        "verified",
+        "expires_at"
+      ],
+      "requestType": "IdentityLoginStatusRequest",
+      "requestFields": [
+        "challenge_id",
+        "completion_token"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/identity/{provider}/callback",
+      "status": "implemented",
+      "responseType": "IdentityCallbackCaptureResponse",
+      "responseFields": [
+        "provider",
+        "challenge_id",
+        "received_code",
+        "message"
+      ],
+      "requestType": "IdentityCallbackQuery",
+      "requestFields": [
+        "code",
+        "state",
+        "challengeId"
       ]
     },
     {
@@ -440,6 +533,15 @@
     {
       "method": "GET",
       "path": "/api/assets/items/{item_id}/images/{kind}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/assets/media-items/{item_id}/subtitles/{override_id}",
       "status": "implemented",
       "responseType": null,
       "responseFields": null,
@@ -972,6 +1074,24 @@
       "requestFields": [
         "new_password",
         "force_change"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/{id}/telegram-password-reset",
+      "status": "implemented",
+      "responseType": "TelegramPasswordResetReceiptDto",
+      "responseFields": [
+        "operation_id",
+        "user_id",
+        "username",
+        "replayed",
+        "delivery_status",
+        "payload_expires_at"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
       ]
     },
     {
