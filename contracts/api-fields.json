@@ -852,7 +852,12 @@
         "total_libraries",
         "total_mounts",
         "active_admin_count",
-        "uptime_secs"
+        "uptime_secs",
+        "kpis",
+        "alerts",
+        "environment_status",
+        "refreshed_at",
+        "recent_audit_logs"
       ],
       "requestType": null,
       "requestFields": null
@@ -867,7 +872,12 @@
         "total_libraries",
         "total_mounts",
         "active_admin_count",
-        "uptime_secs"
+        "uptime_secs",
+        "kpis",
+        "alerts",
+        "environment_status",
+        "refreshed_at",
+        "recent_audit_logs"
       ],
       "requestType": null,
       "requestFields": null
@@ -3135,6 +3145,31 @@
       "responseType": null,
       "responseFields": null,
       "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/qr-login",
+      "status": "implemented",
+      "responseType": "CredentialQrLoginDto",
+      "responseFields": [
+        "session_id",
+        "uid",
+        "qr_url",
+        "qr_image"
+      ],
+      "requestType": "Value",
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/yun139/qr-status",
+      "status": "implemented",
+      "responseType": "CredentialQrStatusDto",
+      "responseFields": [
+        "status"
+      ],
+      "requestType": "String, String",
       "requestFields": null
     },
     {
