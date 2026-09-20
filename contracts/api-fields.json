@@ -315,6 +315,57 @@
     },
     {
       "method": "GET",
+      "path": "/api/account/identity-bindings",
+      "status": "implemented",
+      "responseType": "AccountIdentityBindingsResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/account/identity-bindings/{provider}/start",
+      "status": "implemented",
+      "responseType": "StartIdentityFlowResponse",
+      "responseFields": [
+        "provider",
+        "challengeId",
+        "action",
+        "authorizeUrl",
+        "deliveryStatus",
+        "debugCode",
+        "completionToken",
+        "message",
+        "expiresAt"
+      ],
+      "requestType": "StartIdentityBindingRequest",
+      "requestFields": [
+        "email",
+        "redirectUri"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/account/identity-bindings/{provider}/complete",
+      "status": "implemented",
+      "responseType": "CompleteIdentityBindingResponse",
+      "responseFields": [
+        "binding"
+      ],
+      "requestType": "CompleteIdentityBindingRequest",
+      "requestFields": [
+        "challengeId",
+        "code",
+        "providerSubject",
+        "providerEmail",
+        "providerUsername",
+        "providerDisplayName"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/install/status",
       "status": "implemented",
       "responseType": "InstallStatusDto",
