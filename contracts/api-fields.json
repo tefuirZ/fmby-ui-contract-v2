@@ -2474,6 +2474,46 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/probe-tasks/{sourceId}",
+      "status": "implemented",
+      "responseType": "ManagedProbeTaskDetailResponse",
+      "responseFields": [
+        "task",
+        "video_streams",
+        "audio_streams",
+        "subtitle_streams"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/probe-tasks/{sourceId}/enqueue",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/probe-tasks/{sourceId}/refresh",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/naming-scrape",
       "status": "implemented",
       "responseType": "NamingScrapeView",
@@ -5280,30 +5320,6 @@
   "planned": [],
   "exempt": [],
   "known_drift": [
-    {
-      "rule": "FRONTEND_FIELD_EXTRA",
-      "method": "GET",
-      "path": "/api/manage/overview",
-      "reason": "形状漂移（真）：后端 OverviewDto{total_items,total_libraries,total_mounts,active_admin_count,uptime_secs} 5 平字段（bridges/manage.rs 无端口 → fail-closed）；前端 RawManageOverviewResponse 期待 18 嵌套字段（kpis/alerts/...）。前端 mapper 对缺字段有回落（不崩但 KPI 恒 0/不可用）。根因=后端 overview 端口未接。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "GET",
-      "path": "/api/manage/probe-tasks/{*}",
-      "reason": "契约仓 G-10：探测任务操作端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/probe-tasks/{*}/enqueue",
-      "reason": "契约仓 G-10：探测任务操作端点未实现。"
-    },
-    {
-      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
-      "method": "POST",
-      "path": "/api/manage/probe-tasks/{*}/refresh",
-      "reason": "契约仓 G-10：探测任务操作端点未实现。"
-    },
     {
       "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
       "method": "POST",
