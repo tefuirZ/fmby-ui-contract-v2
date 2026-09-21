@@ -3156,7 +3156,9 @@
         "sidecar_nfo",
         "sidecar_subtitle",
         "sidecar_poster",
-        "visibility_rule"
+        "visibility_rule",
+        "drive_id",
+        "site_id"
       ]
     },
     {
@@ -3225,7 +3227,9 @@
         "sidecar_nfo",
         "sidecar_subtitle",
         "sidecar_poster",
-        "visibility_rule"
+        "visibility_rule",
+        "drive_id",
+        "site_id"
       ]
     },
     {
@@ -3901,6 +3905,119 @@
         "categoryId",
         "pageSize"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/sync-jobs/{job_id}",
+      "status": "implemented",
+      "responseType": "UpstreamSyncJobDto",
+      "responseFields": [
+        "id",
+        "source_id",
+        "job_kind",
+        "status",
+        "category_ids",
+        "page_size",
+        "worker_count",
+        "result_summary",
+        "last_error_message",
+        "attempt_count",
+        "max_attempts",
+        "created_by",
+        "started_at",
+        "finished_at",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/emby/import/preview",
+      "status": "implemented",
+      "responseType": "UpstreamEmbySyncDto",
+      "responseFields": [
+        "source_id",
+        "page_size",
+        "category_count",
+        "imported_item_count",
+        "imported_variant_count",
+        "categories",
+        "synced_at"
+      ],
+      "requestType": "UpstreamEmbyImportRequest",
+      "requestFields": [
+        "categoryId",
+        "pageSize"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/upstreams/{id}/emby/import",
+      "status": "implemented",
+      "responseType": "UpstreamSyncJobDto",
+      "responseFields": [
+        "id",
+        "source_id",
+        "job_kind",
+        "status",
+        "category_ids",
+        "page_size",
+        "worker_count",
+        "result_summary",
+        "last_error_message",
+        "attempt_count",
+        "max_attempts",
+        "created_by",
+        "started_at",
+        "finished_at",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": "UpstreamEmbyImportRequest",
+      "requestFields": [
+        "categoryId",
+        "pageSize"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/emby/import/jobs",
+      "status": "implemented",
+      "responseType": "UpstreamSyncJobListDto",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/upstreams/{id}/emby/import/jobs/{job_id}",
+      "status": "implemented",
+      "responseType": "UpstreamSyncJobDto",
+      "responseFields": [
+        "id",
+        "source_id",
+        "job_kind",
+        "status",
+        "category_ids",
+        "page_size",
+        "worker_count",
+        "result_summary",
+        "last_error_message",
+        "attempt_count",
+        "max_attempts",
+        "created_by",
+        "started_at",
+        "finished_at",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "GET",
