@@ -1838,6 +1838,17 @@
     },
     {
       "method": "GET",
+      "path": "/api/playback/realtime/ws",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "PlaybackRealtimeQuery",
+      "requestFields": [
+        "scope"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/playback/stream/{variant_id}",
       "status": "implemented",
       "responseType": null,
