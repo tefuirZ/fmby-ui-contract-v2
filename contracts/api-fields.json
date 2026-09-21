@@ -156,6 +156,24 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/yun139/share-mounts/{mount_id}/shares",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/yun139/share-mounts/{mount_id}/shares",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/microsoft/auth/config-status",
       "status": "implemented",
       "responseType": "MicrosoftAppConfigStatusResponse",
