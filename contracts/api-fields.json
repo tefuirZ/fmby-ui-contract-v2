@@ -173,6 +173,24 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/yun139/share-mounts/{mount_id}/browse",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/share-mounts/{mount_id}/shares/{share_entry_id}/browse",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "GET",
       "path": "/api/manage/microsoft/auth/config-status",
       "status": "implemented",
