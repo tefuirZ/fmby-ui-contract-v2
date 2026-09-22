@@ -130,4 +130,4 @@
 错误：400 / 401 / 404 / 503。
 
 > 真实 115 账号的网络往返（列目录/直链播放）**只在你自己的环境 + 真账号**下测得，
-> 见 [`../../features/implementation-status.md`](../../features/implementation-status.md) §需人工验收。
+> 见 [`../../../features/implementation-status.md`](../../../features/implementation-status.md) §需人工验收。

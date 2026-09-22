@@ -16,15 +16,14 @@
 
 | 字段 | 值域 | 说明 |
 |---|---|---|
-| `theme` | — | ⚠️ **值域前后端不一致，见下** |
+| `theme` | `system` \| `dark` \| `light`（后端 `bridges/settings.rs:380`） | ✅ **已对齐（G-16 已修）** |
 | `poster_density` | `compact` \| `comfortable` \| `spacious` | 海报密度 |
 | `reduced_motion` | bool | 减少动效 |
 | `home_sections` | string[] | 首页分区顺序 |
 
-> ⚠️ **G-16（确凿 bug）**：后端校验 `theme ∈ ["dark","template","light"]`；前端类型是
-> `'system' | 'dark' | 'light'`。**两集合不等**——前端提交 `system` 会被后端 400。
-> 另外后端把「明暗模式（dark/light）」与「主题 id（template）」混在同一字段。
-> 主题作者**不要**依赖此字段做主题切换（host 的 `useTheme()` 才是主题真相）。
+> ✅ **G-16 已修复（2026-09-19）**：后端白名单现为 `["system","dark","light"]`
+> （`crates/fmby-v2-server/src/bridges/settings.rs:380`）——前端「跟随系统」不再 400；
+> 原 `"template"`（笔误）已移除。主题作者仍以 host `useTheme()` 为真相。
 
 > ⚠️ **G-01**：用户所选**主题 id（darkroom/template）**只存 localStorage，后端无该字段。
 > 跨端同步待后端补字段。

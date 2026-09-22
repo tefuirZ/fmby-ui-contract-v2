@@ -106,4 +106,4 @@
 | `GET/POST /api/manage/yun139/account-pools/{pool_id}/members` | 成员列表 / 添加 |
 | `DELETE /api/manage/yun139/account-pools/{pool_id}/members/{profile_id}` | 移除成员 |
 
-详见 [`yun139.md`](./yun139.md)。★ **段 A：池只存管，不参与取流调度（段 B）。**
+详见 [`yun139.md`](./yun139.md)。★ **段 A/段 B 均已实现（含 `lease`/`report`）。**

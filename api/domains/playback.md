@@ -25,8 +25,9 @@
 
 状态码：`200` / `304`（未修改）/ `404`（无此 blob）/ `415`（不支持的媒体类型）/ `416`（Range 不满足）。
 
-> 当前资产面只有这一个端点。前端契约里出现的 `/api/assets/items/{id}/images/{id}`、
-> `/api/assets/subtitles` 等**尚未实现**（见 implementation-status G-13）。
+> 资产面现为 **3 端点**：`/api/assets/{blob_id}` + `/api/assets/items/{item_id}/images/{kind}`
+> + `/api/assets/media-items/{item_id}/subtitles/{override_id}`（后两者**已实现**）；
+> `/api/assets/libraries/{id}/images/{id}` 仍未实现（G-13）。
 
 ---
 

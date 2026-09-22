@@ -80,7 +80,7 @@ skin（apps/themes/<id>，可插拔）
 
 ## 下一步
 
-- 想动手做主题 → [`../development/getting-started.md`](../development/getting-started.md)
+- 想动手做主题 → （开发指南 `development/` 待补）
 - 想看有哪些页面 → [`../features/routes.md`](../features/routes.md)
 - 想看 API 细节 → [`../api/README.md`](../api/README.md)
 - 想看架构 → [`02-architecture.md`](./02-architecture.md)

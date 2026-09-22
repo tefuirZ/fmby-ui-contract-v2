@@ -81,7 +81,7 @@
 | # | 问题 | 状态（2026-09-18 核对） | 影响 |
 |---|---|---|---|
 | **G-01** 🟡 | 用户所选**主题 id** 跨端持久化 | 🟡 **部分**：`PUT /api/settings/user/appearance` 已实现（routes/settings.rs:111；bridges/settings.rs:199-240 KV `user.appearance.{user_id}`），但 `theme` 值域硬限 `["dark","template","light"]`（settings.rs one_of 校验）——**皮肤 manifest id（如 `darkroom`）存不进去**；主题 id 仍靠 localStorage。**已立卡 `THEME-VALUE-DOMAIN`（主仓 `ORCHESTRATION-INBOX.md`，P3 待派）** | 换设备/清缓存丢失皮肤选择 |
-| **G-16** ⚠️ | `appearance.theme` 前后端**值域不匹配**（后端 `["dark","template","light"]`，settings/models.rs:24-25 ThemeMode vs 前端 `'system'\|'dark'\|'light'`，settings/raw-types.ts:36） | ⛔ 仍未对齐 | 用户选「跟随系统」必被 400；语义混淆 |
+| **G-16** ✅ | `appearance.theme` 值域**已对齐**（后端 `["system","dark","light"]`，`bridges/settings.rs:380`） | ✅ **已修复（2026-09-19）** | 前端「跟随系统」不再 400 |
 
 #### A2. 鉴权 / 用户
 
@@ -97,7 +97,7 @@
 |---|---|---|
 | G-05 | 条目级操作面 | ✅ **已实现**（16 条子路由全 implemented：artwork、artwork/{overrideId}、metadata、metadata/reset、refresh-metadata、scan、scrape、scrape/refresh、sources/{sourceId}、subtitles、subtitles/{overrideId}、pipeline、provider-search、identify、identity/manual-match、visibility/{state}；routes/mod.rs:633-685 + media_metadata.rs:474-504；卡片 CRUD-MEDIA-METADATA merge fa8e952d/daecac96、CRUD-MEDIA-SCRAPE merge aaf839ee、CRUD-MEDIA-IDENTITY merge f5b227fe） |
 | G-08 | `/api/manage/libraries/{id}/scan`、`/api/manage/scans` | 🟡 **部分**：`{id}/scan` 触发已实现（SCAN-TRIGGER-B2，routes/scan_trigger.rs；契约重生成 28789373）；`/api/manage/scans` 扫描列表仍无（api-fields 无 + routes 无） |
-| G-10 | `/api/manage/probe-tasks/{id}`、`/{id}/enqueue`、`/{id}/refresh` | ⛔ **未实现**（api-fields 与 routes 均只有列表 `GET /manage/probe-tasks` 与创建 POST，routes/mod.rs:746-748；`{id}` 子路径零命中） |
+| G-10 | `/api/manage/probe-tasks/{id}`、`/{id}/enqueue`、`/{id}/refresh` | ✅ **已实现**（api-fields 3 端点 implemented，PROBE-TASKS-OPS 卡落地） |
 | G-12 | — | ✅ pipeline 详情已实现（`/api/manage/media-items/{id}/pipeline`，routes/mod.rs:643） |
 
 #### A4. 挂载 / 资产 / 注册码 / 其他
@@ -105,8 +105,8 @@
 | # | 端点 | 状态（2026-09-18 核对） |
 |---|---|---|
 | G-09 | `/api/manage/mounts/{id}/validate`、`/{id}/refresh-access` | ✅ **已实现**（CRUD-MOUNTS merge 1c35df09；routes/mod.rs:354-358；语义：validate=只读探活+审计、refresh-access 能力位真探活/noop；VERIFY-SEMANTICS ba666446 起 verify=真探活+落状态） |
-| G-11 | `/api/manage/registration-codes/{id}`、`/{id}/status`、`/batches/{id}`、`/batch/delete` | 🟡 **部分**：`{id}` PATCH+DELETE、`{id}/status` PATCH 已实现（REG-CODES-B merge 70854d8d，routes/mod.rs:330-338）；`/batches/{id}`、`/batch/delete` 仍无（api-fields/routes 零命中） |
-| G-13 | `/api/assets`、`/api/assets/items/{id}/images/{id}`、`/api/assets/libraries/{id}/images/{id}`、`/api/assets/subtitles` | ⛔ **未实现**（api-fields/routes 仍只有 `/api/assets/{blob_id}`） |
+| G-11 | `/api/manage/registration-codes/{id}`、`/{id}/status`、`/batches/{id}`、`/batch/delete` | ✅ **已实现**（api-fields 7 端点 implemented：`{id}` PATCH+DELETE、`{id}/status` PATCH、`batches/{id}` PATCH、`batch/delete` POST） |
+| G-13 | `/api/assets`、assets items images、assets subtitles | 🟡 **部分已实现**：`/api/assets/{blob_id}` + `/api/assets/items/{item_id}/images/{kind}` + `/api/assets/media-items/{item_id}/subtitles/{override_id}` implemented；`/api/assets`（列表）、`/api/assets/libraries/{id}/images/{id}` 仍未实现 |
 | G-14 | `/api/manage/advanced` | ✅ **已实现**（MANAGE-ADVANCED merge bbab7e29：settings 组 7 项真值直出；`security.revoked_sessions` 诚实省略——V2 吊销=物理 DELETE 无行可数，前端已回落「—」，见 fmby-web MANAGE-ADVANCED handoff） |
 | G-17 | `/api/manage/yun139/*` **前端接线** | 🟡 维持：后端段 A（11 端点）implemented（api-fields）；**前端页面与交互待用户接手**（fmby-web main 无 yun139 页面，grep 零命中） |
 | G-06 | ⚠️ **危险操作确认口径不一致**：后端 `?confirmed=true` vs 前端 body `confirm_action` | ✅ **已收口**：前端统一 `?confirmed=true`（fmby-web api.ts 14 处 `params:{confirmed:true}`；后端 confirm-gate 闸 PASSED——前端危险写调用均发 params.confirmed；fix/fe-confirm-registration 已合入） |
@@ -155,7 +155,7 @@
 | 7 | 139 真凭据（authorization/cookie） | 段 A：档案创建/重新授权后**凭据可被 139 侧接受**（本卡只验密封与存管，未验 139 上游接受性） |
 | 8 | 139 池调度（段 B） | 取流按池策略选号 / 租借 / 冷却 / 失败计数生效 |
 
-详见 [`../acceptance/functional.md`](../acceptance/functional.md) §真实环境验收。
+详见（验收清单 `acceptance/` 待补）§真实环境验收。
 
 ---
 
