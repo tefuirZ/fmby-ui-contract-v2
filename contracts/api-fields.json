@@ -953,6 +953,24 @@
     },
     {
       "method": "POST",
+      "path": "/api/manage/pan115/previews/{preview_id}/browse",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/share-items/browse",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
       "path": "/api/manage/pan115/share-mounts/{mount_id}/qr-login",
       "status": "implemented",
       "responseType": "CredentialQrLoginDto",
