@@ -41,7 +41,7 @@
 | `Play` | 播放 | `/playback/*` |
 | `ManageAccess` | 用户 / 权限 / 注册码 / 积分 | `/manage/users*`、`/manage/role-templates*`、`/manage/registration-codes*`、`/manage/rewards*` |
 | `ManageLibrary` | 媒体库 / 合集 / 命名 / 来源 | `/manage/libraries*`、`/manage/mounts*`、`/manage/collections*`、`/manage/naming-*`、`/manage/media-items*`、`/manage/pan115/*` |
-| `ManageMount` | 挂载独立管理位 | 预留 |
+| `ManageMount` | 挂载/凭据独立管理位（115 账号·图床、139 账号） | ✅ 使用中 |
 | `ManageSettings` | 站点 / 密钥 / 授权 / telegram 配置 | `/manage/secrets/*`、`/manage/license/*`、`/manage/telegram-bot/*`、`/settings/server/*`、`/admin/site-settings` |
 | `DangerousAction` | 危险删除（叠加 `?confirmed=true`） | `DELETE /manage/**/{id}`、`DELETE /admin/media/{id}` |
 | `ViewAudit` | 审计 / 日志只读 | `/manage/audit-logs`、`/manage/runtime-logs`、`/admin/audit` |

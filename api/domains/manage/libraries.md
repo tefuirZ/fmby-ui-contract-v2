@@ -25,7 +25,7 @@
 | `GET /api/manage/media-items/{id}/pipeline` | 处理管道 → `RawManagedMediaItemPipelineRecord` |
 
 > 前端契约里出现的 `/{id}/artwork`、`/{id}/metadata`、`/{id}/scrape`、`/{id}/scan`、
-> `/{id}/subtitles`、`/{id}/sources/{id}` 等**子资源端点尚未实现**（G-05）。
+> ✅ 原记「子资源端点尚未实现（G-05）」**已过时**：`/{id}/artwork`、`/{id}/metadata`、`/{id}/scrape`、`/{id}/scan`、`/{id}/subtitles`、`/{id}/sources/{id}` 等**已实现**（api-fields `/api/manage/media-items` 23 端点）。
 
 ---
 
@@ -36,7 +36,7 @@
 | `GET /api/manage/probe-tasks` | 列表 |
 | `POST /api/manage/probe-tasks` | 创建 |
 
-> 前端契约里 `/{id}`、`/{id}/enqueue`、`/{id}/refresh` **未实现**（G-10）。
+> ✅ probe-tasks `/{id}`、`/{id}/enqueue`、`/{id}/refresh` **已实现**（api-fields 3 端点 implemented；原 G-10 登记已过时）。
 
 ---
 

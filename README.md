@@ -13,10 +13,10 @@
 | `api/` | API 契约文档（按域拆分，人类可读） |
 | `features/` | 功能清单 + 实现进度（含未实现项登记） |
 | `overview/` | 架构与运行模型 |
-| `skin-package/` | 主题包规范 |
-| `design/` | 设计规范（tokens/响应式/a11y） |
-| `development/` | 开发指南 |
-| `acceptance/` | 验收清单 |
+| `skin-package/` | 主题包规范（**规划中，当前空**） |
+| `design/` | 设计规范（tokens/响应式/a11y）（**规划中，当前空**） |
+| `development/` | 开发指南（**规划中，当前空**） |
+| `acceptance/` | 验收清单（**规划中，当前空**） |
 
 ## 契约版本
 

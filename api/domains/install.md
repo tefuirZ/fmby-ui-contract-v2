@@ -29,5 +29,5 @@
 
 安装页（`/install`）：读 status → 若未安装则展示探测表单。探测成功后进入初始化流程。
 
-> **注意**：注册 / 初始化向导的完整流程（`/api/auth/setup`、`/api/auth/register`）
-> **尚未实现**，见 [`../../features/implementation-status.md`](../../features/implementation-status.md) G-02。
+> **注意**：后端端点 `POST /api/auth/setup`、`POST /api/auth/register` **已实现**（api-fields
+> implemented）；**前端注册/初始化页**仍缺（见 [`../../features/implementation-status.md`](../../features/implementation-status.md) G-02）。

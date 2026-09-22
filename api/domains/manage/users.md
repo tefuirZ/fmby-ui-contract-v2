@@ -16,7 +16,7 @@
 | `PATCH /api/manage/users/{id}/status` | 启用/禁用 → 204 |
 
 > 前端契约里 `/{id}/reset-password`、`/{id}/approve-registration`、`/{id}/reject-registration`、
-> `/{id}/login-risk/reset`、`/batch/{delete,disable,update}`、`/login-risk/ip/reset` **未实现**（G-04）。
+> ✅ 原记「`/{id}/reset-password`…、`/batch/{delete,disable,update}` 未实现（G-04）」**已过时**：这些端点**已实现**（api-fields `/api/manage/users` 15 端点；V2 落地名为 `batch/permanent-delete`）。
 
 ---
 
@@ -37,7 +37,7 @@
 | `GET /api/manage/registration-codes` | 列表 |
 | `POST /api/manage/registration-codes` | 创建（批量/单个） |
 
-> 前端契约里 `/{id}`、`/{id}/status`、`/batches/{id}`、`/batch/delete` **未实现**（G-11）。
+> ✅ 注册码 `/{id}`、`/{id}/status`、`/batches/{id}`、`/batch/delete` **已实现**（api-fields 7 端点 implemented；原 G-11 登记已过时）。
 
 ---
 

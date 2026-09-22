@@ -89,6 +89,6 @@ export default entry;
 
 ## 运维视角
 
-- 主题静态资源由后端随 host 一起构建发布（当前形态）；运行时上传主题包为**规划中**
-- 站点管理员目前不能在后端切换「全局默认主题」——默认主题是构建期常量
+- 主题静态资源由后端随 host 一起构建发布；**运行时安装/启用主题包已实现**（`POST /api/site/themes/install`、`POST /api/site/themes/{id}/enable`）
+- 站点管理员**可在后端切换全局默认主题**（`POST /api/site/themes/{id}/enable`）；构建期 `DEFAULT_THEME_ID` 为缺省
   （`DEFAULT_THEME_ID`），用户级切换在浏览器端
