@@ -4747,6 +4747,76 @@
       ]
     },
     {
+      "method": "GET",
+      "path": "/api/manage/ai-interventions/threads",
+      "status": "implemented",
+      "responseType": "AiInterventionThread",
+      "responseFields": null,
+      "requestType": "ThreadListQuery",
+      "requestFields": [
+        "limit",
+        "offset"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/ai-interventions/media/{id}",
+      "status": "implemented",
+      "responseType": "ThreadDetail",
+      "responseFields": [
+        "thread",
+        "messages",
+        "runs"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/ai-interventions/media/{id}/session/open",
+      "status": "implemented",
+      "responseType": "AiInterventionThread",
+      "responseFields": null,
+      "requestType": "OpenSessionBody",
+      "requestFields": [
+        "preferred_skill_key"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/ai-interventions/media/{id}/apply",
+      "status": "implemented",
+      "responseType": "AiInterventionThread",
+      "responseFields": null,
+      "requestType": "ApplyBody",
+      "requestFields": [
+        "session_id"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/ai-interventions/session/message",
+      "status": "implemented",
+      "responseType": "AiInterventionSessionMessage",
+      "responseFields": null,
+      "requestType": "SendMessageBody",
+      "requestFields": [
+        "session_id",
+        "message"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/ai-interventions/session/close",
+      "status": "implemented",
+      "responseType": "AiInterventionThread",
+      "responseFields": null,
+      "requestType": "CloseSessionBody",
+      "requestFields": [
+        "session_id"
+      ]
+    },
+    {
       "method": "POST",
       "path": "/api/manage/ai-interventions/media/{id}/suggest",
       "status": "implemented",
