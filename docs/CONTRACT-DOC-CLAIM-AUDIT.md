@@ -166,33 +166,31 @@ python3 -c "import json;d=json.load(open('contracts/api-fields.json'));print(len
 
 ---
 
-## §6 已直接修改的文件清单（维护中文档）+ 残留
+## §6 需处理清单（分派登记）
 
-**已直接改（15 文件）**（均文档层；**未动 `contracts/api-fields.json`**）：
+### 6.1 已直接改完（15 文件；本报告同批提交）
+`README.md`、`api/README.md`、`api/auth.md`、`api/domains/{install,playback,settings}.md`、
+`api/domains/manage/{README,libraries,mounts,users,yun139}.md`、
+`features/{README,implementation-status}.md`、`overview/{01-introduction,03-runtime-model}.md`
+（死链 17 处一并修复，复检 remaining dangling = 0）。
 
-| 文件 | 修了什么 |
-|---|---|
-| `api/domains/settings.md` | G-16 值域已对齐（后端 `settings.rs:380`） |
-| `features/implementation-status.md` | G-16/G-10/G-11/G-13 状态纠正 |
-| `api/domains/manage/libraries.md` | G-05 子资源、G-10 probe-tasks 已实现 |
-| `api/domains/manage/users.md` | G-04 用户增强、G-11 注册码子路径已实现 |
-| `api/domains/playback.md` | 资产面 3 端点（items images / media-items subtitles 已实现） |
-| `api/domains/install.md` | G-02 setup/register：后端已实现（前端页仍缺） |
-| `features/README.md` | media-reviews / upstreams / pan115-imghost → 后端已实现 |
-| `api/domains/manage/yun139.md` | 端点数 20；段 B（lease/report）/扫码/挂载浏览已实现 |
-| `api/domains/manage/README.md` | 139 段 A/段 B 均已实现 |
-| `api/auth.md` | `ManageMount` 预留 → 使用中（`auth.rs:94`） |
-| `overview/03-runtime-model.md` | 主题运行时安装/启用已实现 |
-| `README.md` | 结构表空目录标注「规划中，当前空」 |
-| `api/README.md` | 计数→368 基准；settings/server 6→14；yun139 11→20；**10 处死链改指存在文件** |
-| `features/README.md` | **4 处死链**改相对路径 |
-| `api/domains/manage/mounts.md` | **1 处死链**相对深度修正 |
+### 6.2 需前端接（后端已实现、前端页仍缺 —— 属前端仓 fmby-web）
+| 项 | 后端状态（本仓/清单证据） | 前端缺口 |
+|---|---|---|
+| 注册 / 初始化页 | `POST /api/auth/register`、`/api/auth/setup` implemented | host 无 `/register`、`/setup` 页（grep 0） |
+| 人物合集页 | v1 有 `/people/:id` | v2 前端未实现 |
+| 115 图床页 | `POST/GET /api/manage/pan115/imghost/*` 8 端点 implemented | `/manage/site/tools/pan115-imghost` 页未实现 |
+| Developer API 页 | `GET/POST/DELETE /api/admin/api-tokens` implemented | 前端页未实现 |
+| 审核工单 / 上游源 / 微软授权 / 系统关于 页 | 后端 `/media-reviews` 6、`/upstreams` 32、`/microsoft` 24 端点 implemented | 前端页未实现 |
 
-**新增**：`docs/CONTRACT-DOC-CLAIM-AUDIT.md`（本报告）。
+### 6.3 需主代理裁决 / 三方对账口径（本卡**未跑** `--write`）
+> 注意：**契约清单事实上已与后端一致**（`CONTRACT SYNC PASSED`，368 端点）。以下仅列「不确定是否应纳入清单/对账口径」的项：
+1. **`/api/v1/*` 开放 API 面**：后端存在挂载点 `crates/fmby-v2-server/src/factory/interfaces.rs:961`（`nest("/api/v1", api_v1)`），但**清单 368 端点不含任何 `/api/v1/*`**；清单 `note` 自述覆盖「一方 WebUI 面」。→ **open API 面是否应纳入契约清单，交主代理裁决**。
+2. **闸 WARN「48 个映射后域类型未做字段级对账」**：是否升级为字段级对账，交主代理。
 
-**死链**：17 处已全部修复（复检 remaining dangling = 0）。
+### 6.4 需后端卡（真缺口，非文档问题）
+- `/api/assets/libraries/{id}/images/{id}`、`/api/assets`（列表）——清单与后端**均无**（G-13 残留）；是否规划交主代理。
+- `/api/manage/yun139/.../transfers/*`（139 转存）——清单无；对应 **V2 仓**决策 `S5-YUN139-TRANSFER`（139 转存要做）——**跨仓引用，不在 V2 闸覆盖范围**。
 
-**残留（需主代理/前端）**：
-- 前端页面态（`/register`、`people/:id`、pan115-imghost 页、Developer API 页）属**前端待接**，非后端未实现——本文档已注明。
-- `api-fields.json` endpoints 段仍由主代理统一 `--write` 重生成（本卡只读）。
-- 字段级对账（闸 WARN: 48 映射后域类型）未做。
+### 6.5 交主代理裁决（拿不到证据）
+- 无：本卡所有结论均有清单 `method+path` 或后端 `file:line` 证据。
