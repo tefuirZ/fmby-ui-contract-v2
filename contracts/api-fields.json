@@ -191,6 +191,60 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/yun139/share-links/browse",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/previews",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/previews/{preview_id}/browse",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/yun139/share-mounts/{mount_id}/transfers",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/share-mounts/{mount_id}/transfers/prepare",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/transfers/{record_id}/playback-success",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "GET",
       "path": "/api/manage/microsoft/auth/config-status",
       "status": "implemented",
@@ -3133,7 +3187,8 @@
         "visibility_rule",
         "capabilities",
         "linked_libraries",
-        "last_checked_at"
+        "last_checked_at",
+        "credential_status"
       ],
       "requestType": "ManageMountsQuery",
       "requestFields": [
@@ -3158,7 +3213,8 @@
         "capability_state",
         "path_policies",
         "linked_sources",
-        "recent_scan_tasks"
+        "recent_scan_tasks",
+        "credential_status"
       ],
       "requestType": "ManagedMountCreateRequest",
       "requestFields": [
@@ -3212,7 +3268,8 @@
         "capability_state",
         "path_policies",
         "linked_sources",
-        "recent_scan_tasks"
+        "recent_scan_tasks",
+        "credential_status"
       ],
       "requestType": null,
       "requestFields": null
@@ -3230,7 +3287,8 @@
         "capability_state",
         "path_policies",
         "linked_sources",
-        "recent_scan_tasks"
+        "recent_scan_tasks",
+        "credential_status"
       ],
       "requestType": "ManagedMountUpdateRequest",
       "requestFields": [
@@ -3274,7 +3332,8 @@
         "capability_state",
         "path_policies",
         "linked_sources",
-        "recent_scan_tasks"
+        "recent_scan_tasks",
+        "credential_status"
       ],
       "requestType": null,
       "requestFields": null
@@ -3292,7 +3351,8 @@
         "capability_state",
         "path_policies",
         "linked_sources",
-        "recent_scan_tasks"
+        "recent_scan_tasks",
+        "credential_status"
       ],
       "requestType": null,
       "requestFields": null
@@ -3383,6 +3443,28 @@
       "requestType": "TriggerLibraryScanRequest",
       "requestFields": [
         "taskType"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/scans",
+      "status": "implemented",
+      "responseType": "ScanTaskListResponse",
+      "responseFields": [
+        "items",
+        "total",
+        "page",
+        "size"
+      ],
+      "requestType": "ScanListRequest",
+      "requestFields": [
+        "status",
+        "taskType",
+        "libraryId",
+        "mountId",
+        "librarySourceId",
+        "page",
+        "size"
       ]
     },
     {
@@ -4852,6 +4934,49 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/developer/api-tokens",
+      "status": "implemented",
+      "responseType": "DeveloperApiTokenListResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/developer/api-tokens/{tokenId}/revoke",
+      "status": "implemented",
+      "responseType": "DeveloperApiTokenDto",
+      "responseFields": [
+        "id",
+        "name",
+        "scopes",
+        "created_at"
+      ],
+      "requestType": "RevokeDeveloperApiTokenRequest",
+      "requestFields": [
+        "reason"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/developer/subjects",
+      "status": "implemented",
+      "responseType": "DeveloperApiSubjectListResponse",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "DeveloperApiSubjectQuery",
+      "requestFields": [
+        "q",
+        "page",
+        "pageSize"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/events",
       "status": "implemented",
       "responseType": "Value",
@@ -4967,6 +5092,22 @@
         "runtime",
         "dependencies",
         "warnings"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/system/storage-footprint",
+      "status": "implemented",
+      "responseType": "StorageFootprintResponse",
+      "responseFields": [
+        "backend",
+        "supported",
+        "reason",
+        "generated_at",
+        "postgres",
+        "file_search"
       ],
       "requestType": null,
       "requestFields": null
@@ -5164,6 +5305,18 @@
       "requestType": "TaskCenterActionPayload",
       "requestFields": [
         "action"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/task-center/actions/batch",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": "TaskCenterBatchActionPayload",
+      "requestFields": [
+        "action",
+        "targets"
       ]
     },
     {
@@ -5901,10 +6054,14 @@
       ],
       "requestType": "UpdateMediaItemMetadataRequest",
       "requestFields": [
+        "title",
+        "year",
         "sort_title",
         "overview",
         "community_rating",
-        "premiered"
+        "premiered",
+        "genres",
+        "studios"
       ]
     },
     {
