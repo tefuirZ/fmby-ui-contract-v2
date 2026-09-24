@@ -1715,6 +1715,17 @@
     },
     {
       "method": "GET",
+      "path": "/api/assets/image-proxy",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "ImageProxyQuery",
+      "requestFields": [
+        "url"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/assets/items/{item_id}/images/{kind}",
       "status": "implemented",
       "responseType": null,
