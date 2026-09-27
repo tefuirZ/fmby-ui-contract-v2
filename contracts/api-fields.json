@@ -2435,6 +2435,35 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/libraries/deletions",
+      "status": "implemented",
+      "responseType": "ManagedLibraryDeleteTaskDto",
+      "responseFields": [
+        "library_id",
+        "library_name",
+        "library_type",
+        "status",
+        "message",
+        "attempt_count",
+        "max_attempts",
+        "next_retry_at",
+        "last_error_code",
+        "last_error_message",
+        "requested_by_user_id",
+        "requested_by_username",
+        "created_at",
+        "started_at",
+        "finished_at",
+        "updated_at"
+      ],
+      "requestType": "LibraryDeleteTasksQuery",
+      "requestFields": [
+        "page",
+        "pageSize"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/libraries",
       "status": "implemented",
       "responseType": "ManagedLibraryRecord",
@@ -2520,6 +2549,46 @@
       "requestFields": [
         "confirmed"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/libraries/{id}/delete-status",
+      "status": "implemented",
+      "responseType": "ManagedLibraryDeleteStatusDto",
+      "responseFields": [
+        "library_id",
+        "library_name",
+        "status",
+        "message",
+        "last_error_code",
+        "last_error_message",
+        "created_at",
+        "started_at",
+        "finished_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/libraries/{id}/delete/retry",
+      "status": "implemented",
+      "responseType": "ManagedLibraryDeleteStatusDto",
+      "responseFields": [
+        "library_id",
+        "library_name",
+        "status",
+        "message",
+        "last_error_code",
+        "last_error_message",
+        "created_at",
+        "started_at",
+        "finished_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "GET",
@@ -4336,6 +4405,33 @@
       ]
     },
     {
+      "method": "GET",
+      "path": "/api/manage/users/expiry-notifications/settings",
+      "status": "implemented",
+      "responseType": "UserExpiryNotificationSettingsDto",
+      "responseFields": [
+        "enabled",
+        "threshold_days"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/users/expiry-notifications/settings",
+      "status": "implemented",
+      "responseType": "UserExpiryNotificationSettingsDto",
+      "responseFields": [
+        "enabled",
+        "threshold_days"
+      ],
+      "requestType": "UserExpiryNotificationSettingsDto",
+      "requestFields": [
+        "enabled",
+        "threshold_days"
+      ]
+    },
+    {
       "method": "POST",
       "path": "/api/rewards/media-requests",
       "status": "implemented",
@@ -5844,7 +5940,7 @@
     {
       "method": "GET",
       "path": "/api/admin/tasks",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "TaskItemDto",
       "responseFields": [
         "id",
@@ -5857,7 +5953,7 @@
     {
       "method": "DELETE",
       "path": "/api/admin/media/{id}",
-      "status": "implemented",
+      "status": "stub",
       "responseType": null,
       "responseFields": null,
       "requestType": "ConfirmQuery",
@@ -5868,7 +5964,7 @@
     {
       "method": "GET",
       "path": "/api/admin/audit",
-      "status": "implemented",
+      "status": "stub",
       "responseType": "AuditItemDto",
       "responseFields": [
         "id",
