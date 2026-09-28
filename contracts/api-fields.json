@@ -1092,7 +1092,9 @@
       "requestType": "LoginRequest",
       "requestFields": [
         "username",
-        "password"
+        "password",
+        "captcha_id",
+        "captcha_code"
       ]
     },
     {
@@ -1115,6 +1117,21 @@
       ],
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/captcha",
+      "status": "implemented",
+      "responseType": "CaptchaChallengeResponse",
+      "responseFields": [
+        "captcha_id",
+        "image_data_url",
+        "expires_at"
+      ],
+      "requestType": "CaptchaQuery",
+      "requestFields": [
+        "scene"
+      ]
     },
     {
       "method": "POST",
@@ -1318,7 +1335,9 @@
         "code",
         "username",
         "password",
-        "display_name"
+        "display_name",
+        "captcha_id",
+        "captcha_code"
       ]
     },
     {
