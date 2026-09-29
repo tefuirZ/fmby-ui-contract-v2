@@ -1754,6 +1754,24 @@
     },
     {
       "method": "GET",
+      "path": "/api/assets/collections/{collection_id}/images/{kind}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/assets/libraries/{library_id}/images/{kind}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/assets/media-items/{item_id}/subtitles/{override_id}",
       "status": "implemented",
       "responseType": null,
@@ -1810,7 +1828,46 @@
       "requestFields": null
     },
     {
+      "method": "DELETE",
+      "path": "/api/items/{id}/played",
+      "status": "implemented",
+      "responseType": "ItemPlayedActionDto",
+      "responseFields": [
+        "ok",
+        "item_id",
+        "action"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "GET",
+      "path": "/api/items/{id}/likes",
+      "status": "implemented",
+      "responseType": "ItemLikesDto",
+      "responseFields": [
+        "item_id",
+        "likes"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/items/{id}/likes",
+      "status": "implemented",
+      "responseType": "ItemLikesDto",
+      "responseFields": [
+        "item_id",
+        "likes"
+      ],
+      "requestType": "SetItemLikesRequest",
+      "requestFields": [
+        "likes"
+      ]
+    },
+    {
+      "method": "DELETE",
       "path": "/api/items/{id}/likes",
       "status": "implemented",
       "responseType": "ItemLikesDto",
@@ -2150,6 +2207,111 @@
         "status",
         "accountKind"
       ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/emby-import/preview",
+      "status": "implemented",
+      "responseType": "PreviewEmbyUsersImportResponse",
+      "responseFields": [
+        "users",
+        "summary"
+      ],
+      "requestType": "PreviewEmbyUsersImportRequest",
+      "requestFields": [
+        "source",
+        "include_disabled"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/emby-import",
+      "status": "implemented",
+      "responseType": "ImportEmbyUsersResponse",
+      "responseFields": [
+        "summary",
+        "results",
+        "audit_id"
+      ],
+      "requestType": "ImportEmbyUsersRequest",
+      "requestFields": [
+        "source",
+        "include_disabled",
+        "selected_emby_user_ids",
+        "collision_strategy",
+        "role_template_id",
+        "initial_password",
+        "force_password_change",
+        "confirm_action",
+        "session_confirmation",
+        "current_password"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/users/emby-import/jobs",
+      "status": "implemented",
+      "responseType": "EmbyUsersImportJobDto",
+      "responseFields": [
+        "id",
+        "status",
+        "source_kind",
+        "source_id",
+        "summary",
+        "results",
+        "error_message",
+        "audit_id",
+        "started_at",
+        "finished_at",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/users/emby-import/jobs",
+      "status": "implemented",
+      "responseType": "StartEmbyUsersImportJobResponse",
+      "responseFields": [
+        "job"
+      ],
+      "requestType": "ImportEmbyUsersRequest",
+      "requestFields": [
+        "source",
+        "include_disabled",
+        "selected_emby_user_ids",
+        "collision_strategy",
+        "role_template_id",
+        "initial_password",
+        "force_password_change",
+        "confirm_action",
+        "session_confirmation",
+        "current_password"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/users/emby-import/jobs/{job_id}",
+      "status": "implemented",
+      "responseType": "EmbyUsersImportJobDto",
+      "responseFields": [
+        "id",
+        "status",
+        "source_kind",
+        "source_id",
+        "summary",
+        "results",
+        "error_message",
+        "audit_id",
+        "started_at",
+        "finished_at",
+        "created_at",
+        "updated_at"
+      ],
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "POST",
@@ -2608,6 +2770,41 @@
       ],
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/libraries/{id}/cleanup-preview",
+      "status": "implemented",
+      "responseType": "LibraryCleanupPreviewDto",
+      "responseFields": [
+        "library_id",
+        "media_source_count",
+        "media_item_count",
+        "sidecar_asset_count",
+        "samples"
+      ],
+      "requestType": "CleanupQuery",
+      "requestFields": [
+        "allowed",
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/libraries/{id}/cleanup",
+      "status": "implemented",
+      "responseType": "LibraryCleanupResultDto",
+      "responseFields": [
+        "library_id",
+        "sources_deleted",
+        "nodes_deleted",
+        "unlocked_by"
+      ],
+      "requestType": "CleanupQuery",
+      "requestFields": [
+        "allowed",
+        "confirmed"
+      ]
     },
     {
       "method": "GET",
@@ -4950,6 +5147,41 @@
       ]
     },
     {
+      "method": "POST",
+      "path": "/api/manage/operations/media-reprocess",
+      "status": "implemented",
+      "responseType": "MediaReprocessTaskDto",
+      "responseFields": [
+        "id",
+        "scope_library_id",
+        "mode",
+        "status",
+        "cursor_media_item_id",
+        "cursor_source_id",
+        "batch_size",
+        "stats",
+        "requested_by_user_id",
+        "lease_owner",
+        "lease_token",
+        "lease_expires_at",
+        "last_error_code",
+        "last_error_message",
+        "created_at",
+        "started_at",
+        "finished_at",
+        "updated_at"
+      ],
+      "requestType": "MediaReprocessCreateRequest",
+      "requestFields": [
+        "mode",
+        "library_id",
+        "batch_size",
+        "confirm_action",
+        "session_confirmation",
+        "current_password"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/manage/operations/media-reprocess/{id}",
       "status": "implemented",
@@ -5322,6 +5554,106 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/operations/media-visibility-governance",
+      "status": "implemented",
+      "responseType": "GovernanceTaskDto",
+      "responseFields": [
+        "id",
+        "mode",
+        "status",
+        "restoreFromTaskId",
+        "cursorMediaItemId",
+        "batchSize",
+        "policyVersion",
+        "stats",
+        "requestedByUserId",
+        "leaseOwner",
+        "leaseToken",
+        "leaseExpiresAt",
+        "lastErrorCode",
+        "lastErrorMessage",
+        "createdAt",
+        "startedAt",
+        "finishedAt",
+        "updatedAt"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/operations/media-visibility-governance",
+      "status": "implemented",
+      "responseType": "GovernanceTaskDto",
+      "responseFields": [
+        "id",
+        "mode",
+        "status",
+        "restoreFromTaskId",
+        "cursorMediaItemId",
+        "batchSize",
+        "policyVersion",
+        "stats",
+        "requestedByUserId",
+        "leaseOwner",
+        "leaseToken",
+        "leaseExpiresAt",
+        "lastErrorCode",
+        "lastErrorMessage",
+        "createdAt",
+        "startedAt",
+        "finishedAt",
+        "updatedAt"
+      ],
+      "requestType": "GovernanceCreateRequest",
+      "requestFields": [
+        "mode",
+        "batchSize",
+        "policyVersion",
+        "restoreFromTaskId"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/operations/media-visibility-governance/{taskId}",
+      "status": "implemented",
+      "responseType": "GovernanceTaskDto",
+      "responseFields": [
+        "id",
+        "mode",
+        "status",
+        "restoreFromTaskId",
+        "cursorMediaItemId",
+        "batchSize",
+        "policyVersion",
+        "stats",
+        "requestedByUserId",
+        "leaseOwner",
+        "leaseToken",
+        "leaseExpiresAt",
+        "lastErrorCode",
+        "lastErrorMessage",
+        "createdAt",
+        "startedAt",
+        "finishedAt",
+        "updatedAt"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/operations/media-visibility-governance/{taskId}/cancel",
+      "status": "implemented",
+      "responseType": "GovernanceCancelResponse",
+      "responseFields": [
+        "cancelled"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/advanced",
       "status": "implemented",
       "responseType": "ManageAdvancedResponse",
@@ -5683,6 +6015,32 @@
         "from",
         "to"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/runtime-log-archives",
+      "status": "implemented",
+      "responseType": "ManagedRuntimeLogArchivesResponse",
+      "responseFields": [
+        "items",
+        "total",
+        "log_dir",
+        "retention_days"
+      ],
+      "requestType": "RuntimeLogArchivesQuery",
+      "requestFields": [
+        "page",
+        "pageSize"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/runtime-log-archives/{archiveId}/download",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "GET",
