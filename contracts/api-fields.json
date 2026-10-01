@@ -1311,7 +1311,7 @@
       "method": "POST",
       "path": "/api/auth/setup",
       "status": "implemented",
-      "responseType": "Value",
+      "responseType": null,
       "responseFields": null,
       "requestType": "SetupRequest",
       "requestFields": [
