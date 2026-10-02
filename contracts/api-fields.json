@@ -246,6 +246,33 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/yun139/accounts/{mount_id}/credentials",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/accounts/{mount_id}/browse",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/yun139/activate",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/microsoft/auth/config-status",
       "status": "implemented",
       "responseType": "MicrosoftAppConfigStatusResponse",
@@ -1588,6 +1615,18 @@
     },
     {
       "method": "GET",
+      "path": "/api/browse/libraries/home",
+      "status": "implemented",
+      "responseType": "LibraryListResponse",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/browse/libraries/{id}",
       "status": "implemented",
       "responseType": "LibraryDetailResponse",
@@ -1902,6 +1941,20 @@
         "total",
         "next_cursor",
         "has_more"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/collections/{id}",
+      "status": "implemented",
+      "responseType": "ManagedCollectionDetailDto",
+      "responseFields": [
+        "collection",
+        "members",
+        "rules",
+        "member_overrides"
       ],
       "requestType": null,
       "requestFields": null
@@ -2803,6 +2856,52 @@
       "requestType": "CleanupQuery",
       "requestFields": [
         "allowed",
+        "confirmed"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/libraries/{id}/media-reset-preview",
+      "status": "implemented",
+      "responseType": "LibraryMediaResetPreviewDto",
+      "responseFields": [
+        "library_id",
+        "library_name",
+        "media_item_count",
+        "media_source_count"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/libraries/{id}/media-reset",
+      "status": "implemented",
+      "responseType": "LibraryMediaResetResultDto",
+      "responseFields": [
+        "library_id",
+        "library_name",
+        "deleted_media_item_count",
+        "deleted_media_source_count"
+      ],
+      "requestType": "MediaResetQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/libraries/{id}/sources/{sourceId}/purge",
+      "status": "implemented",
+      "responseType": "LibrarySourcePurgeResultDto",
+      "responseFields": [
+        "library_id",
+        "source_id",
+        "library_name",
+        "deleted_media_source_count"
+      ],
+      "requestType": "LibrarySourcePurgeQuery",
+      "requestFields": [
         "confirmed"
       ]
     },
@@ -5654,6 +5753,39 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/migration/inspect",
+      "status": "implemented",
+      "responseType": "MigrationInspectResponse",
+      "responseFields": [
+        "count",
+        "currentVersion",
+        "entries"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/migration/export",
+      "status": "implemented",
+      "responseType": "MigrationExportResponse",
+      "responseFields": [
+        "entries"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/migration/import",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/advanced",
       "status": "implemented",
       "responseType": "ManageAdvancedResponse",
@@ -5904,6 +6036,15 @@
         "action",
         "targets"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/task-center/pipeline-gaps",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "GET",
