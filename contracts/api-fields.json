@@ -259,7 +259,7 @@
       "status": "implemented",
       "responseType": "Value",
       "responseFields": null,
-      "requestType": null,
+      "requestType": "Yun139OwnedBrowseRequest",
       "requestFields": null
     },
     {
@@ -268,7 +268,7 @@
       "status": "implemented",
       "responseType": "Value",
       "responseFields": null,
-      "requestType": null,
+      "requestType": "Yun139ActivateRequest",
       "requestFields": null
     },
     {
@@ -1944,6 +1944,25 @@
       ],
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/collections",
+      "status": "implemented",
+      "responseType": "CollectionsListResponse",
+      "responseFields": [
+        "items",
+        "total",
+        "page",
+        "page_size",
+        "has_more"
+      ],
+      "requestType": "CollectionsListQuery",
+      "requestFields": [
+        "page",
+        "pageSize",
+        "search"
+      ]
     },
     {
       "method": "GET",
