@@ -861,6 +861,24 @@
       "requestFields": null
     },
     {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/_debug/permanent-url/{sha1}",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/imghost/_debug/final-url/{sha1}",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "POST",
       "path": "/api/manage/pan115/qr-login",
       "status": "implemented",
@@ -1026,6 +1044,15 @@
     {
       "method": "POST",
       "path": "/api/manage/pan115/share-download-preview/create",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/previews",
       "status": "implemented",
       "responseType": null,
       "responseFields": null,
@@ -1576,13 +1603,7 @@
       "path": "/api/browse/roots",
       "status": "implemented",
       "responseType": "RootItemDto",
-      "responseFields": [
-        "id",
-        "title",
-        "kind",
-        "year",
-        "library_id"
-      ],
+      "responseFields": null,
       "requestType": "BrowseRootsQuery",
       "requestFields": [
         "libraryId",
@@ -1630,16 +1651,7 @@
       "path": "/api/browse/libraries/{id}",
       "status": "implemented",
       "responseType": "LibraryDetailResponse",
-      "responseFields": [
-        "library",
-        "hero_summary",
-        "items",
-        "total",
-        "page",
-        "page_size",
-        "next_cursor",
-        "has_more"
-      ],
+      "responseFields": null,
       "requestType": "LibraryDetailQuery",
       "requestFields": [
         "page",
@@ -1667,11 +1679,7 @@
       "path": "/api/browse/resume",
       "status": "implemented",
       "responseType": "ResumeResponse",
-      "responseFields": [
-        "items",
-        "next_cursor",
-        "has_more"
-      ],
+      "responseFields": null,
       "requestType": "BrowsePagedQuery",
       "requestFields": [
         "pageSize",
@@ -1684,11 +1692,7 @@
       "path": "/api/browse/recently-added",
       "status": "implemented",
       "responseType": "RecentlyAddedResponse",
-      "responseFields": [
-        "items",
-        "next_cursor",
-        "has_more"
-      ],
+      "responseFields": null,
       "requestType": "BrowsePagedQuery",
       "requestFields": [
         "pageSize",
@@ -1701,31 +1705,33 @@
       "path": "/api/browse/items/{id}",
       "status": "implemented",
       "responseType": "ItemDetailDto",
-      "responseFields": [
-        "id",
-        "title",
-        "kind",
-        "year",
-        "library_id",
-        "parent_id",
-        "children",
-        "variants"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/browse/search",
+      "status": "implemented",
+      "responseType": "BrowseSearchResponse",
+      "responseFields": [
+        "items",
+        "total"
+      ],
+      "requestType": "BrowseSearchQuery",
+      "requestFields": [
+        "q",
+        "limit",
+        "page_size",
+        "page"
+      ]
     },
     {
       "method": "GET",
       "path": "/api/search",
       "status": "implemented",
       "responseType": "RootItemDto",
-      "responseFields": [
-        "id",
-        "title",
-        "kind",
-        "year",
-        "library_id"
-      ],
+      "responseFields": null,
       "requestType": "SearchQuery",
       "requestFields": [
         "q",
@@ -1749,14 +1755,7 @@
       "path": "/api/recommendations/for-you",
       "status": "implemented",
       "responseType": "RecommendationItemDto",
-      "responseFields": [
-        "id",
-        "title",
-        "kind",
-        "year",
-        "library_id",
-        "reason"
-      ],
+      "responseFields": null,
       "requestType": "RecommendationsForYouQuery",
       "requestFields": [
         "limit"
@@ -1820,18 +1819,30 @@
     },
     {
       "method": "GET",
+      "path": "/api/assets/people/{person_id}/primary",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/assets/streams/{source_id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "StreamQuery",
+      "requestFields": [
+        "session"
+      ]
+    },
+    {
+      "method": "GET",
       "path": "/api/items/{id}",
       "status": "implemented",
       "responseType": "ItemDetailWebDto",
-      "responseFields": [
-        "item",
-        "children",
-        "related_items",
-        "versions",
-        "can_play",
-        "technical",
-        "metadata_extras"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -1840,12 +1851,7 @@
       "path": "/api/items/{id}/descendants",
       "status": "implemented",
       "responseType": "ItemDescendantsResponse",
-      "responseFields": [
-        "items",
-        "total",
-        "next_cursor",
-        "has_more"
-      ],
+      "responseFields": null,
       "requestType": "ItemDescendantsQuery",
       "requestFields": [
         "page",
@@ -1922,12 +1928,7 @@
       "path": "/api/items/people/{id}",
       "status": "implemented",
       "responseType": "PersonDetailDto",
-      "responseFields": [
-        "id",
-        "name",
-        "poster_key",
-        "item_count"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -1936,12 +1937,7 @@
       "path": "/api/items/people/{id}/items",
       "status": "implemented",
       "responseType": "ItemDescendantsResponse",
-      "responseFields": [
-        "items",
-        "total",
-        "next_cursor",
-        "has_more"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -1979,16 +1975,24 @@
       "requestFields": null
     },
     {
+      "method": "GET",
+      "path": "/api/collections/{id}/tracks/{track_key}",
+      "status": "implemented",
+      "responseType": "CollectionTrackResponse",
+      "responseFields": [
+        "collection_id",
+        "track",
+        "items"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "POST",
       "path": "/api/playback/resolve",
       "status": "implemented",
       "responseType": "PlaybackTargetDto",
-      "responseFields": [
-        "url_ref",
-        "kind",
-        "quality",
-        "container"
-      ],
+      "responseFields": null,
       "requestType": "PlaybackResolveRequest",
       "requestFields": [
         "variant_id"
@@ -2011,19 +2015,7 @@
       "path": "/api/playback/sessions",
       "status": "implemented",
       "responseType": "PlaybackSessionCreateDto",
-      "responseFields": [
-        "session_id",
-        "item_id",
-        "title",
-        "stream_url",
-        "mime_type",
-        "can_direct_play_in_browser",
-        "can_use_external_player",
-        "duration_seconds",
-        "active_source",
-        "audio_tracks",
-        "subtitle_tracks"
-      ],
+      "responseFields": null,
       "requestType": "PlaybackSessionCreateRequest",
       "requestFields": [
         "item_id"
@@ -2036,11 +2028,7 @@
       "responseType": null,
       "responseFields": null,
       "requestType": "PlaybackSessionProgressRequest",
-      "requestFields": [
-        "position_ticks",
-        "duration_ticks",
-        "is_completed"
-      ]
+      "requestFields": null
     },
     {
       "method": "POST",
@@ -2049,10 +2037,7 @@
       "responseType": null,
       "responseFields": null,
       "requestType": "PlaybackHeartbeatRequest",
-      "requestFields": [
-        "position_ticks",
-        "paused"
-      ]
+      "requestFields": null
     },
     {
       "method": "POST",
@@ -2061,11 +2046,7 @@
       "responseType": null,
       "responseFields": null,
       "requestType": "PlaybackSessionProgressRequest",
-      "requestFields": [
-        "position_ticks",
-        "duration_ticks",
-        "is_completed"
-      ]
+      "requestFields": null
     },
     {
       "method": "GET",
@@ -2200,18 +2181,7 @@
       "path": "/api/admin/overview",
       "status": "implemented",
       "responseType": "OverviewDto",
-      "responseFields": [
-        "total_items",
-        "total_libraries",
-        "total_mounts",
-        "active_admin_count",
-        "uptime_secs",
-        "kpis",
-        "alerts",
-        "environment_status",
-        "refreshed_at",
-        "recent_audit_logs"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -2220,18 +2190,7 @@
       "path": "/api/manage/overview",
       "status": "implemented",
       "responseType": "OverviewDto",
-      "responseFields": [
-        "total_items",
-        "total_libraries",
-        "total_mounts",
-        "active_admin_count",
-        "uptime_secs",
-        "kpis",
-        "alerts",
-        "environment_status",
-        "refreshed_at",
-        "recent_audit_logs"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -2662,53 +2621,58 @@
       ]
     },
     {
+      "method": "POST",
+      "path": "/api/manage/users/reports",
+      "status": "implemented",
+      "responseType": "ManagedUserReportDto",
+      "responseFields": [
+        "id",
+        "sort",
+        "status_filter",
+        "total_rows",
+        "total_pages",
+        "created_at",
+        "expires_at",
+        "reused_existing"
+      ],
+      "requestType": "CreateManagedUserReportRequest",
+      "requestFields": [
+        "sort",
+        "status",
+        "search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/users/reports/{report_id}/rows",
+      "status": "implemented",
+      "responseType": "ManagedUserReportPageDto",
+      "responseFields": [
+        "report",
+        "rows",
+        "next_sequence"
+      ],
+      "requestType": "ManagedUserReportRowsQuery",
+      "requestFields": [
+        "after_sequence",
+        "limit"
+      ]
+    },
+    {
       "method": "PUT",
       "path": "/api/manage/libraries/order",
       "status": "implemented",
       "responseType": "ManagedLibraryRecord",
-      "responseFields": [
-        "id",
-        "name",
-        "description",
-        "kind",
-        "type_label",
-        "item_count",
-        "total_items",
-        "status",
-        "visibility_label",
-        "updated_at",
-        "last_scan_at",
-        "sources",
-        "actual_sources"
-      ],
+      "responseFields": null,
       "requestType": "ReorderManagedLibrariesRequest",
-      "requestFields": [
-        "libraryIds"
-      ]
+      "requestFields": null
     },
     {
       "method": "GET",
       "path": "/api/manage/libraries/deletions",
       "status": "implemented",
       "responseType": "ManagedLibraryDeleteTaskDto",
-      "responseFields": [
-        "library_id",
-        "library_name",
-        "library_type",
-        "status",
-        "message",
-        "attempt_count",
-        "max_attempts",
-        "next_retry_at",
-        "last_error_code",
-        "last_error_message",
-        "requested_by_user_id",
-        "requested_by_username",
-        "created_at",
-        "started_at",
-        "finished_at",
-        "updated_at"
-      ],
+      "responseFields": null,
       "requestType": "LibraryDeleteTasksQuery",
       "requestFields": [
         "page",
@@ -2720,21 +2684,7 @@
       "path": "/api/manage/libraries",
       "status": "implemented",
       "responseType": "ManagedLibraryRecord",
-      "responseFields": [
-        "id",
-        "name",
-        "description",
-        "kind",
-        "type_label",
-        "item_count",
-        "total_items",
-        "status",
-        "visibility_label",
-        "updated_at",
-        "last_scan_at",
-        "sources",
-        "actual_sources"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -2743,32 +2693,16 @@
       "path": "/api/manage/libraries",
       "status": "implemented",
       "responseType": "ManagedLibraryDetailDto",
-      "responseFields": [
-        "library",
-        "source_bindings",
-        "access_grants",
-        "recent_scan_tasks"
-      ],
+      "responseFields": null,
       "requestType": "CreateManagedLibraryRequest",
-      "requestFields": [
-        "name",
-        "library_type",
-        "description",
-        "source_bindings",
-        "grant_user_ids"
-      ]
+      "requestFields": null
     },
     {
       "method": "GET",
       "path": "/api/manage/libraries/{id}",
       "status": "implemented",
       "responseType": "ManagedLibraryDetailDto",
-      "responseFields": [
-        "library",
-        "source_bindings",
-        "access_grants",
-        "recent_scan_tasks"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -2777,20 +2711,9 @@
       "path": "/api/manage/libraries/{id}",
       "status": "implemented",
       "responseType": "ManagedLibraryDetailDto",
-      "responseFields": [
-        "library",
-        "source_bindings",
-        "access_grants",
-        "recent_scan_tasks"
-      ],
+      "responseFields": null,
       "requestType": "UpdateManagedLibraryRequest",
-      "requestFields": [
-        "name",
-        "library_type",
-        "description",
-        "replace_source_bindings",
-        "replace_grant_user_ids"
-      ]
+      "requestFields": null
     },
     {
       "method": "DELETE",
@@ -2808,18 +2731,7 @@
       "path": "/api/manage/libraries/{id}/delete-status",
       "status": "implemented",
       "responseType": "ManagedLibraryDeleteStatusDto",
-      "responseFields": [
-        "library_id",
-        "library_name",
-        "status",
-        "message",
-        "last_error_code",
-        "last_error_message",
-        "created_at",
-        "started_at",
-        "finished_at",
-        "updated_at"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -2828,18 +2740,7 @@
       "path": "/api/manage/libraries/{id}/delete/retry",
       "status": "implemented",
       "responseType": "ManagedLibraryDeleteStatusDto",
-      "responseFields": [
-        "library_id",
-        "library_name",
-        "status",
-        "message",
-        "last_error_code",
-        "last_error_message",
-        "created_at",
-        "started_at",
-        "finished_at",
-        "updated_at"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -2848,13 +2749,7 @@
       "path": "/api/manage/libraries/{id}/cleanup-preview",
       "status": "implemented",
       "responseType": "LibraryCleanupPreviewDto",
-      "responseFields": [
-        "library_id",
-        "media_source_count",
-        "media_item_count",
-        "sidecar_asset_count",
-        "samples"
-      ],
+      "responseFields": null,
       "requestType": "CleanupQuery",
       "requestFields": [
         "allowed",
@@ -2866,12 +2761,7 @@
       "path": "/api/manage/libraries/{id}/cleanup",
       "status": "implemented",
       "responseType": "LibraryCleanupResultDto",
-      "responseFields": [
-        "library_id",
-        "sources_deleted",
-        "nodes_deleted",
-        "unlocked_by"
-      ],
+      "responseFields": null,
       "requestType": "CleanupQuery",
       "requestFields": [
         "allowed",
@@ -2883,12 +2773,7 @@
       "path": "/api/manage/libraries/{id}/media-reset-preview",
       "status": "implemented",
       "responseType": "LibraryMediaResetPreviewDto",
-      "responseFields": [
-        "library_id",
-        "library_name",
-        "media_item_count",
-        "media_source_count"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -2897,12 +2782,7 @@
       "path": "/api/manage/libraries/{id}/media-reset",
       "status": "implemented",
       "responseType": "LibraryMediaResetResultDto",
-      "responseFields": [
-        "library_id",
-        "library_name",
-        "deleted_media_item_count",
-        "deleted_media_source_count"
-      ],
+      "responseFields": null,
       "requestType": "MediaResetQuery",
       "requestFields": [
         "confirmed"
@@ -2913,12 +2793,7 @@
       "path": "/api/manage/libraries/{id}/sources/{sourceId}/purge",
       "status": "implemented",
       "responseType": "LibrarySourcePurgeResultDto",
-      "responseFields": [
-        "library_id",
-        "source_id",
-        "library_name",
-        "deleted_media_source_count"
-      ],
+      "responseFields": null,
       "requestType": "LibrarySourcePurgeQuery",
       "requestFields": [
         "confirmed"
@@ -3444,31 +3319,16 @@
       "path": "/api/manage/mounts/health",
       "status": "implemented",
       "responseType": "MountHealthListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
+      "responseFields": null,
       "requestType": "MountHealthQuery",
-      "requestFields": [
-        "status"
-      ]
+      "requestFields": null
     },
     {
       "method": "POST",
       "path": "/api/manage/mounts/{id}/probe",
       "status": "implemented",
       "responseType": "MountProbeDto",
-      "responseFields": [
-        "mount_id",
-        "probe_status",
-        "latency_ms",
-        "message",
-        "health_status",
-        "status_message",
-        "fault_kind",
-        "fault_title",
-        "fault_action"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -3809,40 +3669,16 @@
       "path": "/api/manage/mounts/batch/refresh-abnormal",
       "status": "implemented",
       "responseType": "BatchRefreshAbnormalMountsResponse",
-      "responseFields": [
-        "total",
-        "refreshed",
-        "active",
-        "unreachable",
-        "skipped",
-        "failed",
-        "results"
-      ],
+      "responseFields": null,
       "requestType": "BatchRefreshAbnormalMountsRequest",
-      "requestFields": [
-        "mount_ids",
-        "limit"
-      ]
+      "requestFields": null
     },
     {
       "method": "POST",
       "path": "/api/manage/mounts/{id}/verify",
       "status": "implemented",
       "responseType": "ManagedMountDto",
-      "responseFields": [
-        "id",
-        "name",
-        "mount_type",
-        "config_hash",
-        "verified_at",
-        "status",
-        "note",
-        "rate_config",
-        "sidecar_nfo",
-        "sidecar_subtitle",
-        "sidecar_poster",
-        "visibility_rule"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -4799,6 +4635,24 @@
       ]
     },
     {
+      "method": "GET",
+      "path": "/api/manage/users/direct-registration/settings",
+      "status": "implemented",
+      "responseType": "DirectRegistrationSettingsDto",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/manage/users/direct-registration/settings",
+      "status": "implemented",
+      "responseType": "DirectRegistrationSettingsDto",
+      "responseFields": null,
+      "requestType": "DirectRegistrationSettingsDto",
+      "requestFields": null
+    },
+    {
       "method": "POST",
       "path": "/api/rewards/media-requests",
       "status": "implemented",
@@ -5029,41 +4883,16 @@
       "path": "/api/manage/media-items",
       "status": "implemented",
       "responseType": "ManagedMediaItemsResponse",
-      "responseFields": [
-        "items",
-        "total"
-      ],
+      "responseFields": null,
       "requestType": "MediaItemsQuery",
-      "requestFields": [
-        "page",
-        "pageSize",
-        "keyword",
-        "libraryId",
-        "mediaType",
-        "sortBy",
-        "sortOrder"
-      ]
+      "requestFields": null
     },
     {
       "method": "GET",
       "path": "/api/manage/media-items/{id}",
       "status": "implemented",
       "responseType": "ManagedMediaItemDetailResponse",
-      "responseFields": [
-        "item",
-        "metadata_status",
-        "base_metadata",
-        "effective_metadata",
-        "remote_metadata",
-        "scraped_metadata",
-        "scraped_artworks",
-        "local_metadata_override",
-        "sources",
-        "remote_assets",
-        "artwork_overrides",
-        "subtitle_overrides",
-        "latest_metadata_raw_content"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -5083,14 +4912,7 @@
       "path": "/api/manage/media-items/{id}/pipeline",
       "status": "implemented",
       "responseType": "ManagedMediaItemPipelineDto",
-      "responseFields": [
-        "item_id",
-        "identify_task",
-        "identity_binding",
-        "scrape_task",
-        "current_metadata_source",
-        "review_status"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -5152,17 +4974,9 @@
       "path": "/api/manage/media-items/ratings/backfill",
       "status": "implemented",
       "responseType": "MediaRatingBackfillResponse",
-      "responseFields": [
-        "limit",
-        "scanned",
-        "updated",
-        "skipped",
-        "truncated"
-      ],
+      "responseFields": null,
       "requestType": "MediaRatingBackfillRequest",
-      "requestFields": [
-        "limit"
-      ]
+      "requestFields": null
     },
     {
       "method": "POST",
@@ -6066,30 +5880,24 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/task-center/person-metadata/historical-seeds/cancel",
+      "status": "implemented",
+      "responseType": "HistoricalSeedCancelResponse",
+      "responseFields": [
+        "cancelled_count"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "GET",
       "path": "/api/manage/sessions",
       "status": "implemented",
       "responseType": "ManagedSessionDto",
-      "responseFields": [
-        "id",
-        "user_id",
-        "username",
-        "display_name",
-        "client_info",
-        "ip_address",
-        "status",
-        "created_at",
-        "expires_at",
-        "last_activity_at",
-        "now_playing"
-      ],
+      "responseFields": null,
       "requestType": "ManagedSessionsQuery",
-      "requestFields": [
-        "status",
-        "userId",
-        "page",
-        "pageSize"
-      ]
+      "requestFields": null
     },
     {
       "method": "DELETE",
@@ -6107,49 +5915,18 @@
       "path": "/api/manage/audit-logs",
       "status": "implemented",
       "responseType": "ManagedAuditLogsResponse",
-      "responseFields": [
-        "items",
-        "total"
-      ],
+      "responseFields": null,
       "requestType": "AuditLogsQuery",
-      "requestFields": [
-        "page",
-        "pageSize",
-        "userId",
-        "action",
-        "requestId"
-      ]
+      "requestFields": null
     },
     {
       "method": "GET",
       "path": "/api/manage/runtime-logs",
       "status": "implemented",
       "responseType": "ManagedRuntimeLogsResponse",
-      "responseFields": [
-        "items",
-        "total",
-        "truncated",
-        "log_dir",
-        "available_targets"
-      ],
+      "responseFields": null,
       "requestType": "RuntimeLogsQuery",
-      "requestFields": [
-        "page",
-        "pageSize",
-        "level",
-        "target",
-        "search",
-        "method",
-        "path",
-        "client",
-        "ip",
-        "user",
-        "requestId",
-        "all",
-        "format",
-        "from",
-        "to"
-      ]
+      "requestFields": null
     },
     {
       "method": "GET",
@@ -6158,40 +5935,16 @@
       "responseType": null,
       "responseFields": null,
       "requestType": "RuntimeLogsQuery",
-      "requestFields": [
-        "page",
-        "pageSize",
-        "level",
-        "target",
-        "search",
-        "method",
-        "path",
-        "client",
-        "ip",
-        "user",
-        "requestId",
-        "all",
-        "format",
-        "from",
-        "to"
-      ]
+      "requestFields": null
     },
     {
       "method": "GET",
       "path": "/api/manage/runtime-log-archives",
       "status": "implemented",
       "responseType": "ManagedRuntimeLogArchivesResponse",
-      "responseFields": [
-        "items",
-        "total",
-        "log_dir",
-        "retention_days"
-      ],
+      "responseFields": null,
       "requestType": "RuntimeLogArchivesQuery",
-      "requestFields": [
-        "page",
-        "pageSize"
-      ]
+      "requestFields": null
     },
     {
       "method": "GET",
@@ -6656,7 +6409,8 @@
       "requestFields": [
         "name",
         "scopes",
-        "expires_at_ms"
+        "expires_at_ms",
+        "note"
       ]
     },
     {
@@ -6683,25 +6437,71 @@
       "requestFields": null
     },
     {
+      "method": "GET",
+      "path": "/api/admin/cas/drives",
+      "status": "implemented",
+      "responseType": "CasDriveConfigDto",
+      "responseFields": [
+        "provider_type",
+        "drive_ref",
+        "enabled",
+        "priority"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PUT",
+      "path": "/api/admin/cas/drives",
+      "status": "implemented",
+      "responseType": "CasDriveConfigDto",
+      "responseFields": [
+        "provider_type",
+        "drive_ref",
+        "enabled",
+        "priority"
+      ],
+      "requestType": "UpsertCasDriveConfigRequest",
+      "requestFields": [
+        "provider_type",
+        "drive_ref",
+        "enabled",
+        "priority"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/cas/fanout/{content_id}",
+      "status": "implemented",
+      "responseType": "CasFanoutStatusDto",
+      "responseFields": [
+        "content_id",
+        "drives"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/cas/reconcile",
+      "status": "implemented",
+      "responseType": "CasReconcileReportDto",
+      "responseFields": [
+        "report_id",
+        "source",
+        "identified",
+        "reconciled",
+        "generated_at_ms"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "POST",
       "path": "/api/manage/media-items/{id}/artwork",
       "status": "implemented",
       "responseType": "ManagedMediaItemDetailResponse",
-      "responseFields": [
-        "item",
-        "metadata_status",
-        "base_metadata",
-        "effective_metadata",
-        "remote_metadata",
-        "scraped_metadata",
-        "scraped_artworks",
-        "local_metadata_override",
-        "sources",
-        "remote_assets",
-        "artwork_overrides",
-        "subtitle_overrides",
-        "latest_metadata_raw_content"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -6734,21 +6534,7 @@
       "path": "/api/manage/media-items/{id}/subtitles",
       "status": "implemented",
       "responseType": "ManagedMediaItemDetailResponse",
-      "responseFields": [
-        "item",
-        "metadata_status",
-        "base_metadata",
-        "effective_metadata",
-        "remote_metadata",
-        "scraped_metadata",
-        "scraped_artworks",
-        "local_metadata_override",
-        "sources",
-        "remote_assets",
-        "artwork_overrides",
-        "subtitle_overrides",
-        "latest_metadata_raw_content"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     },
@@ -6766,28 +6552,9 @@
       "path": "/api/manage/media-items/{id}/subtitles/{overrideId}",
       "status": "implemented",
       "responseType": "ManagedMediaItemDetailResponse",
-      "responseFields": [
-        "item",
-        "metadata_status",
-        "base_metadata",
-        "effective_metadata",
-        "remote_metadata",
-        "scraped_metadata",
-        "scraped_artworks",
-        "local_metadata_override",
-        "sources",
-        "remote_assets",
-        "artwork_overrides",
-        "subtitle_overrides",
-        "latest_metadata_raw_content"
-      ],
+      "responseFields": null,
       "requestType": "UpdateMediaItemSubtitleOverrideRequest",
-      "requestFields": [
-        "language",
-        "is_active",
-        "is_default",
-        "sort_order"
-      ]
+      "requestFields": null
     },
     {
       "method": "DELETE",
@@ -6809,32 +6576,9 @@
       "path": "/api/manage/media-items/{id}/metadata",
       "status": "implemented",
       "responseType": "ManagedMediaItemDetailResponse",
-      "responseFields": [
-        "item",
-        "metadata_status",
-        "base_metadata",
-        "effective_metadata",
-        "remote_metadata",
-        "scraped_metadata",
-        "scraped_artworks",
-        "local_metadata_override",
-        "sources",
-        "remote_assets",
-        "artwork_overrides",
-        "subtitle_overrides",
-        "latest_metadata_raw_content"
-      ],
+      "responseFields": null,
       "requestType": "UpdateMediaItemMetadataRequest",
-      "requestFields": [
-        "title",
-        "year",
-        "sort_title",
-        "overview",
-        "community_rating",
-        "premiered",
-        "genres",
-        "studios"
-      ]
+      "requestFields": null
     },
     {
       "method": "POST",
@@ -6856,21 +6600,7 @@
       "path": "/api/manage/media-items/{id}/refresh-metadata",
       "status": "implemented",
       "responseType": "ManagedMediaItemDetailResponse",
-      "responseFields": [
-        "item",
-        "metadata_status",
-        "base_metadata",
-        "effective_metadata",
-        "remote_metadata",
-        "scraped_metadata",
-        "scraped_artworks",
-        "local_metadata_override",
-        "sources",
-        "remote_assets",
-        "artwork_overrides",
-        "subtitle_overrides",
-        "latest_metadata_raw_content"
-      ],
+      "responseFields": null,
       "requestType": null,
       "requestFields": null
     }
