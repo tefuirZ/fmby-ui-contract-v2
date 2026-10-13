@@ -1602,7 +1602,8 @@
       "responseType": "InstallDatabaseProbeDto",
       "responseFields": [
         "kind",
-        "reachable"
+        "reachable",
+        "error_code"
       ],
       "requestType": "InstallDatabaseProbeRequest",
       "requestFields": [
