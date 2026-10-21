@@ -18,6 +18,18 @@
 
 ## error_code 值域
 
+wire 值域为**两族并存**（真源 = 主仓 `fmby-v2-contracts/src/error_code.rs`）：
+
+- **基础错误族**（`AppError` 12 类直配，小写蛇形；`http/src/errors.rs` `error_code_of`）——下表；
+- **Coded 目录族**（`ErrorCode::as_slug()`，SCREAMING_SNAKE_CASE，201 slug，唯一真源
+  `error_code/slug.rs`，机械目录 `docs/plans/v2-dev/contracts/error-catalog.md`）——
+  全量值域见 **`api/errors.coded.generated.md`**（由
+  `scripts/generate-error-catalog.mjs` 从主仓 catalog 生成，`--check` 门模式，
+  **勿手改**；2026-10-21 快照 = 主仓 `126abf54a`，分布 400×95 / 401×11 / 403×11 /
+  404×21 / 409×22 / 413×3 / **429×3** / 500×5 / 501×1 / 502×5 / 503×23 / 504×1）。
+
+**基础错误族**：
+
 | error_code | HTTP | 含义 | message 是否脱敏 |
 |---|---|---|---|
 | `validation` | 400 | 入参不合法 | 原文（业务语义） |
