@@ -89,8 +89,37 @@
 | `DELETE /api/admin/media/{id}` | `DangerousAction` | 删媒体（危险） |
 | `GET /api/admin/audit` | `ViewAudit` | 审计（分页/过滤） |
 | `GET/PUT /api/admin/site-settings` | `ManageSettings` | 站点设置 |
-| `POST/GET /api/admin/api-tokens` | `ManageSettings` | API token 签发/列表 |
+| `POST/GET /api/admin/api-tokens` | `ManageSettings` | API token 签发/列表（**签发成功态 = 200**——`Ok(Json(CreateApiTokenResponse))`，axum 默认；#1858：测试曾误断 201 已修 #1878，契约从未写 201） |
 | `DELETE /api/admin/api-tokens/{id}` | `ManageSettings` | 吊销 |
+
+## 媒体可见性状态（`visibility_state` · 0072 四态枚举）
+
+主仓迁移 0072 起 `media_item_visibility` 带 `visibility_state VARCHAR(16)`（NOT NULL，
+缺省 `Visible`），四态：
+
+| 态 | 语义 |
+|---|---|
+| `Visible` | 正常可见 |
+| `AutoHidden` | 自动隐藏（规则/连坐派生） |
+| `ManualHidden` | 手动隐藏（管理面直隐/审核流 ApproveVisibilityHide） |
+| `NoPermission` | **显式拒绝**（管理员设置；与 ManualHidden 的差异 = 管理面展示 deny 理由「无权限」，用户面单条 detail 走 404 侧信道防护，人物图访问判拒） |
+
+- `hidden` 布尔列（0037）保留为**派生冗余**（31 个消费点零改动；`NoPermission` 行
+  `hidden=1` 连坐语义与 V1 `hidden_tree` 一致）。
+> ★补注（rb02 实测，2026-10-21）：`AutoHidden` 在 V2 **无生产写入者**
+> （`domain/media_review.rs:305-306`：V1 由治理任务写、V2 未建任务面，仅落地
+> `Visible`/`ManualHidden`/`NoPermission` 三态读写）；`visibility_state` 为
+> **应用层枚举**——DB 无 CHECK 约束（形态 = 0072 迁移头注）。
+
+- 写入口：`POST /api/manage/media-items/{id}/visibility/{state}`（admin+dangerous，
+  `?confirmed=true`，`{ok:true}`）——`{state}` 值域即上表四态。
+
+## 数据导出（data-export）
+
+详见 `export.md`：`POST /api/manage/export/jobs`（200 `{job_id,state}`）、
+`GET /api/manage/export/jobs/{jobId}`（状态轮询）、`DELETE …/{jobId}`（取消）、
+`GET …/{jobId}/manifest`（清单）、`GET …/{jobId}/files/{name}`（JSONL 分片流）——
+全族 `admin（DangerousAction）`。
 
 ---
 

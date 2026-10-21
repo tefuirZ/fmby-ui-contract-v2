@@ -12,11 +12,23 @@
 
 - `error_code`：稳定枚举，**前端按它分支**
 - `message`：面向人的说明（部分已脱敏，**不要解析**）
-- `trace_id`：排查用（可选）
+- `trace_id`：排查用（可选）。**仅部分错误携带**——当前仅 license 域 Coded 错误经文案解析回填；**通用注入未上线**（主仓 FAIL-LOUD-DIAGNOSTICS-1 未合 main；#1905 是 request-id 中间件：extensions + 响应头，**非 ErrorBody 注入**），**无则省略该键**（`skip_serializing_if`）
 
 ---
 
 ## error_code 值域
+
+wire 值域为**两族并存**（真源 = 主仓 `fmby-v2-contracts/src/error_code.rs`）：
+
+- **基础错误族**（`AppError` 12 类直配，小写蛇形；`http/src/errors.rs` `error_code_of`）——下表；
+- **Coded 目录族**（`ErrorCode::as_slug()`，SCREAMING_SNAKE_CASE，201 slug，唯一真源
+  `error_code/slug.rs`，机械目录 `docs/plans/v2-dev/contracts/error-catalog.md`）——
+  全量值域见 **`api/errors.coded.generated.md`**（由
+  `scripts/generate-error-catalog.mjs` 从主仓 catalog 生成，`--check` 门模式，
+  **勿手改**；2026-10-21 快照 = 主仓 `126abf54a`，分布 400×95 / 401×11 / 403×11 /
+  404×21 / 409×22 / 413×3 / **429×3** / 500×5 / 501×1 / 502×5 / 503×23 / 504×1）。
+
+**基础错误族**：
 
 | error_code | HTTP | 含义 | message 是否脱敏 |
 |---|---|---|---|
