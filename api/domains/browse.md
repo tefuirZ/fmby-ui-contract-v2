@@ -34,7 +34,7 @@
 
 > **读面分页/过滤语义（2026-10-21 同步，#1851 F4/F6 修复 + #1882/#1863）**：
 > - 库详情读面（`LibraryDetailResponse.items` + `next_cursor/has_more`）走 **keyset 游标**
->   （`catalog::cursor::keyset_id_after`，不重页、稳定排序）；
+>   （`fmby-v2-domain::cursor::keyset_id_after`，不重页、稳定排序）；
 > - **全库口径**：`library_id` 缺省（None）= 跨库聚合——`kind` 过滤与 keyset 游标在
 >   全库口径**同样生效**（此前 where 优先级曾吞掉两者，#1872 治本）；
 > - **删除中库排除**：异步删除（pending/running）节点恒不可见，判据**先于** 0125 桶

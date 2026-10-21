@@ -106,6 +106,11 @@
 
 - `hidden` 布尔列（0037）保留为**派生冗余**（31 个消费点零改动；`NoPermission` 行
   `hidden=1` 连坐语义与 V1 `hidden_tree` 一致）。
+> ★补注（rb02 实测，2026-10-21）：`AutoHidden` 在 V2 **无生产写入者**
+> （`domain/media_review.rs:305-306`：V1 由治理任务写、V2 未建任务面，仅落地
+> `Visible`/`ManualHidden`/`NoPermission` 三态读写）；`visibility_state` 为
+> **应用层枚举**——DB 无 CHECK 约束（形态 = 0072 迁移头注）。
+
 - 写入口：`POST /api/manage/media-items/{id}/visibility/{state}`（admin+dangerous，
   `?confirmed=true`，`{ok:true}`）——`{state}` 值域即上表四态。
 

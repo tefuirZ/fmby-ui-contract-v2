@@ -12,7 +12,7 @@
 
 - `error_code`：稳定枚举，**前端按它分支**
 - `message`：面向人的说明（部分已脱敏，**不要解析**）
-- `trace_id`：排查用（可选）。**server 生成**（透传入站 `x-request-id` 或服务端生成；实现 = 主仓 #1905，错误响应注入中间件），**无则省略该键**（`skip_serializing_if`）
+- `trace_id`：排查用（可选）。**仅部分错误携带**——当前仅 license 域 Coded 错误经文案解析回填；**通用注入未上线**（主仓 FAIL-LOUD-DIAGNOSTICS-1 未合 main；#1905 是 request-id 中间件：extensions + 响应头，**非 ErrorBody 注入**），**无则省略该键**（`skip_serializing_if`）
 
 ---
 

@@ -10,4 +10,4 @@
 | `GET /api/manage/export/jobs/{jobId}` | — | `{job_id, state, actor_id, consistency, tables, tables_done, rows_written, bytes_written, error?, created_at_ms, finished_at_ms?}`（consistency：SQLite=`eventually-consistent` / PG=`point-in-time`） | 401 / 403 / 404 / 500 |
 | `DELETE /api/manage/export/jobs/{jobId}` | — | `{job_id, state}`（批边界生效；已终态幂等返回当前态） | 401 / 403 / 404 / 500 |
 | `GET /api/manage/export/jobs/{jobId}/manifest` | — | manifest JSON（`_schema`/`jobId`/`schemaVersion`/`consistency`/`actorId`/`exportedAtMs`/`tables[{table,rows,parts,redactions[{column,action}]}]`；sha256 进审计） | 401 / 403 / 404（未生成）/ 500 |
-| `GET /api/manage/export/jobs/{jobId}/files/{name}` | — | JSONL 分片流（`application/x-ndjson`；流式 `ReaderStream`，不整文件入内存；`name` 禁 `/` `\` `..`） | 401 / 403 / 404 |
+| `GET /api/manage/export/jobs/{jobId}/files/{name}` | — | JSONL 分片（`application/x-ndjson`；**实装 = `fs::read` 整片进 `Body`**——单分片上限 10 万行（`DEFAULT_MAX_ROWS_PER_FILE`），非流式；`name` 禁 `/` `\` `..`） | 401 / 403 / 404 |
