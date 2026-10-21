@@ -92,6 +92,13 @@
 | `POST/GET /api/admin/api-tokens` | `ManageSettings` | API token 签发/列表 |
 | `DELETE /api/admin/api-tokens/{id}` | `ManageSettings` | 吊销 |
 
+## 数据导出（data-export）
+
+详见 `export.md`：`POST /api/manage/export/jobs`（200 `{job_id,state}`）、
+`GET /api/manage/export/jobs/{jobId}`（状态轮询）、`DELETE …/{jobId}`（取消）、
+`GET …/{jobId}/manifest`（清单）、`GET …/{jobId}/files/{name}`（JSONL 分片流）——
+全族 `admin（DangerousAction）`。
+
 ---
 
 ## 139 云盘账号（V1F-04a）
