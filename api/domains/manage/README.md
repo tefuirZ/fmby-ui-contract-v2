@@ -89,7 +89,7 @@
 | `DELETE /api/admin/media/{id}` | `DangerousAction` | 删媒体（危险） |
 | `GET /api/admin/audit` | `ViewAudit` | 审计（分页/过滤） |
 | `GET/PUT /api/admin/site-settings` | `ManageSettings` | 站点设置 |
-| `POST/GET /api/admin/api-tokens` | `ManageSettings` | API token 签发/列表 |
+| `POST/GET /api/admin/api-tokens` | `ManageSettings` | API token 签发/列表（**签发成功态 = 200**——`Ok(Json(CreateApiTokenResponse))`，axum 默认；#1858：测试曾误断 201 已修 #1878，契约从未写 201） |
 | `DELETE /api/admin/api-tokens/{id}` | `ManageSettings` | 吊销 |
 
 ## 媒体可见性状态（`visibility_state` · 0072 四态枚举）
