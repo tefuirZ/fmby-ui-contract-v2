@@ -32,6 +32,16 @@
 
 > `/api/browse/history` 的 `page > 1` **显式拒绝**（不假分页）——历史页当前只支持首页。
 
+> **读面分页/过滤语义（2026-10-21 同步，#1851 F4/F6 修复 + #1882/#1863）**：
+> - 库详情读面（`LibraryDetailResponse.items` + `next_cursor/has_more`）走 **keyset 游标**
+>   （`catalog::cursor::keyset_id_after`，不重页、稳定排序）；
+> - **全库口径**：`library_id` 缺省（None）= 跨库聚合——`kind` 过滤与 keyset 游标在
+>   全库口径**同样生效**（此前 where 优先级曾吞掉两者，#1872 治本）；
+> - **删除中库排除**：异步删除（pending/running）节点恒不可见，判据**先于** 0125 桶
+>   快路径（#1882，`read_side_delete_hiding`）；
+> - **facet 统计**（`count_nodes_by_kind`）同口径：全库 = 双 SQL 分支（有 libraryId 走
+>   索引 SEARCH / 无则全量 GROUP BY），删除中库排除谓词保留（#1857/#1863）。
+
 ---
 
 ## 检索
