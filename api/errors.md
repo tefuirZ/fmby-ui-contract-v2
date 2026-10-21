@@ -73,6 +73,6 @@ wire 值域为**两族并存**（真源 = 主仓 `fmby-v2-contracts/src/error_co
 3. `404` → 空状态（资源没了），不是错误页
 4. `429` → 提示稍后重试（读 `Retry-After` 若有）
 5. `501` → 提示"该功能尚未开放"
-6. `5xx` → 通用错误 + `trace_id`（便于报障）
+6. `5xx` → 通用错误；**若错误体携带 `trace_id` 则一并展示**（便于报障）——trace_id 仅部分错误携带（当前 license 域回填），通用注入未上线（FAIL-LOUD-DIAGNOSTICS-1），无该键时正常降级不展示
 
 `shared/errors` 提供 `getErrorMessage(error)` 统一取文案（已处理脱敏）。
