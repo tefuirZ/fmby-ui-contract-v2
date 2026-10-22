@@ -1613,6 +1613,48 @@
       ]
     },
     {
+      "method": "POST",
+      "path": "/api/install/probe/redis",
+      "status": "implemented",
+      "responseType": "InstallRedisProbeDto",
+      "responseFields": [
+        "ok"
+      ],
+      "requestType": "InstallRedisProbeRequest",
+      "requestFields": [
+        "url",
+        "password",
+        "db"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/install/apply",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": "InstallApplyRequest",
+      "requestFields": [
+        "database",
+        "cache",
+        "admin"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/install/complete",
+      "status": "implemented",
+      "responseType": "InstallCompleteDto",
+      "responseFields": [
+        "completed",
+        "restart_required"
+      ],
+      "requestType": "InstallCompleteRequest",
+      "requestFields": [
+        "confirm_action"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/browse/roots",
       "status": "implemented",
@@ -1679,13 +1721,15 @@
         "page",
         "page_size",
         "next_cursor",
-        "has_more"
+        "has_more",
+        "media_types"
       ],
       "requestType": "LibraryDetailQuery",
       "requestFields": [
         "page",
         "pageSize",
-        "cursor"
+        "cursor",
+        "mediaType"
       ]
     },
     {
@@ -1768,7 +1812,7 @@
       "requestFields": [
         "q",
         "limit",
-        "page_size",
+        "pageSize",
         "page"
       ]
     },
@@ -1916,6 +1960,24 @@
     {
       "method": "GET",
       "path": "/api/items/{id}/descendants",
+      "status": "implemented",
+      "responseType": "ItemDescendantsResponse",
+      "responseFields": [
+        "items",
+        "total",
+        "next_cursor",
+        "has_more"
+      ],
+      "requestType": "ItemDescendantsQuery",
+      "requestFields": [
+        "page",
+        "pageSize",
+        "cursor"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/items/{id}/children",
       "status": "implemented",
       "responseType": "ItemDescendantsResponse",
       "responseFields": [
@@ -2786,7 +2848,7 @@
       ],
       "requestType": "ManagedUserReportRowsQuery",
       "requestFields": [
-        "after_sequence",
+        "afterSequence",
         "limit"
       ]
     },
@@ -5079,7 +5141,8 @@
       "responseFields": [
         "entries",
         "overrides_file",
-        "microsoft_editions"
+        "microsoft_editions",
+        "overridable_keys"
       ],
       "requestType": null,
       "requestFields": null
@@ -5100,13 +5163,28 @@
       ]
     },
     {
+      "method": "POST",
+      "path": "/api/manage/secrets/test",
+      "status": "implemented",
+      "responseType": "SecretsTestResponseDto",
+      "responseFields": [
+        "ok",
+        "reason",
+        "latency_ms"
+      ],
+      "requestType": "SecretsTestRequest",
+      "requestFields": [
+        "service"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/manage/license/status",
       "status": "implemented",
       "responseType": "LicenseStatusDto",
       "responseFields": [
         "runtime_state",
-        "business_access_allowed",
+        "paid_features_allowed",
         "server_base_url",
         "realtime_enabled",
         "realtime_status",
@@ -5134,6 +5212,8 @@
         "last_realtime_event_kind",
         "last_realtime_error",
         "realtime_blocked_reason",
+        "authority_source",
+        "authority_misalignment_hint",
         "device_flow",
         "summary",
         "entitlements",
@@ -6260,6 +6340,82 @@
       ]
     },
     {
+      "method": "POST",
+      "path": "/api/manage/export/jobs",
+      "status": "implemented",
+      "responseType": "ExportStartResponse",
+      "responseFields": [
+        "jobId",
+        "state",
+        "consistency",
+        "tables"
+      ],
+      "requestType": "ExportStartRequest",
+      "requestFields": [
+        "tables",
+        "batch_size",
+        "interval_ms"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/export/jobs/{jobId}",
+      "status": "implemented",
+      "responseType": "ExportJobDto",
+      "responseFields": [
+        "jobId",
+        "state",
+        "consistency",
+        "tables",
+        "tablesDone",
+        "rowsWritten",
+        "bytesWritten",
+        "error",
+        "createdAtMs",
+        "finishedAtMs"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/export/jobs/{jobId}",
+      "status": "implemented",
+      "responseType": "ExportJobDto",
+      "responseFields": [
+        "jobId",
+        "state",
+        "consistency",
+        "tables",
+        "tablesDone",
+        "rowsWritten",
+        "bytesWritten",
+        "error",
+        "createdAtMs",
+        "finishedAtMs"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/export/jobs/{jobId}/manifest",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/export/jobs/{jobId}/files/{name}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "GET",
       "path": "/api/manage/task-center/overview",
       "status": "implemented",
@@ -6281,7 +6437,8 @@
         "from",
         "to",
         "page",
-        "size"
+        "size",
+        "first"
       ]
     },
     {
@@ -6994,7 +7151,8 @@
       "responseType": "CasFanoutStatusDto",
       "responseFields": [
         "content_id",
-        "drives"
+        "drives",
+        "deferred"
       ],
       "requestType": null,
       "requestFields": null
@@ -7013,6 +7171,107 @@
       ],
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/cas/contents",
+      "status": "implemented",
+      "responseType": "CasContentListItemDto",
+      "responseFields": [
+        "content_id",
+        "fingerprint",
+        "media_item_id",
+        "drives",
+        "has_local_entity",
+        "source_kind",
+        "lease",
+        "deferred_gate",
+        "grace_remaining_ms",
+        "updated_at"
+      ],
+      "requestType": "CasContentsQuery",
+      "requestFields": [
+        "page",
+        "pageSize",
+        "sort"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/admin/asset/download-tasks",
+      "status": "implemented",
+      "responseType": "AssetDownloadTaskDto",
+      "responseFields": [
+        "id",
+        "variant_ref",
+        "state",
+        "retry_count"
+      ],
+      "requestType": "WaitingReviewQuery",
+      "requestFields": [
+        "offset",
+        "limit"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/asset/download-tasks/{id}/requeue",
+      "status": "implemented",
+      "responseType": "AssetRequeueResultDto",
+      "responseFields": [
+        "id",
+        "changed"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/cas/reconcile/trigger",
+      "status": "implemented",
+      "responseType": "CasReconcileTriggerDto",
+      "responseFields": [
+        "task_id",
+        "created"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/cas/fanout/{content_id}/drives/{drive_id}/retry",
+      "status": "implemented",
+      "responseType": "CasRetryCopyDto",
+      "responseFields": [
+        "drive_id",
+        "copy_state",
+        "reason_code",
+        "reason_detail"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/admin/cas/fanout/{content_id}/trigger",
+      "status": "implemented",
+      "responseType": "CasFanoutTriggerResultDto",
+      "responseFields": [
+        "content_id",
+        "drives",
+        "summary",
+        "status"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
     },
     {
       "method": "POST",
