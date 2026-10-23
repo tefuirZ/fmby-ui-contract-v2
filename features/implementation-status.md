@@ -3,7 +3,10 @@
 > ★ **这是本仓库最重要的文件**。它回答一个问题：**v2 到底已经做了什么、还没做什么。**
 >
 > - 基线：**v0.1.122**（2026-09-18 G 表全量复核；后端端点 307、契约闸 PASS）
-> - G 表核对方法：api-fields.json（307 端点）× 主仓 routes grep 双证；前端侧以 fmby-web main（含 origin/main）源码为准；引用文件:行见各行标注
+> - **当前实测：后端端点 457**（2026-10-24 `check-contract-sync` 三方对账 PASSED：
+>   backend routes 457 = api-fields.json manifest 457；manifest 由 `--write` 从后端重生成）
+> - 增量纪律：契约批量补录 PR（#4 形态）合并时，同步更新「当前实测」行（数字取 `node scripts/check-contract-sync.mjs --json` 的 `manifest.endpoints`）
+> - G 表核对方法：api-fields.json（基线 307 → 当前 457）× 主仓 routes grep 双证；前端侧以 fmby-web main（含 origin/main）源码为准；引用文件:行见各行标注
 > - 数据来源：主仓 `docs/plans/v2-dev/BOARD.md`（全量任务卡）+ 前后端端点对账（代码实测）
 > - 状态图例：✅ 已实现 ｜ 🟡 部分实现 ｜ ⛔ 未实现（已规划）｜ ⚪ v1 有 / v2 暂未对齐 ｜ 🔬 需真机真账号验收
 >
@@ -72,7 +75,7 @@
 
 ### A. 前后端不一致（历史清单 G-01..G-17）— 2026-09-18 全量复核版
 
-> 复核方法：api-fields.json 307 端点（implemented 状态）× 主仓 routes grep 双证；
+> 复核方法：api-fields.json（基线 307，当前 457，以 --write 重生成的 manifest 为准）× 主仓 routes grep 双证；
 > 前端侧以 fmby-web main（origin/main）源码为准。历史「41 条」为 v0.1.105 期快照，
 > 其中大量项已随后续卡落地，逐条状态见下表。
 
