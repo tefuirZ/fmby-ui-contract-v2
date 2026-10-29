@@ -5214,6 +5214,8 @@
         "realtime_blocked_reason",
         "authority_source",
         "authority_misalignment_hint",
+        "tamper_flag",
+        "tamper_locked_until",
         "device_flow",
         "summary",
         "entitlements",
@@ -5286,7 +5288,10 @@
         "libraryId",
         "mediaType",
         "sortBy",
-        "sortOrder"
+        "sortOrder",
+        "sourceStatus",
+        "metadataStatus",
+        "hasLocalOverride"
       ]
     },
     {
@@ -5860,6 +5865,15 @@
       "requestFields": [
         "days"
       ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/cdn-probe/status",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
     },
     {
       "method": "GET",
@@ -6782,6 +6796,7 @@
         "provider",
         "configured",
         "secret_fields_configured",
+        "deliveryOriginHint",
         "cloudflareZoneId",
         "aliyunEndpoint",
         "tencentEndpoint",
@@ -6801,6 +6816,7 @@
         "provider",
         "configured",
         "secret_fields_configured",
+        "deliveryOriginHint",
         "cloudflareZoneId",
         "aliyunEndpoint",
         "tencentEndpoint",
@@ -7342,6 +7358,26 @@
       ],
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/subtitles/fetch-online",
+      "status": "implemented",
+      "responseType": "MediaItemSubtitleOnlineFetchResponse",
+      "responseFields": [
+        "override_id",
+        "media_item_id",
+        "language",
+        "source",
+        "release",
+        "subtitle_format",
+        "is_default"
+      ],
+      "requestType": "SubtitleOnlineFetchRequest",
+      "requestFields": [
+        "language",
+        "is_default"
+      ]
     },
     {
       "method": "GET",
