@@ -47,6 +47,15 @@
       "requestFields": null
     },
     {
+      "method": "PATCH",
+      "path": "/api/manage/yun139/credential-profiles/{profile_id}",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
       "method": "DELETE",
       "path": "/api/manage/yun139/credential-profiles/{profile_id}",
       "status": "implemented",
@@ -121,6 +130,15 @@
     {
       "method": "POST",
       "path": "/api/manage/yun139/account-pools/{pool_id}/members",
+      "status": "implemented",
+      "responseType": null,
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/yun139/account-pools/{pool_id}/members/{profile_id}",
       "status": "implemented",
       "responseType": null,
       "responseFields": null,
@@ -1147,6 +1165,88 @@
       "status": "implemented",
       "responseType": null,
       "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/pan115/shares",
+      "status": "implemented",
+      "responseType": "Pan115ShareRecordDto",
+      "responseFields": [
+        "id",
+        "mount_id",
+        "file_id",
+        "share_code",
+        "pwd",
+        "status",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/shares",
+      "status": "implemented",
+      "responseType": "Pan115ShareRecordDto",
+      "responseFields": [
+        "id",
+        "mount_id",
+        "file_id",
+        "share_code",
+        "pwd",
+        "status",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ],
+      "requestType": "CreatePan115ShareRequest",
+      "requestFields": [
+        "mount_id",
+        "file_id",
+        "pwd"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/pan115/shares/{id}",
+      "status": "implemented",
+      "responseType": "Pan115ShareRecordDto",
+      "responseFields": [
+        "id",
+        "mount_id",
+        "file_id",
+        "share_code",
+        "pwd",
+        "status",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ],
+      "requestType": "UpdatePan115SharePwdRequest",
+      "requestFields": [
+        "pwd"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/pan115/shares/{id}/cancel",
+      "status": "implemented",
+      "responseType": "Pan115ShareRecordDto",
+      "responseFields": [
+        "id",
+        "mount_id",
+        "file_id",
+        "share_code",
+        "pwd",
+        "status",
+        "created_at",
+        "updated_at",
+        "created_by"
+      ],
       "requestType": null,
       "requestFields": null
     },
@@ -3478,8 +3578,10 @@
         "created_at",
         "updated_at"
       ],
-      "requestType": null,
-      "requestFields": null
+      "requestType": "RoleTemplateListQuery",
+      "requestFields": [
+        "status"
+      ]
     },
     {
       "method": "POST",
@@ -3549,6 +3651,21 @@
     {
       "method": "DELETE",
       "path": "/api/manage/role-templates/{id}",
+      "status": "implemented",
+      "responseType": "ManageActionResultDto",
+      "responseFields": [
+        "id",
+        "result",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/role-templates/{id}/enable",
       "status": "implemented",
       "responseType": "ManageActionResultDto",
       "responseFields": [
@@ -3715,6 +3832,32 @@
         "expires_at",
         "allow_reactivation",
         "require_approval"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/registration-codes/batches/{id}/status",
+      "status": "implemented",
+      "responseType": "ManagedRegistrationCodeBatchDto",
+      "responseFields": [
+        "id",
+        "name",
+        "kind",
+        "total_codes",
+        "available_codes",
+        "used_codes",
+        "disabled_codes",
+        "expired_codes",
+        "total_used_count",
+        "created_by",
+        "created_by_username",
+        "created_by_display_name",
+        "created_at",
+        "items"
+      ],
+      "requestType": "UpdateRegistrationCodeStatusRequest",
+      "requestFields": [
+        "status"
       ]
     },
     {
@@ -4930,6 +5073,36 @@
       ]
     },
     {
+      "method": "POST",
+      "path": "/api/manage/telegram-bot/verify-token",
+      "status": "implemented",
+      "responseType": "TelegramVerifyTokenResponseDto",
+      "responseFields": [
+        "valid",
+        "bot_id",
+        "username",
+        "first_name"
+      ],
+      "requestType": "TelegramVerifyTokenRequest",
+      "requestFields": [
+        "token"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/telegram-bot/test",
+      "status": "implemented",
+      "responseType": "TelegramSendTestResponseDto",
+      "responseFields": [
+        "sent",
+        "chat_id"
+      ],
+      "requestType": "TelegramSendTestRequest",
+      "requestFields": [
+        "chat_id"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/manage/rewards/config",
       "status": "implemented",
@@ -5214,6 +5387,8 @@
         "realtime_blocked_reason",
         "authority_source",
         "authority_misalignment_hint",
+        "tamper_flag",
+        "tamper_locked_until",
         "device_flow",
         "summary",
         "entitlements",
@@ -5286,7 +5461,10 @@
         "libraryId",
         "mediaType",
         "sortBy",
-        "sortOrder"
+        "sortOrder",
+        "sourceStatus",
+        "metadataStatus",
+        "hasLocalOverride"
       ]
     },
     {
@@ -5863,6 +6041,15 @@
     },
     {
       "method": "GET",
+      "path": "/api/manage/cdn-probe/status",
+      "status": "implemented",
+      "responseType": "Value",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
       "path": "/api/manage/operations/runtime",
       "status": "implemented",
       "responseType": "ManageRuntimeObservabilityResponse",
@@ -6061,6 +6248,24 @@
       ],
       "requestType": null,
       "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/advanced/actions/{action}",
+      "status": "implemented",
+      "responseType": "AdvancedActionExecutedDto",
+      "responseFields": [
+        "action",
+        "result",
+        "deleted_sessions",
+        "retained_revoked_expired_sessions",
+        "refreshed_at",
+        "message"
+      ],
+      "requestType": "ConfirmQuery",
+      "requestFields": [
+        "confirmed"
+      ]
     },
     {
       "method": "GET",
@@ -6782,6 +6987,7 @@
         "provider",
         "configured",
         "secret_fields_configured",
+        "deliveryOriginHint",
         "cloudflareZoneId",
         "aliyunEndpoint",
         "tencentEndpoint",
@@ -6801,6 +7007,7 @@
         "provider",
         "configured",
         "secret_fields_configured",
+        "deliveryOriginHint",
         "cloudflareZoneId",
         "aliyunEndpoint",
         "tencentEndpoint",
@@ -7344,6 +7551,26 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/media-items/{id}/subtitles/fetch-online",
+      "status": "implemented",
+      "responseType": "MediaItemSubtitleOnlineFetchResponse",
+      "responseFields": [
+        "override_id",
+        "media_item_id",
+        "language",
+        "source",
+        "release",
+        "subtitle_format",
+        "is_default"
+      ],
+      "requestType": "SubtitleOnlineFetchRequest",
+      "requestFields": [
+        "language",
+        "is_default"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/manage/media-items/{id}/subtitles/{overrideId}",
       "status": "implemented",
@@ -7419,11 +7646,14 @@
       "requestFields": [
         "title",
         "year",
+        "original_title",
         "sort_title",
         "overview",
         "community_rating",
         "premiered",
         "genres",
+        "directors",
+        "actors",
         "studios"
       ]
     },
