@@ -7637,6 +7637,30 @@
       "method": "POST",
       "path": "/api/manage/users/batch/delete",
       "reason": "前端全仓未实际调用该路径（DISPATCH-REVERIFY 实测），V1 亦无此端点；保留 exempt 防止误接。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "GET",
+      "path": "/api/manage/upstreams/{*}/emby/libraries",
+      "reason": "Emby 后端能力已按用户裁定整功能砍除（#2412），前端 fmby-web 的 shared/src/contracts/manage/upstreams/api.ts 仍残留 4 条 emby 端点调用（UI UpstreamCollectSection 还在用），属**死调用面**（运行时 404）。前端仓不在本次清理范围（跨仓另卡）。修法=前端卡清掉 emby API 面后删除本条。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/upstreams/{*}/emby/discover-libraries",
+      "reason": "Emby 后端能力已按用户裁定整功能砍除（#2412），前端 fmby-web 的 shared/src/contracts/manage/upstreams/api.ts 仍残留 4 条 emby 端点调用（UI UpstreamCollectSection 还在用），属**死调用面**（运行时 404）。前端仓不在本次清理范围（跨仓另卡）。修法=前端卡清掉 emby API 面后删除本条。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "PUT",
+      "path": "/api/manage/upstreams/{*}/emby/library-bindings",
+      "reason": "Emby 后端能力已按用户裁定整功能砍除（#2412），前端 fmby-web 的 shared/src/contracts/manage/upstreams/api.ts 仍残留 4 条 emby 端点调用（UI UpstreamCollectSection 还在用），属**死调用面**（运行时 404）。前端仓不在本次清理范围（跨仓另卡）。修法=前端卡清掉 emby API 面后删除本条。"
+    },
+    {
+      "rule": "FRONTEND_ENDPOINT_NOT_DECLARED",
+      "method": "POST",
+      "path": "/api/manage/upstreams/emby/discover-lan",
+      "reason": "Emby 后端能力已按用户裁定整功能砍除（#2412），前端 fmby-web 的 shared/src/contracts/manage/upstreams/api.ts 仍残留 4 条 emby 端点调用（UI UpstreamCollectSection 还在用），属**死调用面**（运行时 404）。前端仓不在本次清理范围（跨仓另卡）。修法=前端卡清掉 emby API 面后删除本条。"
     }
   ],
   "known_drift": [
