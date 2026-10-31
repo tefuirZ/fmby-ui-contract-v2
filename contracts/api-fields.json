@@ -158,19 +158,32 @@
       "method": "POST",
       "path": "/api/manage/yun139/account-pools/{pool_id}/lease",
       "status": "implemented",
-      "responseType": null,
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "responseType": "Yun139LeaseResponse",
+      "responseFields": [
+        "pool_id",
+        "lease_id",
+        "profile_id",
+        "display_name",
+        "expires_at"
+      ],
+      "requestType": "Yun139LeaseRequest",
+      "requestFields": [
+        "sticky_key"
+      ]
     },
     {
       "method": "POST",
       "path": "/api/manage/yun139/account-pools/{pool_id}/report",
       "status": "implemented",
-      "responseType": null,
+      "responseType": "OkResponse",
       "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "requestType": "Yun139ReportRequest",
+      "requestFields": [
+        "profile_id",
+        "lease_id",
+        "success",
+        "cooldown_seconds"
+      ]
     },
     {
       "method": "GET",
@@ -780,6 +793,149 @@
       "requestFields": [
         "path",
         "delta_link"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/microsoft/pools",
+      "status": "implemented",
+      "responseType": "MicrosoftAccountPoolsResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/pools",
+      "status": "implemented",
+      "responseType": "MicrosoftAccountPoolResponse",
+      "responseFields": [
+        "pool"
+      ],
+      "requestType": "MicrosoftCreateAccountPoolRequest",
+      "requestFields": [
+        "name",
+        "description",
+        "strategy",
+        "cooldown_seconds",
+        "max_concurrent"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/microsoft/pools/{pool_id}",
+      "status": "implemented",
+      "responseType": "MicrosoftAccountPoolResponse",
+      "responseFields": [
+        "pool"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/microsoft/pools/{pool_id}",
+      "status": "implemented",
+      "responseType": "MicrosoftAccountPoolResponse",
+      "responseFields": [
+        "pool"
+      ],
+      "requestType": "MicrosoftUpdateAccountPoolRequest",
+      "requestFields": [
+        "name",
+        "description",
+        "strategy",
+        "cooldown_seconds",
+        "max_concurrent",
+        "is_enabled"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/microsoft/pools/{pool_id}",
+      "status": "implemented",
+      "responseType": "OkResponse",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/manage/microsoft/pools/{pool_id}/members",
+      "status": "implemented",
+      "responseType": "MicrosoftAccountPoolMembersResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/pools/{pool_id}/members",
+      "status": "implemented",
+      "responseType": "MicrosoftAccountPoolMembersResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": "MicrosoftAddAccountPoolMemberRequest",
+      "requestFields": [
+        "account_id",
+        "weight"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/manage/microsoft/pools/{pool_id}/members/{account_id}",
+      "status": "implemented",
+      "responseType": "MicrosoftAccountPoolMembersResponse",
+      "responseFields": [
+        "items"
+      ],
+      "requestType": "MicrosoftUpdateAccountPoolMemberRequest",
+      "requestFields": [
+        "weight",
+        "is_enabled"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/manage/microsoft/pools/{pool_id}/members/{account_id}",
+      "status": "implemented",
+      "responseType": "OkResponse",
+      "responseFields": null,
+      "requestType": null,
+      "requestFields": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/pools/{pool_id}/lease",
+      "status": "implemented",
+      "responseType": "MicrosoftLeaseResponse",
+      "responseFields": [
+        "pool_id",
+        "lease_id",
+        "account_id",
+        "expires_at"
+      ],
+      "requestType": "MicrosoftLeaseRequest",
+      "requestFields": [
+        "sticky_key"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/manage/microsoft/pools/{pool_id}/report",
+      "status": "implemented",
+      "responseType": "OkResponse",
+      "responseFields": null,
+      "requestType": "MicrosoftReportRequest",
+      "requestFields": [
+        "account_id",
+        "lease_id",
+        "success"
       ]
     },
     {
@@ -2532,111 +2688,6 @@
         "status",
         "accountKind"
       ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/users/emby-import/preview",
-      "status": "implemented",
-      "responseType": "PreviewEmbyUsersImportResponse",
-      "responseFields": [
-        "users",
-        "summary"
-      ],
-      "requestType": "PreviewEmbyUsersImportRequest",
-      "requestFields": [
-        "source",
-        "include_disabled"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/users/emby-import",
-      "status": "implemented",
-      "responseType": "ImportEmbyUsersResponse",
-      "responseFields": [
-        "summary",
-        "results",
-        "audit_id"
-      ],
-      "requestType": "ImportEmbyUsersRequest",
-      "requestFields": [
-        "source",
-        "include_disabled",
-        "selected_emby_user_ids",
-        "collision_strategy",
-        "role_template_id",
-        "initial_password",
-        "force_password_change",
-        "confirm_action",
-        "session_confirmation",
-        "current_password"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/users/emby-import/jobs",
-      "status": "implemented",
-      "responseType": "EmbyUsersImportJobDto",
-      "responseFields": [
-        "id",
-        "status",
-        "source_kind",
-        "source_id",
-        "summary",
-        "results",
-        "error_message",
-        "audit_id",
-        "started_at",
-        "finished_at",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/users/emby-import/jobs",
-      "status": "implemented",
-      "responseType": "StartEmbyUsersImportJobResponse",
-      "responseFields": [
-        "job"
-      ],
-      "requestType": "ImportEmbyUsersRequest",
-      "requestFields": [
-        "source",
-        "include_disabled",
-        "selected_emby_user_ids",
-        "collision_strategy",
-        "role_template_id",
-        "initial_password",
-        "force_password_change",
-        "confirm_action",
-        "session_confirmation",
-        "current_password"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/users/emby-import/jobs/{job_id}",
-      "status": "implemented",
-      "responseType": "EmbyUsersImportJobDto",
-      "responseFields": [
-        "id",
-        "status",
-        "source_kind",
-        "source_id",
-        "summary",
-        "results",
-        "error_message",
-        "audit_id",
-        "started_at",
-        "finished_at",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": null,
-      "requestFields": null
     },
     {
       "method": "POST",
@@ -4477,18 +4528,6 @@
     },
     {
       "method": "POST",
-      "path": "/api/manage/upstreams/emby/discover-lan",
-      "status": "implemented",
-      "responseType": "UpstreamLanDiscoveryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
       "path": "/api/manage/upstreams/{id}/health-check",
       "status": "implemented",
       "responseType": "CredentialHealthDto",
@@ -4502,18 +4541,6 @@
     {
       "method": "POST",
       "path": "/api/manage/upstreams/{id}/apple-cms/discover-categories",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/emby/discover-libraries",
       "status": "implemented",
       "responseType": "UpstreamCategoryListDto",
       "responseFields": [
@@ -4538,32 +4565,6 @@
     {
       "method": "PUT",
       "path": "/api/manage/upstreams/{id}/apple-cms/category-bindings",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": "UpstreamCategoryBindingsWriteDto",
-      "requestFields": [
-        "bindings"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams/{id}/emby/libraries",
-      "status": "implemented",
-      "responseType": "UpstreamCategoryListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "PUT",
-      "path": "/api/manage/upstreams/{id}/emby/library-bindings",
       "status": "implemented",
       "responseType": "UpstreamCategoryListDto",
       "responseFields": [
@@ -4768,115 +4769,8 @@
       ]
     },
     {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/emby/sync",
-      "status": "implemented",
-      "responseType": "UpstreamEmbySyncDto",
-      "responseFields": [
-        "source_id",
-        "page_size",
-        "category_count",
-        "imported_item_count",
-        "imported_variant_count",
-        "categories",
-        "synced_at"
-      ],
-      "requestType": "UpstreamEmbySyncRequest",
-      "requestFields": [
-        "categoryId",
-        "pageSize"
-      ]
-    },
-    {
       "method": "GET",
       "path": "/api/manage/upstreams/{id}/sync-jobs/{job_id}",
-      "status": "implemented",
-      "responseType": "UpstreamSyncJobDto",
-      "responseFields": [
-        "id",
-        "source_id",
-        "job_kind",
-        "status",
-        "category_ids",
-        "page_size",
-        "worker_count",
-        "result_summary",
-        "last_error_message",
-        "attempt_count",
-        "max_attempts",
-        "created_by",
-        "started_at",
-        "finished_at",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/emby/import/preview",
-      "status": "implemented",
-      "responseType": "UpstreamEmbySyncDto",
-      "responseFields": [
-        "source_id",
-        "page_size",
-        "category_count",
-        "imported_item_count",
-        "imported_variant_count",
-        "categories",
-        "synced_at"
-      ],
-      "requestType": "UpstreamEmbyImportRequest",
-      "requestFields": [
-        "categoryId",
-        "pageSize"
-      ]
-    },
-    {
-      "method": "POST",
-      "path": "/api/manage/upstreams/{id}/emby/import",
-      "status": "implemented",
-      "responseType": "UpstreamSyncJobDto",
-      "responseFields": [
-        "id",
-        "source_id",
-        "job_kind",
-        "status",
-        "category_ids",
-        "page_size",
-        "worker_count",
-        "result_summary",
-        "last_error_message",
-        "attempt_count",
-        "max_attempts",
-        "created_by",
-        "started_at",
-        "finished_at",
-        "created_at",
-        "updated_at"
-      ],
-      "requestType": "UpstreamEmbyImportRequest",
-      "requestFields": [
-        "categoryId",
-        "pageSize"
-      ]
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams/{id}/emby/import/jobs",
-      "status": "implemented",
-      "responseType": "UpstreamSyncJobListDto",
-      "responseFields": [
-        "items",
-        "total"
-      ],
-      "requestType": null,
-      "requestFields": null
-    },
-    {
-      "method": "GET",
-      "path": "/api/manage/upstreams/{id}/emby/import/jobs/{job_id}",
       "status": "implemented",
       "responseType": "UpstreamSyncJobDto",
       "responseFields": [
@@ -6216,6 +6110,21 @@
       "requestFields": null
     },
     {
+      "method": "POST",
+      "path": "/api/manage/migration/inspect",
+      "status": "implemented",
+      "responseType": "InspectMigrationResponse",
+      "responseFields": [
+        "snapshot",
+        "conflicts"
+      ],
+      "requestType": "InspectMigrationRequest",
+      "requestFields": [
+        "security_code",
+        "envelope"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/manage/migration/export",
       "status": "implemented",
@@ -6228,12 +6137,31 @@
     },
     {
       "method": "POST",
+      "path": "/api/manage/migration/export",
+      "status": "implemented",
+      "responseType": "ExportMigrationResponse",
+      "responseFields": [
+        "envelope"
+      ],
+      "requestType": "ExportMigrationRequest",
+      "requestFields": [
+        "security_code",
+        "selection"
+      ]
+    },
+    {
+      "method": "POST",
       "path": "/api/manage/migration/import",
       "status": "implemented",
-      "responseType": null,
-      "responseFields": null,
-      "requestType": null,
-      "requestFields": null
+      "responseType": "ImportMigrationResponse",
+      "responseFields": [
+        "report"
+      ],
+      "requestType": "ImportMigrationRequest",
+      "requestFields": [
+        "security_code",
+        "envelope"
+      ]
     },
     {
       "method": "GET",
@@ -7717,6 +7645,24 @@
       "method": "POST",
       "path": "/api/auth/identity/telegram/login/status",
       "reason": "前端硬编码具体 provider（telegram）而后端声明为 {provider} 模板（routes/mod.rs:185），运行时可正确匹配，仅契约字面比对差异；login/status 仅 Telegram 支持故前端不参数化。"
+    },
+    {
+      "rule": "MANIFEST_RESPONSE_TYPE_DRIFT",
+      "method": "POST",
+      "path": "/api/manage/yun139/account-pools/{pool_id}/lease",
+      "reason": "闸缺陷（非清单错）：extractHandlers 按**函数名**建索引且 first-wins，而 lease_from_pool / report_lease 在 manage_microsoft_pool.rs 与 yun139_accounts.rs 两文件**重名**；readdirSync 先扫到 microsoft 文件 ⇒ yun139 的这两条路由被解析成 MicrosoftLease* 系列 DTO。本清单已按后端**真实** DTO（Yun139LeaseRequest/Yun139LeaseResponse）登记（后端 DTO 为字段权威口径），故闸的漂移报错为假阳性。修法=让 extractHandlers 按「文件+路由注册点」定位而非仅函数名；修闸后须删本条。"
+    },
+    {
+      "rule": "MANIFEST_FIELD_MISSING",
+      "method": "POST",
+      "path": "/api/manage/yun139/account-pools/{pool_id}/lease",
+      "reason": "闸缺陷（非清单错）：extractHandlers 按**函数名**建索引且 first-wins，而 lease_from_pool / report_lease 在 manage_microsoft_pool.rs 与 yun139_accounts.rs 两文件**重名**；readdirSync 先扫到 microsoft 文件 ⇒ yun139 的这两条路由被解析成 MicrosoftLease* 系列 DTO。本清单已按后端**真实** DTO（Yun139LeaseRequest/Yun139LeaseResponse）登记（后端 DTO 为字段权威口径），故闸的漂移报错为假阳性。修法=让 extractHandlers 按「文件+路由注册点」定位而非仅函数名；修闸后须删本条。"
+    },
+    {
+      "rule": "MANIFEST_FIELD_STALE",
+      "method": "POST",
+      "path": "/api/manage/yun139/account-pools/{pool_id}/lease",
+      "reason": "闸缺陷（非清单错）：extractHandlers 按**函数名**建索引且 first-wins，而 lease_from_pool / report_lease 在 manage_microsoft_pool.rs 与 yun139_accounts.rs 两文件**重名**；readdirSync 先扫到 microsoft 文件 ⇒ yun139 的这两条路由被解析成 MicrosoftLease* 系列 DTO。本清单已按后端**真实** DTO（Yun139LeaseRequest/Yun139LeaseResponse）登记（后端 DTO 为字段权威口径），故闸的漂移报错为假阳性。修法=让 extractHandlers 按「文件+路由注册点」定位而非仅函数名；修闸后须删本条。"
     }
   ]
 }
