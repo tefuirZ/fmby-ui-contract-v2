@@ -11,7 +11,20 @@
 | `GET /api/manage/collections/{id}` | 详情 `{collection, members[]}` |
 | `PATCH /api/manage/collections/{id}` | 更新 |
 | `DELETE /api/manage/collections/{id}` | 删除（级联成员，幂等） |
+| `PUT /api/manage/collections/order` | 合集排序（整表替换） |
+| `GET /api/manage/collections/member-candidates` | 成员候选（搜索） |
+| `PATCH /api/manage/collections/{id}/members/{member_id}` | 改成员（排序位等） |
 | `DELETE /api/manage/collections/{id}/members/{member_id}` | 移除成员（幂等） |
+| `POST /api/manage/collections/{id}/members/add` | 批量添加成员 |
+| `POST /api/manage/collections/{id}/members/remove` | 批量移除成员 |
+| `POST /api/manage/collections/{id}/members/reorder` | 成员重排 |
+| `PATCH /api/manage/collections/{id}/rules` | 自动规则（写） |
+| `POST /api/manage/collections/rules/preview` | 规则预览（不落状态） |
+| `POST /api/manage/collections/{id}/sync` | 按规则同步成员 |
+| `GET /api/manage/collections/presets` | 预设规则列表 |
+| `POST /api/manage/collections/presets/create` | 创建预设 |
+| `POST /api/manage/collections/imports/douban/preview` | 豆瓣导入预览 |
+| `POST /api/manage/collections/imports/douban/create` | 豆瓣导入执行 |
 
 ---
 
@@ -23,6 +36,9 @@
 | `GET /api/manage/task-center/items` | 列表（category/filter） |
 | `GET /api/manage/task-center/items/{category}/{id}` | 详情 |
 | `POST /api/manage/task-center/items/{category}/{id}/actions` | 动作 |
+| `POST /api/manage/task-center/actions/batch` | 批量动作 |
+| `GET /api/manage/task-center/pipeline-gaps` | 管道缺口 |
+| `POST /api/manage/task-center/person-metadata/historical-seeds/cancel` | 取消人物元数据历史种子 |
 
 ---
 
