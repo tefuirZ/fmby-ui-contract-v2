@@ -13,6 +13,16 @@
 | `GET /api/manage/libraries/{id}` | 详情 |
 | `PATCH /api/manage/libraries/{id}` | 更新 |
 | `DELETE /api/manage/libraries/{id}` | 删除（危险） |
+| `GET /api/manage/libraries/deletions` | 删除中的库列表（**静态段先于 `{id}`**） |
+| `PUT /api/manage/libraries/order` | 库排序（整表替换） |
+| `POST /api/manage/libraries/{id}/scan` | 触发扫描 |
+| `GET /api/manage/libraries/{id}/delete-status` | 删除进度 |
+| `POST /api/manage/libraries/{id}/delete/retry` | 删除重试 |
+| `GET /api/manage/libraries/{id}/cleanup-preview` | 清理预览（不落状态） |
+| `POST /api/manage/libraries/{id}/cleanup` | 执行清理 |
+| `GET /api/manage/libraries/{id}/media-reset-preview` | 媒体重置预览 |
+| `POST /api/manage/libraries/{id}/media-reset` | 媒体重置 |
+| `POST /api/manage/libraries/{id}/sources/{source_id}/purge` | 清除指定来源 |
 
 ---
 
@@ -35,6 +45,9 @@
 |---|---|
 | `GET /api/manage/probe-tasks` | 列表 |
 | `POST /api/manage/probe-tasks` | 创建 |
+| `GET /api/manage/probe-tasks/{id}` | 详情 |
+| `POST /api/manage/probe-tasks/{id}/enqueue` | 入队 |
+| `POST /api/manage/probe-tasks/{id}/refresh` | 刷新 |
 
 > ✅ probe-tasks `/{id}`、`/{id}/enqueue`、`/{id}/refresh` **已实现**（api-fields 3 端点 implemented；原 G-10 登记已过时）。
 
