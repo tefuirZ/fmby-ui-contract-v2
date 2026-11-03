@@ -47,30 +47,36 @@
 
 ## 端点全景
 
-| 域 | 前缀 | 端点数（注册） | 文档 |
-|---|---|---|---|
-| 安装引导 | `/api/install/*` | 2 | [`domains/install.md`](./domains/install.md) |
-| 鉴权/身份 | `/api/auth/*` | 7 | [`auth.md`](./auth.md) |
-| 浏览 | `/api/browse/*` | 6 | [`domains/browse.md`](./domains/browse.md) |
-| 检索/推荐 | `/api/search`、`/api/recommendations/*` | 2 | [`domains/browse.md`](./domains/browse.md) |
-| 媒体项 | `/api/items/*` | 2 | [`domains/playback.md`](./domains/playback.md) |
-| 资产 | `/api/assets/*` | 1 | [`domains/playback.md`](./domains/playback.md) |
-| 播放 | `/api/playback/*` | 7 | [`domains/playback.md`](./domains/playback.md) |
-| 个人设置 | `/api/settings/user/*` | 6 | [`domains/settings.md`](./domains/settings.md) |
-| 服务器设置 | `/api/settings/server/*` | 14（含 email/cdn-operations） | [`domains/settings.md`](./domains/settings.md) |
-| 挂载管理 | `/api/manage/mounts/*` + pan115 | ~20 | [`domains/manage/mounts.md`](./domains/manage/mounts.md) |
-| 139 账号 | `/api/manage/yun139/*` | 20（**后端已实现，前端未接线**） | [`domains/manage/yun139.md`](./domains/manage/yun139.md) |
-| 媒体库/条目 | `/api/manage/libraries*`、`/media-items*` | ~10 | [`domains/manage/libraries.md`](./domains/manage/libraries.md) |
-| 用户/权限 | `/api/manage/users*`、`/role-templates*`、`/registration-codes*` | ~12 | [`domains/manage/users.md`](./domains/manage/users.md) |
-| 合集/积分 | `/api/manage/collections*`、`/rewards/*` | ~10 | [`domains/manage/README.md`](./domains/manage/README.md) |
-| 任务中心/命名 | `/api/manage/task-center/*`、`/naming-*` | ~14 | [`domains/manage/README.md`](./domains/manage/README.md) |
-| 日志/会话 | `/api/manage/{audit-logs,runtime-logs,sessions}*` | ~5 | [`domains/manage/README.md`](./domains/manage/README.md) |
-| License | `/api/manage/license/*` | 5 | [`domains/manage/README.md`](./domains/manage/README.md) |
-| 密钥链 | `/api/manage/secrets/*` | 2 | [`domains/manage/README.md`](./domains/manage/README.md) |
-| Telegram | `/api/manage/telegram-bot/*` | 3 | [`domains/manage/README.md`](./domains/manage/README.md) |
-| 站点设置/管理杂项 | `/api/admin/*`、`/api/manage/{overview,source-availability}` | ~8 | [`domains/manage/README.md`](./domains/manage/README.md) |
+| 域 | 前缀 | 文档 |
+|---|---|---|
+| 安装引导 | `/api/install/*` | [`domains/install.md`](./domains/install.md) |
+| 鉴权/身份 | `/api/auth/*`、`/api/account/*` | [`auth.md`](./auth.md) |
+| 浏览 | `/api/browse/*` | [`domains/browse.md`](./domains/browse.md) |
+| 检索/推荐 | `/api/search`、`/api/browse/search`、`/api/recommendations/*` | [`domains/browse.md`](./domains/browse.md) |
+| 媒体项 | `/api/items/*` | [`domains/playback.md`](./domains/playback.md) |
+| 资产 | `/api/assets/*` | [`domains/playback.md`](./domains/playback.md) |
+| 播放 | `/api/playback/*` | [`domains/playback.md`](./domains/playback.md) |
+| 个人设置 | `/api/settings/user/*` | [`domains/settings.md`](./domains/settings.md) |
+| 服务器设置 | `/api/settings/server/*`、`/api/settings/integrations/*` | [`domains/settings.md`](./domains/settings.md) |
+| 挂载管理 | `/api/manage/mounts/*`、`/api/manage/pan115/*` | [`domains/manage/mounts.md`](./domains/manage/mounts.md) |
+| 139 账号 | `/api/manage/yun139/*` | [`domains/manage/yun139.md`](./domains/manage/yun139.md) |
+| 媒体库/条目/审核 | `/api/manage/libraries*`、`/media-items*`、`/media-reviews*`、`/probe-tasks*` | [`domains/manage/libraries.md`](./domains/manage/libraries.md) |
+| 用户/权限/注册码/积分 | `/api/manage/users*`、`/role-templates*`、`/registration-codes*`、`/rewards/*` | [`domains/manage/users.md`](./domains/manage/users.md) |
+| 合集 | `/api/manage/collections*` | [`domains/manage/README.md`](./domains/manage/README.md) |
+| 任务中心/命名 | `/api/manage/task-center/*`、`/naming-*` | [`domains/manage/README.md`](./domains/manage/README.md) |
+| 日志/会话 | `/api/manage/{audit-logs,runtime-logs,sessions}*` | [`domains/manage/README.md`](./domains/manage/README.md) |
+| License | `/api/manage/license/*` | [`domains/manage/README.md`](./domains/manage/README.md) |
+| 密钥链 | `/api/manage/secrets/*` | [`domains/manage/README.md`](./domains/manage/README.md) |
+| Telegram | `/api/manage/telegram-bot/*` | [`domains/manage/README.md`](./domains/manage/README.md) |
+| 站点设置/管理杂项 | `/api/admin/*`、`/api/manage/{overview,source-availability}`、`/api/site/themes*` | [`domains/manage/README.md`](./domains/manage/README.md) |
+| **兼容面（Emby/Jellyfin）** | `/emby/*`、`/jellyfin/*` | [`domains/compat-emby.md`](./domains/compat-emby.md) |
 
-> 数量以 `contracts/api-fields.json`（**368 端点**）为准；完整逐条清单见后端路由装配 + 主仓 `docs/interfaces/webui.md`。
+> 逐条端点以各域文档的表为准（本表不再抄数字——数量会腐化，且每域文档已给全表）。
+> 机器真源 = `contracts/api-fields.json`（**483 端点**），它**只覆盖 `/api/*`**；
+> `/api/v1` 与 `/emby`/`/jellyfin` 不在其内（见 `open-v1.md` 与 `compat-emby.md`）。
+>
+> **文档自检**：`node scripts/check-doc-paths.mjs` —— 文档里每个 `METHOD /path`
+> 必须能在清单中找到；找不到即失败（防「文档写了不存在的端点」）。
 
 ---
 
