@@ -8,21 +8,65 @@
 
 | 方法 路径 | 说明 |
 |---|---|
-| `GET /api/manage/mounts` | 列表（§10 查询参数） |
+| `GET /api/manage/mounts` | 列表（§列表查询参数） |
 | `POST /api/manage/mounts` | 新建（Create 7 字段） |
-| `GET /api/manage/mounts/{id}` | 详情（Detail 全量） |
+| `GET /api/manage/mounts/{id}` | 详情（**Detail 响应形状**见下） |
 | `PATCH /api/manage/mounts/{id}` | 编辑（PATCH 6 字段） |
 | `DELETE /api/manage/mounts/{id}` | 删除（危险） |
+| `GET /api/manage/mounts/health` | 全部挂载健康概览（**静态段注册在 `{id}` 之前**） |
+| `POST /api/manage/mounts/{id}/probe` | 探测连通性（不落状态） |
+| `POST /api/manage/mounts/{id}/validate` | 校验配置有效性 |
 | `POST /api/manage/mounts/{id}/verify` | 校验可访问性 |
-| `POST /api/manage/mounts/browse-directories` | 目录浏览（契约 §9 三分支） |
+| `POST /api/manage/mounts/{id}/refresh-access` | 刷新访问凭据（115/139 等需 token 的 provider） |
+| `POST /api/manage/mounts/batch/refresh-abnormal` | 批量刷新异常挂载 |
+| `POST /api/manage/mounts/{id}/scan` | 触发扫描 |
+| `GET /api/manage/mounts/{id}/scan` | 查询扫描进度 |
+| `POST /api/manage/mounts/browse-directories` | 目录浏览（§目录浏览三分支） |
 | `GET /api/manage/mounts/{id}/libraries` | 已绑定媒体库 |
 | `POST /api/manage/mounts/{id}/libraries` | 绑定库 |
 | `DELETE /api/manage/mounts/{id}/libraries/{library_id}` | 解绑 |
-| `POST /api/manage/source-availability/{id}/recover` | 恢复来源可用性 |
+| `POST /api/manage/source-availability/{id}/recover` | 恢复来源可用性（`{id}` 为 `mount:library` 复合键） |
 
 ---
 
-## 列表查询参数（契约 §10）
+## Detail 响应形状
+
+`GET /api/manage/mounts/{id}`（Create / PATCH 亦返回同形）：
+
+```jsonc
+{
+  "mount": { "...": "嵌套挂载实体" },
+  // 以下字段在顶层**平铺**，与 mount.* 同值（历史兼容，双写）
+  "provider_type": "Local",
+  "root_path": "/data",
+  "config_json": { "...": "..." },
+  "capability_state": { "...": "..." },
+  "path_policies": [ "..." ],
+  "linked_sources": [ "..." ],
+  "recent_scan_tasks": [ "..." ],
+  "credential_status": "bound"
+}
+```
+
+> **嵌套 `mount` 与顶层平铺同名并存**是既定 wire 形态（e2e 断言两者同值）。
+> 新代码请优先读 `mount.*`。
+
+### `credential_status` 四态（派生，非存储）
+
+| 值 | 条件 |
+|---|---|
+| `not_required` | provider 为 `Local` 等无需凭据者 |
+| `unbound` | 需要凭据但挂载未绑定 |
+| `expired` | 已绑定且 `expires_at <= now` |
+| `bound` | 已绑定且未过期（无 per-mount 统一过期源时**诚实降级**为 `bound`） |
+
+> 列表 / Detail 顶层 / `mount.credential_status` 三处**同源同值**。
+> ⚠️ 判定只认 `mount.config_json` 里的 `__sealed:` 引用——凭据密文实际存于 settings KV，
+> 绑定动作必须同时写入该引用，否则 UI 会恒显示「未绑定」。
+
+---
+
+## 列表查询参数
 
 ⚠️ **主名为 `camelCase`**（snake_case 为兼容别名，双收）：
 
@@ -84,16 +128,18 @@
 - `Pan115Share` / `Yun139Share`：归一 `/`
 - 其余：trim
 
+> `Pan115` / `Yun139` 等云端 provider 的 `root_path` 允许为空（装配时回落 `/`）。
+
 ## PATCH 6 字段
 
 即上表**去掉 `provider_type`**。`provider_type` 是不可变身份字段，载荷携带即反序列化层拒绝。
 全字段缺省 → 400（不静默 no-op）。
 
-**响应**：Create / PATCH 均返回**挂载 Detail 全量**。
+**响应**：Create / PATCH 均返回**挂载 Detail 全量**（见上）。
 
 ---
 
-## 目录浏览（契约 §9.1 三分支）
+## 目录浏览（三分支）
 
 `POST /api/manage/mounts/browse-directories`
 
@@ -127,7 +173,64 @@
 | `POST /api/manage/pan115/accounts/{mount_id}/browse` | `{path?}` → 目录列举 |
 | `DELETE /api/manage/pan115/accounts/{mount_id}` | 解绑 |
 
-错误：400 / 401 / 404 / 503。
+错误：400 / 401 / 403（受 license 功能门）/ 404 / 503。
 
 > 真实 115 账号的网络往返（列目录/直链播放）**只在你自己的环境 + 真账号**下测得，
 > 见 [`../../../features/implementation-status.md`](../../../features/implementation-status.md) §需人工验收。
+
+## 115 图床（imghost）
+
+| 方法 路径 | 说明 |
+|---|---|
+| `POST /api/manage/pan115/imghost/qr-login` | 图床账号扫码 |
+| `GET /api/manage/pan115/imghost/qr-status` | 扫码状态 |
+| `POST /api/manage/pan115/imghost/activate` | 激活图床账号 |
+| `GET /api/manage/pan115/imghost/credentials` | 凭据状态（掩码） |
+| `DELETE /api/manage/pan115/imghost/credentials` | 清除凭据 |
+| `POST /api/manage/pan115/imghost/upload` | 上传图片 |
+| `GET /api/manage/pan115/imghost/assets` | 资产列表 |
+| `GET /api/manage/pan115/imghost/raw/{sha1}` | 取原图 |
+| `GET /api/manage/pan115/imghost/_debug/permanent-url/{sha1}` | **调试**：永久直链 |
+| `GET /api/manage/pan115/imghost/_debug/final-url/{sha1}` | **调试**：最终直链 |
+
+> 服务**未装配**时图床族 fail-closed 返回 **404**（与同族其余端点的 503 不一致，属既有一致性欠账）。
+
+## 115 同步
+
+| 方法 路径 | 说明 |
+|---|---|
+| `GET /api/manage/pan115/sync/mounts/{mount_id}` | 同步状态 |
+| `POST /api/manage/pan115/sync/mounts/{mount_id}/enqueue` | 入队同步 |
+
+> 响应字段为 **camelCase**（`mountId` / `providerType` / `supportedActions`）——
+> manage 面其余端点均为 snake_case，这是**例外**。
+
+## 115 分享挂载（share-mounts）
+
+| 方法 路径 | 说明 |
+|---|---|
+| `POST /api/manage/pan115/share-mounts/{mount_id}/qr-login` | 分享账号扫码 |
+| `GET /api/manage/pan115/share-mounts/{mount_id}/qr-status` | 扫码状态 |
+| `POST /api/manage/pan115/share-mounts/{mount_id}/activate` | 激活 |
+| `GET /api/manage/pan115/share-mounts/{mount_id}/credentials` | 凭据状态 |
+| `DELETE /api/manage/pan115/share-mounts/{mount_id}/credentials` | 清除凭据 |
+
+## 115 分享浏览 / 预览
+
+| 方法 路径 | 说明 |
+|---|---|
+| `POST /api/manage/pan115/share-items/browse` | 匿名浏览分享目录 |
+| `POST /api/manage/pan115/share-download-preview/qr-login` | 下载用分享账号扫码 |
+| `GET /api/manage/pan115/share-download-preview/qr-status` | 扫码状态 |
+| `POST /api/manage/pan115/share-download-preview/create` | 创建分享下载预览 |
+| `POST /api/manage/pan115/previews` | 创建**自有网盘**预览会话（V1 字面路径） |
+| `POST /api/manage/pan115/previews/{preview_id}/browse` | 用预览凭据浏览 |
+
+## 115 分享记录
+
+| 方法 路径 | 说明 |
+|---|---|
+| `GET /api/manage/pan115/shares` | 分享记录列表 |
+| `POST /api/manage/pan115/shares` | 创建分享记录 |
+| `PATCH /api/manage/pan115/shares/{id}` | 改提取码等 |
+| `POST /api/manage/pan115/shares/{id}/cancel` | 取消分享 |
