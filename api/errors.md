@@ -48,6 +48,29 @@ wire 值域为**两族并存**（真源 = 主仓 `fmby-v2-contracts/src/error_co
 \* `credential_invalid` / `retryable_storage` / `cancelled` 在 HTTP 映射上落到 500
 （`AppError` 非穷尽匹配的兜底分支）。
 
+---
+
+## ⚠️ 第三类：源码自由串码（未入任何枚举）
+
+除上述两族外，后端部分路由**直接构造自由串** `ErrorBody::new("<snake_case>", …)`，
+既不是基础族 12 类、也不在 Coded 201 slug 目录里。**前端按 `error_code` 分支时会实际收到它们**，
+必须一并处理（不要假设值域只有两族）。
+
+已知值（非穷尽，均带来源）：
+
+| error_code | HTTP | 来源 |
+|---|---|---|
+| `install_setup_token_required` | 403 | `fmby-v2-server/src/install_flow/mod.rs:658` |
+| `csrf_origin` | 403 | `fmby-v2-server/src/install_flow/mod.rs:850` |
+| `rate_limited` | 429 | `fmby-v2-http/src/routes/install.rs:223` |
+| `invalid_media_type` | 400 | `fmby-v2-http/src/routes/browse.rs:171` |
+| `range_not_satisfiable` | 416 | `fmby-v2-http/src/routes/asset/blob.rs:152` |
+
+> 注意与 Coded 族近义码的区别：安装面 429 发的是 `rate_limited`，而 Coded 族另有
+> `INSTALL_RATE_LIMITED` / `AUTH_RATE_LIMITED`（**同一语义两个码**）；403 面同理存在
+> `INSTALL_FORBIDDEN`。这是**后端一致性欠账**，收敛方向（并入枚举 vs 保留自由串）
+> 需后端裁量；本文档如实登记现状，避免前端只按两族值域写分支而漏处理。
+
 > **脱敏规则**：`dependency*` / `credential_invalid` / `retryable_storage` / `internal` /
 > `cancelled` 的具体细节（SQL 片段、provider 响应、内部路径）**只进服务端日志**，绝不发给客户端。
 
