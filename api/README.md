@@ -62,6 +62,12 @@
 | 139 账号 | `/api/manage/yun139/*` | [`domains/manage/yun139.md`](./domains/manage/yun139.md) |
 | 媒体库/条目/审核 | `/api/manage/libraries*`、`/media-items*`、`/media-reviews*`、`/probe-tasks*` | [`domains/manage/libraries.md`](./domains/manage/libraries.md) |
 | 用户/权限/注册码/积分 | `/api/manage/users*`、`/role-templates*`、`/registration-codes*`、`/rewards/*` | [`domains/manage/users.md`](./domains/manage/users.md) |
+| **Microsoft 365** | `/api/manage/microsoft/*` | [`domains/manage/microsoft.md`](./domains/manage/microsoft.md) |
+| **上游源** | `/api/manage/upstreams/*` | [`domains/manage/upstreams.md`](./domains/manage/upstreams.md) |
+| **运维面** | `/api/manage/{operations,scans,events,system,runtime-log*}*` | [`domains/manage/operations.md`](./domains/manage/operations.md) |
+| **集成面** | `/api/manage/{announcements,notifications,telegram-bot,ai-interventions,auth-providers}*` | [`domains/manage/integrations.md`](./domains/manage/integrations.md) |
+| **admin 面** | `/api/admin/*` | [`domains/manage/admin.md`](./domains/manage/admin.md) |
+| **其他** | 迁移 / 开发者 / 高级动作 / 密钥 / 积分等 | [`domains/manage/misc.md`](./domains/manage/misc.md) |
 | 合集 | `/api/manage/collections*` | [`domains/manage/README.md`](./domains/manage/README.md) |
 | 任务中心/命名 | `/api/manage/task-center/*`、`/naming-*` | [`domains/manage/README.md`](./domains/manage/README.md) |
 | 日志/会话 | `/api/manage/{audit-logs,runtime-logs,sessions}*` | [`domains/manage/README.md`](./domains/manage/README.md) |
@@ -77,6 +83,12 @@
 >
 > **文档自检**：`node scripts/check-doc-paths.mjs` —— 文档里每个 `METHOD /path`
 > 必须能在清单中找到；找不到即失败（防「文档写了不存在的端点」）。
+>
+> **清单 → 文档生成**：`node scripts/gen-domain-docs.mjs [--write]` —— 把清单里
+> **尚未登记**的端点按语义域生成/追加进 `domains/manage/*.md`（幂等，可重跑）。
+> 生成段只含「端点 + 请求/响应类型 + 字段」（这些清单里有、机械可靠），
+> **语义/边界/错误码/能力门仍需人补**，故生成段带 `⚠️ 自动生成` 标示。
+> 当前清单 **483/483 端点已全部有文档登记**（语义完整度另计）。
 
 ---
 
