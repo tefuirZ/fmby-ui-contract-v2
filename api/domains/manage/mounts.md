@@ -166,7 +166,7 @@
 |---|---|
 | `POST /api/manage/pan115/qr-login` | 发起扫码 → `{session_id, uid, qr_url, qr_image}` |
 | `GET /api/manage/pan115/qr-status` | `?session_id=` → `{status}` |
-| `POST /api/manage/pan115/activate` | `{session_id, mount_id, cookie_app, cookie_header}` |
+| `POST /api/manage/pan115/activate` | `{session_id, mount_id, cookie_app?, cookie_header?}` —— **cookie 两字段可省略**；仅强校验 `session_id` / `mount_id` |
 | `GET /api/manage/pan115/accounts/{mount_id}` | 账号档案（uid/has_cookie/has_open_token/时间） |
 | `POST /api/manage/pan115/accounts/{mount_id}/refresh` | 刷新 open token |
 | `POST /api/manage/pan115/accounts/{mount_id}/health` | `Pan115HealthReport{ok, reason\|null}` |
@@ -174,6 +174,17 @@
 | `DELETE /api/manage/pan115/accounts/{mount_id}` | 解绑 |
 
 错误：400 / 401 / 403（受 license 功能门）/ 404 / 503。
+
+> **`activate` 的凭据来源**：服务端用 `session_id` 从 **QR 一次性会话**换取凭据
+> （`qr.exchange`），**不读**请求里的 `cookie_app` / `cookie_header`。因此扫码形态
+> 只发 `{session_id, mount_id}` 即可；`cookie_app` 用于指定客户端类型（省略用默认）。
+>
+> ⚠️ **不存在「裸 cookie 直接绑定」路径**：只发 `{mount_id, cookie_header}`
+> （手填 cookie 形态，无 `session_id`）会被 **400** 拒绝。要支持该能力须后端新增端点；
+> 在此之前前端不应暴露「手填 cookie」入口。
+>
+> 字段缺失 / 为空 ⇒ **400 `validation`**；会话无效或过期 ⇒ **404**
+> （`qr session expired or unknown`）。**注意不是 422**——cookie 字段已放宽为可选。
 
 > 真实 115 账号的网络往返（列目录/直链播放）**只在你自己的环境 + 真账号**下测得，
 > 见 [`../../../features/implementation-status.md`](../../../features/implementation-status.md) §需人工验收。
