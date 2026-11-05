@@ -166,7 +166,7 @@
 |---|---|
 | `POST /api/manage/pan115/qr-login` | 发起扫码 → `{session_id, uid, qr_url, qr_image}` |
 | `GET /api/manage/pan115/qr-status` | `?session_id=` → `{status}` |
-| `POST /api/manage/pan115/activate` | `{session_id, mount_id, cookie_app?, cookie_header?}` —— **cookie 两字段可省略**；仅强校验 `session_id` / `mount_id` |
+| `POST /api/manage/pan115/activate` | `{session_id?, mount_id, cookie_app?, cookie_header?}` —— **扫码 / 直传二选一**：`session_id`（扫码）与 `cookie_header`（手填 cookie）**至少给一个**；`mount_id` 恒必填 |
 | `GET /api/manage/pan115/accounts/{mount_id}` | 账号档案（uid/has_cookie/has_open_token/时间） |
 | `POST /api/manage/pan115/accounts/{mount_id}/refresh` | 刷新 open token |
 | `POST /api/manage/pan115/accounts/{mount_id}/health` | `Pan115HealthReport{ok, reason\|null}` |
@@ -175,16 +175,27 @@
 
 错误：400 / 401 / 403（受 license 功能门）/ 404 / 503。
 
-> **`activate` 的凭据来源**：服务端用 `session_id` 从 **QR 一次性会话**换取凭据
-> （`qr.exchange`），**不读**请求里的 `cookie_app` / `cookie_header`。因此扫码形态
-> 只发 `{session_id, mount_id}` 即可；`cookie_app` 用于指定客户端类型（省略用默认）。
+> **`activate` 的凭据来源（扫码 / 直传，二选一）**：
+> - **扫码**：带 `session_id`，服务端从 **QR 一次性会话**换取凭据（`qr.exchange`），
+>   **不读**请求里的 `cookie_app` / `cookie_header`。`cookie_app` 用于指定客户端类型
+>   （省略用默认 `web`）。扫码形态只发 `{session_id, mount_id}` 即可。
+> - **直传**：**不带** `session_id`、带 `cookie_header`，服务端直接用这段 cookie 落库
+>   （对齐 139 `Yun139ActivateRequest.cookie` 的能力）。`cookie_header` 可带或不带
+>   `Cookie: ` 前缀。
 >
-> ⚠️ **不存在「裸 cookie 直接绑定」路径**：只发 `{mount_id, cookie_header}`
-> （手填 cookie 形态，无 `session_id`）会被 **400** 拒绝。要支持该能力须后端新增端点；
-> 在此之前前端不应暴露「手填 cookie」入口。
+> 自 **2026-11-05** 起支持直传形态。此前 115 **只能扫码**，只发
+> `{mount_id, cookie_header}` 会被 **400** 拒绝 —— 若你手上的前端仍按旧口径隐藏了
+> 「手填 cookie」入口，现在可以放开了。
 >
-> 字段缺失 / 为空 ⇒ **400 `validation`**；会话无效或过期 ⇒ **404**
-> （`qr session expired or unknown`）。**注意不是 422**——cookie 字段已放宽为可选。
+> ⚠️ **直传只做本地格式校验，不探活**：`cookie_header` 必须能解析出 `UID=` 段，
+> 否则 **400 `validation`** 且**不落库**（fail-closed、零网络）。
+> 但 115 侧**没有同步校验接口**，凭据**是否真的有效在保存时无法判定** ——
+> 请在保存后调用 `POST /api/manage/pan115/accounts/{mount_id}/health`
+> 确认，**不要对用户承诺「保存即可用」**。
+>
+> 字段缺失 / `session_id` 与 `cookie_header` 皆为空白 ⇒ **400 `validation`**；
+> 会话无效或过期 ⇒ **404**（`qr session expired or unknown`）。
+> **注意不是 422** —— `session_id` / `cookie_app` / `cookie_header` 三个字段现已全部可选。
 
 > 真实 115 账号的网络往返（列目录/直链播放）**只在你自己的环境 + 真账号**下测得，
 > 见 [`../../../features/implementation-status.md`](../../../features/implementation-status.md) §需人工验收。
